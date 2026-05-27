@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Ops Bot</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-ops-bot">Rockstarr Ops Bot</h1>
+<p><em>User guide for founder-led clients — v0.1.4</em></p>
+<p>This is the guide to rockstarr-ops v0.1.4, the Rockstarr sales-ops system your Rockstarr lead installed in your Cowork workspace. It runs the human-facing operations work between your outreach plugin and your CRM: daily call prep, prep docs for discovery and close calls, client catch-up agendas, old-lead audits, dead-lead reengagement, post-call transcript processing, and a recurring email-deliverability test. Customer-facing prose is drafted by your Rockstarr Reply plugin; CRM writes are executed by your Rockstarr CRM ops plugin; LinkedIn DMs are sent by your active outreach variant. This system owns the prep, the synthesis, and the queue between them.</p>
+<p>Two things this guide is not: a setup manual (your Rockstarr lead handles setup) and a technical reference (that is maintained separately). This is a founder’s guide to what the system does, what it asks of you, and how you know it is working.</p>
+<h1 id="1-what-the-system-does-and-doesnt-do">1. What the system does (and doesn’t do)</h1>
+<h2 id="what-it-does">What it does</h2>
+<p>Reads your calendar every morning and produces a prep doc for each sales call and an agenda doc for each client catch-up. It classifies Call 1 vs. Call 2 based on whether a prior recorded call or substantive thread exists for that prospect.</p>
+<p>Renders every prep doc against YOUR sales-call framework (phases, pricing card, pain hooks, disqualify language, objection handlers, booking language). There is no baked-in framework in this bot.</p>
+<p>Renders pricing from YOUR pitch.md every time. Old call transcripts may quote stale pricing; the bot trusts pitch.md over the transcript on every conflict.</p>
+<p>Walks four sources in fixed order — recorder, then CRM, then email, then outreach — when you ask it to audit a stalled lead. Produces a five-part synthesis and recommends one of six plays.</p>
+<p>Runs a tight scope check on every reengagement: prior recorded call, LinkedIn ghosting, recent engagement signal. Hands the draft to Rockstarr Reply with a verbatim pain quote from the recorder.</p>
+<p>Processes post-call transcripts one task at a time: extracts your per-client field set, presents you a CRM update bundle for approval, hands a recap-email draft to Rockstarr Reply, comments back on the queue task.</p>
+<p>Runs your recurring spam-test (MailReach, GMass, or any tool that fits the same pattern) on the cadence you set. Constructs the report URL deterministically so the code-rotation gotcha never bites.</p>
+<p>Gives you a one-page report every Friday with audit override rates, reengagement reply rates, deliverability trends, and a cross-client stale-review list.</p>
+<h2 id="what-it-does-not-do">What it does not do</h2>
+<p>It does not draft prose. Audit messages, reengagements, post-call recap notes, and post-call follow-up emails all route through your Rockstarr Reply plugin. This bot hands off; Reply drafts and runs stop-slop.</p>
+<p>It does not write to your CRM directly. Ever. CRM writes go through your Rockstarr CRM ops plugin (rockstarr-ops-bot-ga today). When no CRM ops plugin is installed, the bundle becomes a manual punch list you paste yourself.</p>
+<p>It does not send LinkedIn DMs. Sends route through whichever outreach variant you have installed (Interceptly, Sales Nav, MeetAlfred, Dripify, Waalaxy).</p>
+<p>It does not invent quotes. Quotes from the recorder are verbatim. When the recorder is unavailable, the prep doc or audit synthesis says so plainly.</p>
+<p>It does not batch anything customer-facing. Every message ships through one explicit ‘send it.’ No “reengage these 50 leads.” No “process the queue in one batch.”</p>
+<p>It does not auto-pause your outbound sending when deliverability dips. It flags the score; you decide remediation.</p>
+<p>It does not run on weekends by default. Configurable per client in stack.md.</p>
+<h1 id="2-what-you-get">2. What you get</h1>
+<h2 id="every-day">Every day</h2>
+<p>A morning summary email at the configured run time (default 6am local) listing every event on today’s calendar: sales calls (Call 1 or Call 2 classification), client catch-ups, and internal blocks under Other.</p>
+<p>A prep doc for every Call 1 (discovery) — intel snapshot from LinkedIn + the prospect’s website + the outreach thread + the booking source, ICP verdict, primary pain hook, phase-by-phase script in your operator’s framework, pricing from pitch.md, clean off-ramp language.</p>
+<p>A prep doc for every Call 2 (close) — intel recap from the recorder transcript (verbatim quotes) + the LinkedIn / email thread, mirror lines in the prospect’s exact words, pitch tuned to skip pain framings the prospect already rejected, sized objection handlers per voiced objection from the last call.</p>
+<p>An agenda doc for every client catch-up — action items from the last call (split into ‘you owe them’ vs. ‘they owe you’, with overdue items flagged), out-for-review tasks (with items 5+ business days old flagged stale), coming-up-for-production tasks in the next 14 days grouped by week, open questions, 3 to 5 quick-reference bullets the operator can skim mid-call.</p>
+<h2 id="every-friday">Every Friday</h2>
+<p>A weekly report at /06_reports/weekly/ — sales-prep counts by type, audits run with play-selection breakdown and override rate, reengagements sent + replied with reply rate, post-call processings completed with CRM-write success rate, deliverability trend over 8 weeks.</p>
+<p>A cross-client stale-review section — every stale review item across every client agenda surfaced in one ranked list. The cross-client view is easy to miss when each client only sees their own staleness.</p>
+<p>A weekly backup of the small ops mirror workbook at /06_reports/data/ — rollback substrate if a downstream skill writes a bad row.</p>
+<h2 id="on-demand">On demand</h2>
+<p>An audit synthesis for any stalled lead — “Audit [name]” pulls four sources in fixed order, writes the synthesis to /02_inputs/ops/, and recommends one of six plays.</p>
+<p>A reengagement attempt for any dead lead that passes the strict scope check — “Reengage [name]” → draft via Rockstarr Reply → send via your active outreach variant → 5-business-day follow-up timer.</p>
+<p>A post-call processing run for a specific recap task — “Process the call recap for [task-id]” — when the auto-trigger missed it or you want to drive manually.</p>
+<h1 id="3-what-we-need-from-you-before-we-start">3. What we need from you before we start</h1>
+<p>Six items. No more.</p>
+<p>A current pitch — the offer, the pricing, the positioning, who-it’s-for, who-it’s-not, banned landing-page phrases, common objections. We interview you on this in capture-pitch and write it to pitch.md. This file is the single source of truth for pricing — old recordings quote stale prices and the bot trusts pitch.md over every transcript on conflict.</p>
+<p>Your sales-call framework — phase count, phase names, pricing card, pain hooks you typically open discovery with, disqualify language, deal-breaker filters, your common objection handlers, your booking language. We interview you on this in capture-call-framework and write it to ops-call-framework.md. The call-prep skills refuse to run without it.</p>
+<p>Your deliverability tool configuration (if you run one) — sender, tracker URL, test segment, template clone source, comment format, low-score threshold, report URL pattern. We interview you on this in capture-deliverability-config. Skipped entirely if you don’t use a deliverability tool.</p>
+<p>Your ICP qualifications — written elsewhere (in /00_intake/icp-qualifications.md, chained from your Rockstarr Reply plugin if it installed first). The audit skill reads it to disqualify wrong-fit leads.</p>
+<p>Connected tools per your stack.md — your calendar (Google or Outlook), your meeting recorder (Read.ai, Otter, Fathom, Fireflies, or similar), your task system (ClickUp, Asana, Linear, Notion, Trello, Basecamp, or none), your email platform (Gmail or Outlook), and your LinkedIn outreach tool (matches the active rockstarr-outreach-* variant).</p>
+<p>About 10 to 15 minutes per weekday during active periods, plus roughly 30 minutes on Fridays for the weekly report and adjustments. Most of that time is reading prep docs at your desk, not in Cowork.</p>
+<h1 id="4-how-the-daily-call-prep-works">4. How the daily call prep works</h1>
+<p>There is one orchestration skill — daily-call-prep — that runs the whole morning sweep. It dispatches to three sub-skills per event.</p>
+<h2 id="background-mode-the-scheduled-morning-run-default">Background mode (the scheduled morning run, default)</h2>
+<p>The schedule fires daily-call-prep at the configured time (default 6am local). The bot:</p>
+<p>Pulls every event on today’s calendar from your ops_calendar source.</p>
+<p>Filters out events tagged #noprep, all-day events, lunches, coffee, OOO, and anything in your /00_intake/calendar-ignore.md list.</p>
+<p>Classifies each remaining event: Call 1 (no prior recorded call AND no substantive prior thread), Call 2 (a prior recorded call OR substantive thread exists), client catch-up (attendee or title matches a row in your client roster), or Other (internal blocks).</p>
+<p>Dispatches to prep-call-1, prep-call-2, or build-client-agenda per event. Sub-skills run in series, not parallel — most days have 1 to 3 events.</p>
+<p>Each sub-skill writes a docx to /03_drafts/ops/sales-prep/ or /03_drafts/ops/agendas/ plus a markdown sidecar at the same path with .md extension.</p>
+<p>At the end of the run, emails you ONE summary at the configured email — subject “[ops] Daily prep — [date] — N events” — with computer:// links to every doc. If FLAGS surfaced (recorder unavailable, DISQUALIFY verdict, pricing conflict), they appear at the bottom of the email.</p>
+<p>Schedules an end-of-day archive task that moves today’s docs to /05_published/ops/ at 11:59pm.</p>
+<p>The bot does NOT send any customer-facing message during the morning sweep. The prep docs are operator-facing; you read them before each call.</p>
+<h2 id="foreground-mode-you-in-chat">Foreground mode (you, in chat)</h2>
+<p>Type “Prep my day” in a Cowork task. The same daily-call-prep skill runs, but with you watching. Each prep doc is rendered with its sub-skill log in chat as it lands. No email at the end — you already saw everything.</p>
+<h2 id="weekends-and-pto">Weekends and PTO</h2>
+<p>By default the bot does not run on weekends. Configurable via stack.md.ops_daily_run_weekends=true. When the bot detects a full-day OOO event on your calendar, it exits early with a “PTO detected — skipping today’s prep” line and resumes normal flow on your return.</p>
+<h1 id="5-your-daily-touchpoints">5. Your daily touchpoints</h1>
+<p>Every weekday, about 10 to 15 minutes total:</p>
+<p>Morning, 2 minutes. Check email. Subject: “[ops] Daily prep — [date] — N events.” Read the mobile summary on your phone. Tap each doc you need to read in full at your desk.</p>
+<p>Before each call, 5 minutes per call. Open the prep doc or agenda. The bot wrote it for the operator — it doesn’t need to read like a customer artifact, so don’t expect polish; expect leverage. ICP verdict, pricing, mirror lines, sized objection handlers, clean off-ramp.</p>
+<p>After each call, 3 to 5 minutes. If the call was sales-driven, your task system already has a post-call task waiting — let the bot fire process-call-transcript when the transcript lands (typically 10 to 30 min post-call) and approve the CRM update bundle + recap email when prompted.</p>
+<p>If you don’t see the summary email but expect calls, check spam for sender <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. Or just type “What’s on today’s prep list?” in Cowork — the digest is on disk at /05_published/ops/daily-summary-&lt;date&gt;.md regardless.</p>
+<h1 id="6-the-morning-email">6. The morning email</h1>
+<p>One email per scheduled run. From <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. Replies to your Rockstarr strategist directly.</p>
+<h2 id="structure">Structure</h2>
+<p>Subject: “[ops] Daily prep — [date] — N events.”</p>
+<p>Sales calls section: one bullet per call with time, lead, company, type (Call 1 or Call 2), ICP verdict chip (GO / CAUTION / DISQUALIFY for Call 1) or commitment chip (operator-owed count for Call 2), and a computer:// link to the prep doc.</p>
+<p>Client catch-ups section: one bullet per catch-up with time, client name, overdue + stale + production chips, link to the agenda doc.</p>
+<p>Other section: time + title for every internal block. No doc — these are calendar context, not prep work.</p>
+<p>FLAGS section: only rendered when something surfaced — recorder unavailable on a Call 2, DISQUALIFY ICP verdict on a Call 1, pricing conflict between framework and pitch, etc. Empty FLAGS section is omitted; no news is good news.</p>
+<h2 id="why-mobile-readable">Why mobile-readable</h2>
+<p>You read the summary between waking up and the first coffee. Bullet list, not numbered. Each bullet stays under 2 lines. Critical info (ICP verdict, overdue count) is visible without expanding any doc. The email is the trigger; the docs are where you act.</p>
+<h1 id="7-how-to-interact-with-the-system">7. How to interact with the system</h1>
+<h2 id="how-it-works-at-a-high-level">How it works at a high level</h2>
+<p>Every action is a short English instruction you type into a Cowork task. No commands, no syntax, no menus. You describe what you want; the system figures out which skill to run, asks follow-up questions when it needs to, and shows you docs and drafts before anything customer-facing ships.</p>
+<p>A few ground rules:</p>
+<p>If you know what you want to do, say it directly: “Prep my day,” “Audit Jane,” “Run the deliverability test.”</p>
+<p>If you’re not sure what to call it, describe it: “What’s going on with the Acme deal?” works the same as “Audit the Acme deal.”</p>
+<p>The system asks before doing anything irreversible. You can always say “Wait, let me check something first.”</p>
+<p>Prompts don’t need to be word-perfect. These are starting points, not magic phrases.</p>
+<h2 id="walkthrough-capturing-your-pitch">Walkthrough: capturing your pitch</h2>
+<p>Open a new task and type: “Capture the pitch.” The system pulls any existing pitch.md to pre-fill and pre-tags each answer HIGH / MEDIUM / LOW confidence.</p>
+<p>Walk through eight short questions one at a time: current offer, current pricing (be exact — quote what you actually say to a prospect, not a summary), positioning paragraph, who-it’s-for, who-it’s-not, banned landing-page phrases, common objections, last-confirmed date.</p>
+<p>Review the written pitch.md. The whole purpose is the pricing line: if it’s right, the bot’s prep docs and reengagement messages will be right. If it’s wrong, re-run immediately.</p>
+<h2 id="walkthrough-capturing-your-call-framework">Walkthrough: capturing your call framework</h2>
+<p>Type: “Capture the call framework.” Pre-fills from any existing ops-call-framework.md.</p>
+<p>Answer eight short questions: phase count, phase names, phase content (1 to 3 sentences per phase), pricing card (the exact language you say on the call), pain hooks the operator opens discovery with, disqualify language, deal-breaker filters, objection handlers per common objection, booking language.</p>
+<p>Review the written ops-call-framework.md. Thin answers produce thin prep docs — re-run after a real call if you find the framework lacks a phase or an objection handler.</p>
+<h2 id="walkthrough-the-morning-prep-path">Walkthrough: the morning prep path</h2>
+<p>Most weekdays, this is all you do:</p>
+<p>Get the email. Subject: “[ops] Daily prep — [date] — N events.”</p>
+<p>On your phone, open each doc you’ll need at your desk. The docx files are in /03_drafts/ops/.</p>
+<p>Before each call, read the prep doc. Make notes on anything the bot got wrong — these surface in the weekly report and refine the next intake pass.</p>
+<h2 id="walkthrough-auditing-a-stalled-lead">Walkthrough: auditing a stalled lead</h2>
+<p>Type: “Audit [lead name]” or “What’s going on with [company]?” The system walks four sources in fixed order — recorder, then CRM, then email, then outreach. The order matters: cold LinkedIn ghosting is interpreted in light of what the lead said when warm.</p>
+<p>Read the synthesis. The bot writes it to /02_inputs/ops/audit-[slug].md. Five parts: last real contact, state of the relationship, unfulfilled commitments (both directions), engagement signal, real bottleneck (the synthesis writer’s read, not what the lead said out loud).</p>
+<p>The bot recommends ONE play out of six: Fulfill (you owe them something), Reframe (objection was unresolved), Curiosity nudge (engagement signal still active — hands off to reengage-lead), Third-party intro (wrong fit, refer to a peer), Clean break (relationship past saving), Wait (timing constraint — calendar reminder).</p>
+<p>Override with one word: “play 4 instead.” Confirm with “go.” The bot does not draft a message until a play is locked in.</p>
+<p>On dispatch, the message draft routes through Rockstarr Reply’s send-it gate. You approve before anything ships.</p>
+<h2 id="walkthrough-reengaging-a-dead-lead">Walkthrough: reengaging a dead lead</h2>
+<p>Type: “Reengage [lead name]” or “[name] went dark — try again.”</p>
+<p>The system runs the scope check. Gate A: prior recorded call (non-overridable — unrecorded prospects are not reengagement candidates). Gate B: LinkedIn ghosting confirmed (non-overridable — recent replies route to the standard outreach reply path). Gate C: recent newsletter or sequence engagement (overridable with explicit “reengage anyway”).</p>
+<p>On pass, the bot picks ONE verbatim pain quote from the recorder transcript that the lead said they were actively trying to solve.</p>
+<p>The draft routes through Rockstarr Reply with intent_hint=reengagement. The warm-reply pattern in your style guide shapes the message; without that pattern captured, the bot uses a neutral fallback and flags it.</p>
+<p>On send-it, the message goes via your active outreach variant. A 5-business-day follow-up timer is created automatically — sooner reads desperate, later goes cold.</p>
+<h2 id="walkthrough-processing-a-post-call-transcript">Walkthrough: processing a post-call transcript</h2>
+<p>Auto-trigger: a new task with your configured post-call queue tag lands in your task system. The bot walks the queue.</p>
+<p>On-demand: “Process the call recap for [task-id].”</p>
+<p>Per task, the bot reads the transcript via your recorder, extracts your per-client field set from ops-call-framework.md, and presents a CRM update bundle for your approval. Reply ‘approve’ to write, ‘edit fields’ to tune, or ‘skip’ to drop.</p>
+<p>On approve, the bundle dispatches to your active CRM ops bot. Without a CRM ops bot installed, the bundle renders as a manual punch list in chat — you paste the values yourself.</p>
+<p>Separately, a recap-email draft routes through Rockstarr Reply’s send-it gate. You approve before the email sends; ‘skip email’ keeps the CRM note but drops the email.</p>
+<h2 id="walkthrough-running-the-deliverability-test">Walkthrough: running the deliverability test</h2>
+<p>Auto-trigger: weekly schedule (or whatever cadence you set in capture-deliverability-config).</p>
+<p>On-demand: “Run the deliverability test” or “Check the spam score.”</p>
+<p>The bot opens your tool, captures the test code ONCE, constructs the report URL deterministically, clones your configured send template, pastes the code, sends to your seed-inbox segment, navigates DIRECTLY to the report URL (never reloading the home page), reads the score, cleans up the clone (with a safety check that the clone’s name actually contains ‘(clone)’ before deleting), and logs to your tracker.</p>
+<p>If the score is below your configured threshold, the comment on the queue task gets a LOW SCORE prefix and the weekly report bumps it to the top.</p>
+<h2 id="quick-reference-the-prompts-youll-use-most-often">Quick reference: the prompts you’ll use most often</h2>
+<p>Daily prep: “Prep my day” / “Morning prep.”</p>
+<p>Single prep doc: “Prep the discovery for [name]” / “Call 2 prep for [name].”</p>
+<p>Single agenda: “Build the agenda for [client].”</p>
+<p>Audit: “Audit [name]” / “What’s going on with [name]?”</p>
+<p>Reengage: “Reengage [name].”</p>
+<p>Post-call: “Process the call recap for [task-id].”</p>
+<p>Deliverability: “Run the deliverability test” / “Check the spam score.”</p>
+<p>Weekly report: “Generate this week’s ops report.”</p>
+<p>Backup: “Back up the ops workbook.”</p>
+<p>Intake: “Capture the pitch” / “Capture the call framework” / “Capture the deliverability config.”</p>
+<h2 id="when-youre-not-sure-what-to-ask-for">When you’re not sure what to ask for</h2>
+<p>Describe what you want in plain English. You don’t need to know the skill names. All of these work:</p>
+<p>“Which leads from last quarter never closed and we never followed up on?”</p>
+<p>“Show me the audit synthesis for Acme.”</p>
+<p>“What did [lead] say about pricing in the last call?”</p>
+<p>“Why is the deliverability score trending down?”</p>
+<p>“What should I do about the catch-up agenda for [client] — anything overdue?”</p>
+<p>The system reads the relevant files in your workspace and answers. If your question is ambiguous, it asks a clarifier before acting.</p>
+<h1 id="8-your-weekly-touchpoint">8. Your weekly touchpoint</h1>
+<p>Every Friday end-of-day, the bot writes a one-page weekly report at /06_reports/weekly/ops-[YYYY-WW].md. Read it with your Rockstarr lead in about 30 minutes:</p>
+<p>Headline: 2 to 3 sentences naming the week’s most important facts — audit override rate, deliverability trend, stale-review pile-up, reengagement reply rate.</p>
+<p>Sales-call prep counts (Call 1 vs. Call 2 vs. catch-ups), ICP verdict breakdown, recorder-unavailable count.</p>
+<p>Audits run with play-selection breakdown and override rate (which play do you keep overriding TO?).</p>
+<p>Reengagements sent + replied, reply rate, booked meetings, engagement-signal-override count.</p>
+<p>Post-call processings completed, CRM-write success rate, recap email status (sent / drafted / skipped).</p>
+<p>Deliverability score table for the week plus an 8-week trendline.</p>
+<p>Cross-client stale-review list — every stale item from every client, sorted by days descending.</p>
+<p>A short ‘what Rachel / Jon should notice’ block synthesizing the patterns.</p>
+<p>If a metric is off, we tell you why, and propose a fix. That’s the point of the Friday meeting.</p>
+<h1 id="9-what-you-approve-and-when">9. What you approve, and when</h1>
+<p>The system will not write or send these things without your explicit approval:</p>
+<p>Customer-facing messages. Audit recommendations, reengagement messages, post-call recap emails, post-call follow-up emails — all flow through your Rockstarr Reply plugin’s send-it gate. ‘Send it’ or clear equivalent. Editing instructions (‘make it shorter’) are NEVER authorization — they trigger a redraft.</p>
+<p>CRM update bundles. Every structured CRM update from post-call processing is presented for your approval before the active CRM ops bot writes. You see the field set, the recap-note body, the status transition. Reply ‘approve’ to write, ‘edit fields’ to tune, or ‘skip’ to drop the bundle without writing.</p>
+<p>Audit play locks. The audit skill recommends ONE play out of six. You approve the lock-in (‘go’) or override (‘play [N] instead’). No play, no draft.</p>
+<p>Reengagement scope overrides. The engagement-signal gate is overridable but requires an explicit ‘reengage anyway’ to proceed. The bot flags the missing signal in the message’s front-matter so you don’t lose the context later.</p>
+<p>Prep docs, agendas, audit syntheses, and the weekly report are operator-facing and have no ‘send’ step. Deliverability runs execute their 9-step flow without per-step approval; the single human gate is reading the score-comment on the queue task and deciding whether the score warrants action.</p>
+<h2 id="the-approval-matrix-at-a-glance">The approval matrix at a glance</h2>
+<p>Customer-facing prose → Rockstarr Reply ‘send it’ gate (strict).</p>
+<p>CRM writes → per-bundle gate before the active CRM ops bot executes (strict).</p>
+<p>Audit play lock-in → operator confirms or overrides (gated, but one-word).</p>
+<p>Reengagement Gate C engagement signal → operator overrides with explicit ‘reengage anyway’ (soft).</p>
+<p>Deliverability score &lt; threshold → no auto-action; LOW SCORE flag + weekly report bump.</p>
+<p>Prep / agenda / audit / weekly docs → no gate (operator-facing artifacts).</p>
+<p>End-of-day archive of today’s prep → unattended (durable record).</p>
+<h1 id="10-cross-bot-handoffs">10. Cross-bot handoffs</h1>
+<p>This bot only owns the prep and synthesis layer. Three peer plugins do the actual customer-facing work:</p>
+<p>Rockstarr Reply (hard dependency). Owns classify + draft + send-it gate + stop-slop. This bot hands every customer-facing message off via the standard handoff bundle with an intent_hint (reengagement, post-call-recap, audit-fulfill, audit-reframe, audit-clean-break, audit-third-party). Without Rockstarr Reply installed, the prose-producing skills refuse.</p>
+<p>Rockstarr CRM ops bot (soft dependency). Today: rockstarr-ops-bot-ga (The Growth Amplifier). On the roadmap: -hubspot, -pipedrive, -salesforce, -close. Without one installed, every CRM update bundle becomes a manual punch list in chat — you paste the values yourself. Never silently skipped.</p>
+<p>Rockstarr Outreach variant (soft dependency). Whichever one you have — Interceptly, Sales Nav, MeetAlfred, Dripify, Waalaxy. Reengagements + audit Play 3 LinkedIn DMs route through its send-message. Without an outreach variant, those steps degrade to a Gmail or Outlook email draft.</p>
+<p>When a peer plugin is missing, the bot tells you which handoff degraded and how. Silence is never an option.</p>
+<h1 id="11-caps-and-guardrails">11. Caps and guardrails</h1>
+<p>The guardrails this bot enforces, regardless of what your other plugins are doing:</p>
+<p>No baked-in framework, voice, pitch, ICP, or pricing. Every shaping decision comes from intake files you own. Re-run the relevant capture skill when something changes.</p>
+<p>pitch.md wins over every transcript on conflict. Old recordings quote stale pricing; the bot trusts pitch.md every time. The fastest way to embarrass yourself is to quote a price you no longer offer — pitch.md is the safeguard.</p>
+<p>Quotes from the recorder are verbatim. The bot does not paraphrase. When the recorder is unavailable, the doc says so plainly — no guessing.</p>
+<p>Four-source order in audit-lead is fixed: recorder, then CRM, then email, then outreach. Reading them out of order mis-frames the synthesis.</p>
+<p>Six audit plays. No more, no less. Pile-on multiple plays is a misuse — it produces noise the lead reads as desperation.</p>
+<p>No batch-send anywhere. Every customer-facing message ships through one explicit ‘send it.’ No “reengage these 50 leads.” No “process the queue in one batch.”</p>
+<p>Reengagement scope is hard-gated on prior recorded call AND LinkedIn ghosting. Engagement signal is overridable but flagged.</p>
+<p>CRM writes route through the active CRM ops bot, never via Chrome MCP directly. That bot is the single point of audit for every CRM mutation in the Growth OS.</p>
+<p>Deliverability code rotation is the single biggest gotcha. The bot captures the test code once, constructs the report URL deterministically, and never reloads the tool’s home page. Same rule across MailReach, GMass, and any future tool.</p>
+<p>Clone safety check on deliverability runs. The bot verifies ‘(clone)’ is in the clone name BEFORE deleting. Protects scheduled non-clone sends from a wrong-row click.</p>
+<p>Stop-slop runs on every customer-facing draft (inside Rockstarr Reply). Operator-facing prose (prep docs, agendas, audit syntheses) bypasses stop-slop by design.</p>
+<h1 id="12-the-weekly-report">12. The weekly report</h1>
+<p>The Friday report is a short document. It contains:</p>
+<p>Headline. 2 to 3 sentences naming the most important facts this week.</p>
+<p>Sales-call prep summary. Counts by type, ICP verdict breakdown, recorder-unavailable count, overdue and stale counts across all agendas.</p>
+<p>Audits table. Recommended play vs. operator-locked play, override rate, most-overridden TO.</p>
+<p>Reengagements. Sent / replies / reply rate / booked / engagement-signal-overridden count.</p>
+<p>Post-call processings. Completed count, CRM-write success rate, recap-email status, manual-punch-list count if any.</p>
+<p>Deliverability. Score table for the week + 8-week trendline + low-score flags.</p>
+<p>Cross-client stale review. Every stale item from every client agenda, ranked by days descending. The cross-client view that single-client agendas hide.</p>
+<p>Data integrity. Markdown / mirror discrepancies, partial runs. Surfaces silent inconsistencies.</p>
+<p>What Rachel / Jon should notice. 3 to 5 bullets synthesizing the trends.</p>
+<p>Every weekly report is kept. They live in /06_reports/weekly/ in your workspace, dated, so you can look back across months.</p>
+<h1 id="13-common-questions">13. Common questions</h1>
+<h2 id="what-if-i-miss-the-morning-email">What if I miss the morning email?</h2>
+<p>The docs are still in /03_drafts/ops/sales-prep/ and /03_drafts/ops/agendas/. The digest is at /05_published/ops/daily-summary-[date].md. Type “What’s on today’s prep list?” to see the same summary in chat.</p>
+<h2 id="can-i-run-the-prep-manually-if-i-prefer">Can I run the prep manually if I prefer?</h2>
+<p>Yes. Type “Prep my day.” The same daily-call-prep skill runs in foreground mode — sub-skills get rendered with their log in chat as they run. No email at the end.</p>
+<h2 id="what-if-the-recorder-transcript-wasnt-ready-in-time-for-the-call-2-prep">What if the recorder transcript wasn’t ready in time for the Call 2 prep?</h2>
+<p>The Call 2 prep doc renders with a clear RECORDER UNAVAILABLE callout and falls back to thread-only intel. The doc is thinner but still useful — you have the LinkedIn / email thread, the booking source, and the pitch. Quotes are not invented.</p>
+<h2 id="what-if-i-audited-a-lead-but-want-to-change-the-play-before-the-draft-ships">What if I audited a lead but want to change the play before the draft ships?</h2>
+<p>Easy. Before you say ‘go,’ override with “play [N] instead.” After ‘go’ and after Rockstarr Reply has drafted: type “redraft this as a clean break instead” — Reply re-routes with the new intent_hint and re-presents. Editing instructions are NEVER send authorization, so you’re safe to change direction.</p>
+<h2 id="can-i-run-a-reengagement-on-a-lead-i-never-had-a-recorded-call-with">Can I run a reengagement on a lead I never had a recorded call with?</h2>
+<p>No. Gate A is non-overridable by design. Without a recorded call, the bot has no anchor — no verbatim pain quote, no real understanding of the prospect’s situation. Use a cold-bump campaign through your outreach variant instead.</p>
+<h2 id="what-if-im-on-pto">What if I’m on PTO?</h2>
+<p>The bot detects full-day OOO events on your calendar and exits with “PTO detected — skipping today’s prep.” Backlog queues — the post-call queue, the audit queue, the deliverability queue — all hold their work. You return to a slightly larger pile but no damage done.</p>
+<h2 id="what-happens-if-my-crm-ops-bot-isnt-installed-yet">What happens if my CRM ops bot isn’t installed yet?</h2>
+<p>Every CRM update bundle from process-call-transcript renders as a manual punch list in chat — you paste the field values into the CRM record yourself. The recap email still drafts and ships via Rockstarr Reply. When you install rockstarr-ops-bot-ga (or any variant), the punch list disappears and bundles auto-write on approval.</p>
+<h2 id="why-does-pitchmd-win-over-the-recorder-transcript">Why does pitch.md ‘win’ over the recorder transcript?</h2>
+<p>Because the operator’s offer is a moving target. The recording from three months ago quotes whatever you said three months ago. pitch.md is the operator confirming, out loud, the current number. The fastest way to embarrass yourself is to send a reengagement that quotes a price you no longer offer.</p>
+<h2 id="how-often-should-i-re-run-capture-pitch">How often should I re-run capture-pitch?</h2>
+<p>Any time the offer changes — pricing, positioning, what’s in scope. The skill stamps a ‘last confirmed at’ date in the file, so you can spot stale files at a glance. If the last-confirmed date is &gt;30 days old, the bot surfaces a soft warning in the daily summary.</p>
+<h2 id="can-i-change-the-deliverability-test-cadence">Can I change the deliverability test cadence?</h2>
+<p>Yes. Re-run capture-deliverability-config and answer Q9 differently. Weekly is the default; some clients run twice-monthly or monthly.</p>
+<h2 id="what-if-i-want-to-add-a-new-icp-filter-to-an-existing-audit">What if I want to add a new ICP filter to an existing audit?</h2>
+<p>Re-run capture-icp-qualifications (lives in your Rockstarr Reply or Outreach plugin). The audit-lead skill reads the file on every run, so the new rules take effect immediately on the next audit.</p>
+<h2 id="does-this-plugin-send-email-outreach">Does this plugin send email outreach?</h2>
+<p>No. Email outreach is a separate part of the Rockstarr AI Growth Operating System. This bot reads email threads (Gmail, Outlook) and drafts recap emails for your approval — it does not run prospecting campaigns.</p>
+<h2 id="what-happens-if-i-pause-or-end-my-engagement">What happens if I pause or end my engagement?</h2>
+<p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. The ops work stops when we stop running the daily loop with you. Nothing disappears.</p>
+<h1 id="14-when-to-contact-rockstarr">14. When to contact Rockstarr</h1>
+<p>Daily summary email did not arrive but you know you had events. Check spam for sender <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. If still missing, your Rockstarr lead can resend.</p>
+<p>Prep doc references stale pricing. Re-run capture-pitch immediately — and call if the bot keeps quoting stale numbers after a re-run.</p>
+<p>Audit synthesis names a play you’d never pick more than once or twice per week. That’s signal the play-selection logic is mis-fitted to your business — we tune.</p>
+<p>Reengagement reply rate &lt; 5% for two weeks running. That’s signal the warm-reply pattern needs tightening — re-run capture-warm-reply-pattern.</p>
+<p>Deliverability score below threshold two runs in a row. That’s a deliverability investigation, not a pricing or framework issue — call us.</p>
+<p>Post-call CRM writes keep failing with validation errors. The bundle shape may not match your CRM’s required fields — we tune the field set or the CRM ops bot.</p>
+<p>Cross-client stale-review list keeps growing. Operationally, that’s a sign the catch-up rhythm isn’t enough — call us; we redesign the cadence.</p>
+<p>You saw something in the weekly report that doesn’t match what you expected.</p>
+<p>Anything else.</p>
+<p>Your Rockstarr lead is the primary contact. The plugin is the tool. We are the humans behind it.</p>
+<p>One closing note.</p>
+<p>This system works best when you treat it like a pipeline habit, not a software product. The 10 to 15 minutes per day you spend reading prep docs and approving recap notes is what turns calls into deals, and dead leads into reengaged ones. The rest runs on your stack, governed by the gates we’ve built in.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

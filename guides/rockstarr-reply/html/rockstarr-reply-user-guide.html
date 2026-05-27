@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Reply</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-reply">Rockstarr Reply</h1>
+<p><em>User guide for founder-led clients</em></p>
+<p>This is the guide to rockstarr-reply, the Rockstarr reply-drafting system your Rockstarr lead installed in your Cowork workspace. It drafts every response to every inbound LinkedIn reply your outreach plugin hands it, runs an AI-slop scrub, classifies the temperature, proposes a label and a follow-up timer, and holds the draft in your queue until you say “send it.” Today it rides on Sales Nav outreach. The same core pipeline is designed to work across LinkedIn variants (Interceptly, MeetAlfred, Dripify, Waalaxy) and email (Gmail, Outlook) as those plugins ship.</p>
+<p>Two things this guide is not: a setup manual (your Rockstarr lead handles setup) and a technical reference (that is maintained separately). This is a founder’s guide to what the system does, what it asks of you, and how you know it is working.</p>
+<blockquote>
+<p><strong>At a glance</strong></p>
+<p>A reply-drafting system that lives behind the Sales Nav outreach plugin today, designed to ride every Rockstarr outreach variant and email variant as they ship.</p>
+<p>Drafts the response, runs an AI-slop scrub, classifies the temperature, proposes a label and a follow-up timer, and holds the draft until you approve it.</p>
+<p>Nothing sends without your explicit “send it.” Editing instructions are draft-and-present, never authorization.</p>
+<p>Hot replies (meeting asks) get specific time proposals — never the booking link itself.</p>
+<p>Polite-yes replies from non-targets get three options (graceful exit, let it hang, throwaway question) with no default pre-selected. You pick.</p>
+</blockquote>
+<h2 id="1-what-the-system-does-and-doesnt-do">1. What the system does (and doesn’t do)</h2>
+<p>What it does</p>
+<ul>
+<li><p>Drafts a reply to every inbound message your outreach plugin hands it. Sales Nav is the live outreach variant today. Interceptly, MeetAlfred, Dripify, Waalaxy, and the email variants (Gmail, Outlook) are on the roadmap and will plug in without changes to the reply core.</p></li>
+<li><p>Reads who the lead is, what they said, and the temperature of the thread (Hot, Warm-ICP, Warm-non-ICP, Skeptical, Cold).</p></li>
+<li><p>Reads your style guide and your captured warm-reply pattern. Every word in every draft comes from those files plus the AI-slop scrub — never a Rockstarr template.</p></li>
+<li><p>Reads your ICP qualifications. The bot has no opinion of its own about who counts as a target.</p></li>
+<li><p>Proposes 2 to 3 specific meeting times when a Hot reply lands, never the booking link itself.</p></li>
+<li><p>Generates three response options when a polite-yes lands from a non-target, with no default pre-selected. You pick.</p></li>
+<li><p>Sends an urgent email the moment a draft is staged so you can act inside the hour. The email has the proposed reply rendered inline plus a deep-link straight back into the Cowork workspace.</p></li>
+<li><p>Surfaces everything still pending (replies, content drafts, outreach campaigns, anything) in a daily 6am digest so nothing falls through the cracks.</p></li>
+</ul>
+<p>What it does not do</p>
+<ul>
+<li><p>It does not send. Sending happens inside your outreach plugin, only after you authorize. Reply-drafting and reply-sending are deliberately separate.</p></li>
+<li><p>It does not invent voice. Every word comes from your style guide plus the warm-reply pattern you captured at intake. Thin inputs make thin drafts — refining the inputs is how you tune the output.</p></li>
+<li><p>It does not invent ICP rules. Your icp-qualifications.md is the source of truth for who counts as a target, who does not, and who is ambiguous enough to flag.</p></li>
+<li><p>It does not paste the booking link. Hot replies propose specific times; the lead replies with a confirmation; your outreach plugin books on their behalf.</p></li>
+<li><p>It does not auto-pitch a non-target who said yes politely. The three-option flow is the answer to that — never assume, never pitch, present the options, let you call it.</p></li>
+<li><p>It does not interpret silence, “ok,” “cool,” or any ambiguous affirmation as authorization to send. Only “send it” (or a clear equivalent) sends.</p></li>
+<li><p>It does not draft for an ambiguous lead. Threads where the bot is not confident enough route to flag-for-review and wait for you.</p></li>
+</ul>
+<h2 id="2-what-you-get">2. What you get</h2>
+<p>Every time a reply lands</p>
+<ul>
+<li><p>An urgent email in your inbox with the lead context, the inbound message excerpt, the temperature read, the proposed label, the proposed follow-up timer, and the drafted reply rendered inline.</p></li>
+<li><p>A deep-link back into the Cowork workspace that opens Claude Desktop directly into the present-for-approval flow. One click and you are reading the draft.</p></li>
+<li><p>A draft file staged in /03_drafts/replies/ in your workspace, with full front-matter so the daily digest can see it.</p></li>
+</ul>
+<p>Every morning at 6am</p>
+<ul>
+<li><p>A daily approvals digest email listing every draft pending across every Rockstarr bot — replies you haven’t acted on yet, plus content drafts, plus outreach campaign specs.</p></li>
+<li><p>Each item carries a deep-link, the same as the urgent emails. One pass through the digest clears the queue.</p></li>
+<li><p>On a quiet day with nothing pending, the digest stays silent. No “you have zero items” email.</p></li>
+</ul>
+<p>When the queue grows</p>
+<ul>
+<li>If the total pending count exceeds a configured threshold (your Rockstarr lead sets it), a weekly backlog alert routes to your strategist as a nudge. You will hear from us before the queue becomes a problem.</li>
+</ul>
+<h2 id="3-what-we-need-from-you-before-we-start">3. What we need from you before we start</h2>
+<p>Six items.</p>
+<ul>
+<li><p>An outreach plugin installed in your workspace. Today that is rockstarr-outreach-salesnav. Reply rides on top of it — reply does not run on its own.</p></li>
+<li><p>An approved style guide in /00_intake/style-guide.md, produced during onboarding via the Rockstarr Brand Voice and Style Architect interview. The bot reads voice from this file every time it drafts.</p></li>
+<li><p>An approved warm-reply pattern, captured at install via a short interview. Structure, length, opening line, closing move, and what to avoid. This is the single most important input for warm-ICP draft quality — specific answers produce specific drafts.</p></li>
+<li><p>Approved ICP qualifications in /00_intake/icp-qualifications.md, captured in a short interview at install. Who is a target, who is not, and what makes a lead ambiguous enough to flag.</p></li>
+<li><p>A configured <code>/00_intake/stack.md</code> file (built during onboarding) that names your booking-mode, availability source, and any required booking fields. Optionally, if you want to handle in-person coffee meetings outside the bot, your Rockstarr lead can enable <code>local_meet_handoff_enabled: true</code> plus a list of <code>local_meet_trigger_terms</code> (e.g. "coffee", "in person", your city name). Off by default.</p></li>
+<li><p>An email address you actively watch — that is where urgent reply notifications and the daily digest land. Plus about 60 seconds per reply to approve, edit, or hand off.</p></li>
+</ul>
+<h2 id="4-how-the-reply-pipeline-works">4. How the reply pipeline works</h2>
+<p>You do not run any of these steps by hand. Your outreach plugin runs them, or you trigger them by typing a plain-English instruction. This is what happens behind the scenes so you know what the system is actually doing.</p>
+<ul>
+<li><p><strong>Your outreach plugin scrapes the inbound thread.</strong> Today that means Sales Nav via the Chrome MCP. It hands the thread text plus your ICP verdict to rockstarr-reply.</p></li>
+<li><p><strong>classify-reply reads the thread.</strong> It assigns a temperature bucket (Hot, Warm-ICP, Warm-non-ICP, Skeptical, Cold) plus sub-type flags, and proposes a label from your stack’s label-mapping rules.</p></li>
+<li><p><strong>draft-reply picks the pattern and writes the body.</strong> Hot threads call for proposed meeting times. Warm-ICP threads use your captured warm-reply pattern. Warm-non-ICP threads produce three options. Skeptical defaults to a silent label unless you have opted into a referral pivot. Cold threads get a short, specific bump.</p></li>
+<li><p><strong>Stop-slop scrubs the prose.</strong> Every draft passes through an AI-tells scrub before it hits your queue. The scrub returns a 0 to 50 score; anything below 35 gets flagged so you see it at approval time.</p></li>
+<li><p><strong>notify-reply-ready fires the urgent email.</strong> The proposed body lands in your inbox immediately, with a Cowork deep-link. Drafts staged in batched flows (a daily detect-replies run that staged five replies in one pass) get one consolidated email rather than five.</p></li>
+<li><p><strong>present-for-approval renders the draft to you.</strong> Lead context, ICP verdict and matching rule, temperature bucket, proposed label, proposed timer, draft body. You read, you respond.</p></li>
+<li><p><strong>On “send it,” the draft moves to /04_approved/replies/ and your outreach plugin executes the send.</strong> The verbatim words you used to authorize get logged to _approvals.log so we have a clean record of what you approved.</p></li>
+</ul>
+<p>What you see in your workspace: a /03_drafts/replies/ folder organized by source channel (today, linkedin-salesnav; future variants get their own subfolders), an /04_approved/replies/ folder with the same structure plus an _approvals.log of every authorized send, and a /02_inputs/replies/_flags.md where threads the bot refused to draft are queued for your hand.</p>
+<h2 id="5-your-daily-touchpoints">5. Your daily touchpoints</h2>
+<p>There is no fixed daily run for replies — they fire when your outreach plugin detects new inbound. Most weekdays you spend 10 to 15 minutes total:</p>
+<ul>
+<li><p><strong>Throughout the day, ~60 seconds per reply.</strong> Urgent email lands. Open the deep-link. Approve, edit, or flag. Send it.</p></li>
+<li><p><strong>Once a day, 6am, ~5 minutes.</strong> The daily approvals digest lands in your inbox. Walk through anything still pending — usually one or two items. Clear the queue.</p></li>
+<li><p><strong>Your inbox.</strong> That is the only steady-state requirement. We do the rest.</p></li>
+</ul>
+<p>No reply the system drafts is sent without your explicit approval. You see the exact text. You edit it or approve it. Then your outreach plugin sends it on the right channel and the right account.</p>
+<h2 id="6-how-to-interact-with-the-system">6. How to interact with the system</h2>
+<p>How it works at a high level</p>
+<p>Every action is a short English instruction you type into a Cowork task. No commands, no syntax, no menus. You describe what you want; the system figures out which step to run, asks follow-up questions when it needs to, and shows you drafts before anything leaves your workspace. The rest of this section walks you through the flows you will use most often.</p>
+<p>A few ground rules:</p>
+<ul>
+<li><p>If you know what you want, say it directly: “Show me the draft for the Jane Doe thread.”</p></li>
+<li><p>If you are not sure what to call it, describe it: “I want to look at the reply that just came in from someone at Acme.” Both work.</p></li>
+<li><p>Editing instructions never send. Only “send it” (or “yes send,” “ship it,” “go ahead and send it”) sends. Silence is never consent.</p></li>
+<li><p>You do not need to get the prompt word-perfect. These are starting points, not magic phrases.</p></li>
+</ul>
+<p>Walkthrough: approving a single reply</p>
+<p>This is the flow you will run most often.</p>
+<ul>
+<li><p><strong>Open the urgent email and click Open in Cowork.</strong> Claude Desktop opens with the draft loaded. You did not need to navigate.</p></li>
+<li><p><strong>Read what the system shows you.</strong> Lead context (name, title, company), ICP verdict and the matching rule, temperature bucket, proposed label, proposed follow-up timer, and the draft body.</p></li>
+<li><p><strong>Pick one response.</strong> “Send it” to authorize. “Make it shorter” / “Try a different angle” / “Less formal” / “Draft a breakup message” to redraft. “Flag this — I want to handle it myself” to route to flag-for-review. “Skip” to close the draft without sending.</p></li>
+<li><p><strong>Editing instructions trigger a redraft.</strong> The new draft lands in the same file with a revision_count bump. You see it. You can keep editing as many times as you want.</p></li>
+<li><p><strong>On “send it,” the draft moves to approved and your outreach plugin sends it.</strong> The verbatim phrase you used gets logged.</p></li>
+</ul>
+<p>Walkthrough: the three-option flow (non-target says yes)</p>
+<p>This is the flow that protects you from the default LinkedIn failure mode — a polite person saying “absolutely” when they are not actually a buyer.</p>
+<ul>
+<li><p><strong>The system shows you three options.</strong> (A) Graceful exit — a short message naming the fit mismatch in your own positioning language. (B) Let it hang — no reply sent, label Ignore. (C) Throwaway question — a light, curiosity-preserving question that keeps the relationship warm without pitching.</p></li>
+<li><p><strong>No default is pre-selected.</strong> The bot will not pick for you. Every time.</p></li>
+<li><p><strong>Type your pick.</strong> “Option A” / “Option B” / “Option C.” Or just describe it: “Go with the graceful exit.” “Let it hang.” “The throwaway question.”</p></li>
+<li><p><strong>On A or C, the bot writes the chosen body and runs it through stop-slop again.</strong> You see the rewritten draft in a fresh approval cycle. Type “send it” to authorize.</p></li>
+<li><p><strong>On B, no draft sends.</strong> The thread gets labeled Ignore in your outreach plugin and the conversation closes naturally.</p></li>
+</ul>
+<p>Walkthrough: a Hot reply (meeting ask)</p>
+<p>When a lead asks about price, timing, process, or a demo, the bot recognizes a Hot reply and proposes meeting times instead of pitching.</p>
+<ul>
+<li><p><strong>Local-area pre-check (if enabled).</strong> Before drafting times, the bot checks whether the lead's message mentions any of your <code>local_meet_trigger_terms</code> (e.g. "grab a coffee", "in person", your city). If so AND you've enabled local-area handling in stack.md, the thread is flagged for your review instead of getting a slot-proposal draft — you handle the in-person scheduling personally. If the feature is off, or no trigger matches, drafting continues normally.</p></li>
+<li><p><strong>draft-reply calls propose-meeting-times.</strong> Reads your booking link page or your Google Calendar (whichever you set during stack capture) and pulls 2 to 3 specific open slots in the next few business days.</p></li>
+<li><p><strong>The drafted reply names those slots.</strong> “Tuesday at 10am, Wednesday at 2pm, or Thursday at 4pm — what works?” It also asks for any booking-link-required fields the lead has not provided yet (email, phone, whatever you configured).</p></li>
+<li><p><strong>Booking link is NEVER pasted.</strong> This is a hard rule. The conversation stays human until there is a real agreed time.</p></li>
+<li><p><strong>On approval, the reply ships through your outreach plugin.</strong> The lead replies with a time and the missing fields. Your outreach plugin’s book-meeting skill fills out the booking-link form on their behalf and you get a calendar invite.</p></li>
+<li><p><strong>Booked manually outside the bot?</strong> Type “Mark the meeting with Jane Doe as booked for Thursday at 2.” The system flips the lead’s state to booked and cancels any pending follow-ups.</p></li>
+</ul>
+<p>Walkthrough: flagging a thread</p>
+<p>Sometimes a thread is too ambiguous, hostile, or just personal — you want to handle it yourself.</p>
+<ul>
+<li><p><strong>Type “flag this” or “I want to look at this one myself.”</strong> The system writes a structured note to /02_inputs/replies/_flags.md with the lead, the channel, the thread id, and what the bot saw.</p></li>
+<li><p><strong>Your outreach plugin labels the thread Follow Up and creates a 2-business-day review task.</strong> The label is the universal visual marker for “needs human attention.”</p></li>
+<li><p><strong>The bot will not draft for that thread again until you resolve the flag.</strong> Either by drafting a reply manually inside the channel UI, or by updating icp-qualifications.md and re-running the daily loop.</p></li>
+</ul>
+<p>Walkthrough: refreshing your warm-reply pattern</p>
+<p>If the warm-ICP drafts feel generic or you keep rewriting the closing move, that is a signal to refresh the pattern.</p>
+<ul>
+<li><p><strong>Type “Re-run the warm-reply pattern interview.”</strong> The system walks you through six or seven questions: structure, length, opening, closing, banned moves, plus a calibration example and an anti-example.</p></li>
+<li><p><strong>Answer in plain English.</strong> “Three to four sentences, open by mirroring one line from their reply, end on a direct question about their experience, never use ‘worth a chat’ or ‘happy to hop on a call.’”</p></li>
+<li><p><strong>The pattern gets appended to your style guide.</strong> Every Warm-ICP draft from now on reads it. Specific answers produce specific drafts.</p></li>
+</ul>
+<p>Quick reference: the prompts you will use most often</p>
+<ul>
+<li><p><strong>Open a draft from the email:</strong> Click the deep-link in the urgent email. Cowork opens to the draft.</p></li>
+<li><p><strong>Approve a draft:</strong> “Send it.” (Or “yes send,” “ship it,” “go ahead and send it.”)</p></li>
+<li><p><strong>Edit a draft:</strong> “Make it shorter,” “Try a different angle,” “Less formal,” “Draft a breakup message,” “Rework the opening.”</p></li>
+<li><p><strong>Pick a non-ICP option:</strong> “Option A,” “Option B,” “Option C.” Or describe it.</p></li>
+<li><p><strong>Flag for review:</strong> “Flag this — I want to handle it myself.”</p></li>
+<li><p><strong>Skip a draft:</strong> “Skip,” “No action.”</p></li>
+<li><p><strong>Mark a manual booking:</strong> “Mark the meeting with [name] as booked for [time].”</p></li>
+<li><p><strong>Refresh warm-reply pattern:</strong> “Re-run the warm-reply pattern interview.”</p></li>
+<li><p><strong>Refresh ICP rules:</strong> “My ICP changed — let’s tighten the rules.”</p></li>
+<li><p><strong>Show pending drafts:</strong> “Show me the replies waiting for my approval.”</p></li>
+</ul>
+<p>When you are not sure what to ask for</p>
+<p>Describe what you want in plain English. You do not need to know skill names. All of these work:</p>
+<ul>
+<li><p>“Why did the bot flag the Acme thread?”</p></li>
+<li><p>“Show me the last reply I approved on the Sales Nav account.”</p></li>
+<li><p>“The drafts on the Hot path keep proposing times outside my preferred window — what’s up?”</p></li>
+<li><p>“Can I see the drafts I rejected this week?”</p></li>
+<li><p>“What’s the proposed label going to be on the Jane Doe thread?”</p></li>
+</ul>
+<p>The system reads the relevant files and answers. If your question is ambiguous, it asks a clarifier before acting.</p>
+<h2 id="7-your-weekly-touchpoint">7. Your weekly touchpoint</h2>
+<p>Every Friday, about 30 minutes with your Rockstarr lead:</p>
+<ul>
+<li><p>Walk through the week’s reply approvals. How many drafts were sent unchanged versus rewritten? Where did you push back, and why?</p></li>
+<li><p>Look at the AI-slop scrub trend. If the bot’s drafts are getting cut more by stop-slop each week, voice may be drifting and the style guide needs a refresh. If the cut volume is falling, voice is holding.</p></li>
+<li><p>Look at the three-option pick distribution. If you are picking option B (let it hang) every time, the graceful-exit and throwaway-question paths are probably dead code for your business — we adjust.</p></li>
+<li><p>Look at unresolved flags in /02_inputs/replies/_flags.md. Anything sitting too long? We resolve it together.</p></li>
+<li><p>Approve any tuning for next week — refresh the warm-reply pattern, tighten ICP rules, opt into the referral pivot, anything else surfaced by the week’s data.</p></li>
+</ul>
+<h2 id="8-what-you-approve-and-when">8. What you approve, and when</h2>
+<p>The system will not send these things without your explicit approval:</p>
+<ul>
+<li><p><strong>Every reply body.</strong> No exceptions. No reply on a Hot thread, no graceful exit on a non-target, no Cold bump, no breakup message, nothing — gets sent until you type “send it.” The gate language is preserved verbatim because every shortcut around it has cost a misfire.</p></li>
+<li><p><strong>Every meeting handoff to book-meeting.</strong> Once a Hot thread reaches the “lead agreed plus supplied required fields” stage, you confirm the handoff before the booking-link form gets driven.</p></li>
+<li><p><strong>Every flag.</strong> When you tell the system to flag a thread, it does — but the flag itself is your call, not the bot’s.</p></li>
+</ul>
+<p>The system DOES auto-execute these things without per-item approval, because they are not lead-facing:</p>
+<ul>
+<li><p>AI-slop scrub on every prose path. Runs every time. No opt-out.</p></li>
+<li><p>Classification, label proposal, follow-up timer proposal. The bot proposes; you confirm at approval time. The proposals never act on their own.</p></li>
+<li><p>Logging the approved phrase to _approvals.log. Audit trail.</p></li>
+<li><p>Daily 6am digest fires automatically on the schedule. (Skipped on a quiet day — no fire-when-empty.)</p></li>
+</ul>
+<h2 id="9-the-send-it-gate">9. The send-it gate</h2>
+<p>This is the single most important thing the system does.</p>
+<p><strong>draft → present → wait for “send it” → send. Editing instructions are NEVER authorization.</strong></p>
+<p>The phrases the bot treats as authorization to send: “send it,” “yes send,” “go ahead and send it,” “ship it,” “approved, send.” Anything else is treated as NOT authorization. If a new phrase arrives that might be authorization, the bot defaults to “NOT authorization — ask.”</p>
+<p>Editing instructions — “make it shorter,” “try a different angle,” “less formal,” “continue,” “next,” “rework the opening,” “draft a breakup message” — ALWAYS trigger a redraft. They never send.</p>
+<p>If you type “shorter AND send it” in one message, the bot obeys the editing instruction first. You will see the shorter version, and you will need to type “send it” again to authorize.</p>
+<p>Silence is never consent. “OK,” “cool,” “sure” are NOT authorization.</p>
+<p>This gate is the reason the entire reply pipeline exists in one place. Every weakening of the gate language has caused a misfire in the past. We will not weaken it.</p>
+<h2 id="10-voice-and-the-warm-reply-pattern">10. Voice and the warm-reply pattern</h2>
+<p>The bot has zero baked-in voice. Every word in every draft comes from your style guide and the warm-reply pattern you captured at intake. There are no Rockstarr templates underneath.</p>
+<p>Two files do all the work:</p>
+<ul>
+<li><p><strong>/00_intake/style-guide.md</strong> — produced during onboarding by the Rockstarr Brand Voice and Style Architect interview. Brand context, mission, brand approach, brand personality, audience definition, tone definition with contrast framing, style rules, channel adaptation, tone examples, consistency principles. Drafts read this on every call.</p></li>
+<li><p><strong>The warm-reply subsection of style-guide.md</strong> — appended at install via the capture-warm-reply-pattern interview. Structure, length, opening line, closing move, banned moves, plus a calibration example and an anti-example. Warm-ICP drafts read this on every call.</p></li>
+</ul>
+<p>If the warm-reply pattern is thin, the drafts will be thin. That is acceptable feedback for the next refresh — re-run capture-warm-reply-pattern with more specific answers and the next drafts will be more specific.</p>
+<p>After voice gets applied, stop-slop runs. It catches AI tells — filler phrases, formulaic binary contrasts (“not X but Y”), passive voice, em dashes, vague declaratives, metronomic rhythm — and removes them. It returns a 0 to 50 score on five dimensions (directness, rhythm, trust, authenticity, density). Anything below 35 gets flagged in the draft so you see it at approval time.</p>
+<p>Order is fixed: voice first, stop-slop last, every time. Scrubbing before voice would strip voice-specific turns of phrase you approved.</p>
+<h2 id="11-notifications-urgent-and-daily">11. Notifications: urgent and daily</h2>
+<p>Two emails matter for this plugin. Both ride on the Rockstarr mailer your Rockstarr lead set up during onboarding.</p>
+<p>Urgent: notify-reply-ready</p>
+<ul>
+<li><p>Fires the moment a draft is staged. One email per batch — if your daily outreach loop staged five replies in one pass, you get one consolidated email with all five rendered inline, not five separate emails.</p></li>
+<li><p>Subject: “Reply from &lt;lead&gt; needs your review” (single) or “&lt;N&gt; new replies need your review” (multi).</p></li>
+<li><p>Body: lead context, what they said (≤300 char excerpt), classification, the proposed reply, an Open in Cowork deep-link.</p></li>
+<li><p>Click the deep-link and Claude Desktop opens with the draft loaded. No navigation needed.</p></li>
+<li><p>Routed to ROCKSTARR_NOTIFY_URGENT_TO if you set it during onboarding, otherwise to your default notify address.</p></li>
+</ul>
+<p>Daily: approvals-digest</p>
+<ul>
+<li><p>Fires every morning at 6am local time. Lists every pending draft across every Rockstarr bot — replies, content drafts, outreach campaigns.</p></li>
+<li><p>Most-recent updates first. Each item carries a deep-link, the same as the urgent emails.</p></li>
+<li><p>Quiet days are silent. If nothing is pending, no email.</p></li>
+<li><p>Subject: “&lt;N&gt; items awaiting your approval.” Subtitle: “Daily digest · &lt;client_name&gt;.”</p></li>
+</ul>
+<p>Weekly backlog: approvals-backlog-alert</p>
+<ul>
+<li>Routes to your Rockstarr strategist (not you) when total pending exceeds the configured threshold. We catch the backlog before it becomes a problem.</li>
+</ul>
+<h2 id="12-common-questions">12. Common questions</h2>
+<p>What if I am traveling and cannot approve replies for a few days?</p>
+<p>Nothing sends. The drafts queue in /03_drafts/replies/. The next morning’s digest will list everything pending — your queue will be a little longer when you return, but no damage is done. Leads who replied see a human pause, not a reflexive bot response.</p>
+<p>What if a draft feels generic?</p>
+<p>That is feedback for capture-warm-reply-pattern. Re-run the interview and answer with more specifics — particularly on the closing move, which is where the most common drafting mistakes live (“worth a chat,” “happy to hop on a call,” calendar links pasted directly). Specific answers produce specific drafts.</p>
+<p>What if the bot keeps drafting for non-targets?</p>
+<p>That is feedback for icp-qualifications.md. Tighten the not-target rules. Type “my ICP changed” and walk through the interview. The bot has zero hardcoded opinions about who counts as a target — it reads what you wrote.</p>
+<p>What if a reply slipped through that I would have killed?</p>
+<p>Tell your Rockstarr lead. We re-tune the gate language and the classification rules. The send-it gate is the most important guardrail in the system; if it ever misfires, we treat it as a top-priority fix.</p>
+<p>Can the bot just auto-send the warm-ICP replies for me?</p>
+<p>No. Auto-send is a non-goal for V1 and V1.1. The human gate is the reason the process has survived real operator use. A separate auto-send variant might exist in the future, but only after the send-it gate has run long enough in production to prove its false-negative rate is effectively zero. We are nowhere near that yet.</p>
+<p>Why does the booking link never go in a reply?</p>
+<p>Because pasting the link reads transactional rather than conversational, and it cuts the reply rate. Naming specific times is the more human move. Once the lead picks one, your outreach plugin’s book-meeting skill fills out the booking-link form on their behalf — the lead never sees the URL.</p>
+<p>What if a lead asks to grab coffee or meet in person?</p>
+<p>If you've enabled local-area handling in stack.md (<code>local_meet_handoff_enabled: true</code> plus a list of trigger terms — "coffee", "in person", local city names, etc.), the bot stops drafting on those threads and flags them for your review instead. You schedule the in-person meeting by phone or text — the bot doesn't try to book physical meetings through your booking link. The feature is off by default; ask your Rockstarr lead to turn it on if it matches your style.</p>
+<p>What if I want a referral pivot on Skeptical replies?</p>
+<p>On the roadmap, not shipping yet. Today, Skeptical replies default to a silent label (Not Interested) with no body sent. The referral-pivot path needs a short interview skill called capture-referral-pattern, which captures how you want referral asks to read — once that ships, Skeptical drafts will read the captured pattern on every call. If this matters for your pipeline, tell your Rockstarr lead and we can prioritize it.</p>
+<p>Does this plugin work with email, not just LinkedIn?</p>
+<p>Not yet. The core pipeline is designed for it — rockstarr-reply-gmail and rockstarr-reply-outlook are the two planned email variants — but neither ships today. When they land, the core stays the same; the variants add an inbox reader and a draft writer for your mail client. Drafts will land in your Drafts folder for you to press Send. If email is a priority for you, tell your Rockstarr lead.</p>
+<p>What happens if I pause or end my engagement?</p>
+<p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. Reply-drafting stops when we stop running daily loops with you. Nothing disappears.</p>
+<p>Why does the bot exist as a separate plugin instead of a skill inside each outreach bot?</p>
+<p>Maintenance. Every reply-drafting bug fix, every new temperature-bucket refinement, every stop-slop rule change should land once and propagate to every channel. Embedding reply drafting inside each outreach plugin would have meant three copies of the same logic by the time the second outreach variant shipped, and worse from there. This way: one place for reply logic, one place to fix it.</p>
+<h2 id="13-when-to-contact-rockstarr">13. When to contact Rockstarr</h2>
+<ul>
+<li><p><strong>A reply slipped through that you would have killed.</strong> Top priority. Call, do not email.</p></li>
+<li><p><strong>The drafts feel generic three days running.</strong> We re-run the warm-reply pattern interview together.</p></li>
+<li><p><strong>The bot is drafting for non-targets you would never pursue.</strong> We tighten icp-qualifications.md together.</p></li>
+<li><p><strong>Urgent emails are not arriving.</strong> Likely a mailer config issue — we check the .rockstarr-mailer.env file together.</p></li>
+<li><p><strong>The daily digest is not arriving.</strong> Same — usually a mailer or schedule issue.</p></li>
+<li><p><strong>You are routinely picking option B (let it hang) on every three-option flow.</strong> That is a signal the graceful-exit and throwaway-question paths are not earning their keep for your business. We adjust.</p></li>
+<li><p><strong>You want a referral pivot on Skeptical threads.</strong> The skill is on the roadmap; we can prioritize it.</p></li>
+<li><p><strong>Anything that looks weird in the weekly review.</strong> Bring it. The review exists for exactly that.</p></li>
+</ul>
+<p>Your Rockstarr lead is the primary contact. The plugin is the tool. We are the humans behind it.</p>
+<p>One closing note.</p>
+<p>This system works best when you treat the 60 seconds per reply as part of your sales cadence, not as software work. The reason the drafts read like you is because you taught the system how you write at intake. The reason the gate exists is because every time someone has tried to bypass it, a reply went out that should not have. Trust the gate. Send the ones that read right. Edit the ones that don’t. We will tune the rest from the weekly data.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

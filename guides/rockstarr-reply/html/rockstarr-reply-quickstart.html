@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quickstart</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="quickstart">Quickstart</h1>
+<p><em>Rockstarr Reply</em></p>
+<blockquote>
+<p><strong>Before your first reply</strong></p>
+<p>An outreach plugin installed in your workspace (today, that is rockstarr-outreach-salesnav). Reply rides on top — it does not run on its own.</p>
+<p>Your approved style guide and ICP qualifications, both produced during onboarding. The bot has no opinion of its own about voice or who counts as a target — it reads yours.</p>
+<p>A booking link (Calendly, GrowthAmp, etc.) OR access to share your Google Calendar — used when a hot reply lands and the bot proposes meeting times.</p>
+<p>An email address you actively watch — that is where urgent reply notifications and the daily digest land.</p>
+<p>30 minutes on the calendar with your Rockstarr lead to walk through your first few approvals together.</p>
+</blockquote>
+<p>How you talk to the system</p>
+<p>You type short, plain-English instructions into a Cowork task. No commands, no menus. The bot drafts the reply, runs an AI-slop scrub, and shows you the draft along with who the lead is, what they said, the temperature read, the proposed label, and the proposed follow-up timer. Nothing sends until you say so. You can edit, push back, or hand the thread off entirely.</p>
+<p>Your first reply, end to end</p>
+<ul>
+<li><p><strong>An urgent email arrives.</strong> Subject reads something like “Reply from Jane Doe needs your review.” Inside: the inbound message, the proposed reply body, and an Open in Cowork link.</p></li>
+<li><p><strong>Click Open in Cowork.</strong> Claude Desktop opens with the draft already loaded. You did not need to navigate anywhere.</p></li>
+<li><p><strong>Read the draft, the lead context, and the temperature read.</strong> Pick one response: “Approve and send,” “Make it shorter,” “Try a different angle,” “Draft a breakup message,” “Flag for review,” or “Skip.”</p></li>
+<li><p><strong>Editing instructions trigger a redraft, never a send.</strong> You will see the new version. You can keep editing as many times as you want.</p></li>
+<li><p><strong>When the draft reads right, type “Send it.”</strong> Only “send it” (or a clear equivalent like “yes send” or “go ahead and send it”) authorizes a send. Editing instructions never do — that is the gate, and it is non-negotiable.</p></li>
+<li><p><strong>The reply ships through your outreach plugin on the right channel and account.</strong> The verbatim words you used to authorize get logged so we have a clear record of what you approved.</p></li>
+</ul>
+<p>The three-option flow (when a non-target says yes)</p>
+<p>LinkedIn is full of polite people who say “absolutely” to a soft opener even when they are not a buyer. The bot will NOT auto-pitch them. Instead, it shows you three options with no default pre-selected:</p>
+<ul>
+<li><p><strong>Option A — Graceful exit.</strong> A short, warm message naming the fit mismatch in your own positioning language.</p></li>
+<li><p><strong>Option B — Let it hang.</strong> No reply sent. Label Ignore. The thread closes naturally.</p></li>
+<li><p><strong>Option C — Throwaway question.</strong> A light, curiosity-preserving question that keeps the relationship warm without committing to a pitch.</p></li>
+</ul>
+<p>You pick. The bot writes. You approve.</p>
+<p>Your daily rhythm (10 to 15 min)</p>
+<ul>
+<li><p><strong>Throughout the day.</strong> When a reply lands, you get an urgent email. Open the deep-link, approve or edit, send it. Total time per reply: about 60 seconds.</p></li>
+<li><p><strong>Once a day, 6am.</strong> A daily digest email lists everything still pending across every Rockstarr bot — reply drafts you have not yet acted on, blog drafts, outreach campaign specs. One pass through the digest clears your queue.</p></li>
+<li><p><strong>If the inbox is quiet.</strong> No replies, no email, no work. The digest also stays silent on a zero-pending day.</p></li>
+</ul>
+<p>Other things you will type</p>
+<ul>
+<li><p><strong>Show me waiting drafts:</strong> “Show me the replies waiting for my approval.”</p></li>
+<li><p><strong>Manually flag a thread:</strong> “Flag the Jane Doe thread — I want to handle it myself.”</p></li>
+<li><p><strong>Mark a manual booking:</strong> “Mark the meeting with Jane Doe as booked for Thursday at 2.”</p></li>
+<li><p><strong>Refresh your warm-reply pattern:</strong> “Re-run the warm-reply pattern interview — the closing move feels off.”</p></li>
+<li><p><strong>Update ICP rules:</strong> “My ICP changed — let’s tighten the rules.”</p></li>
+<li><p><strong>Any question:</strong> Describe what you want. “Why did the bot flag the Acme thread?” and “Show me the last reply I approved on the Sales Nav account.” both work.</p></li>
+</ul>
+<p>If something goes sideways</p>
+<ul>
+<li><p><strong>The drafts feel generic.</strong> Re-run “capture-warm-reply-pattern” with your Rockstarr lead. Specific answers in that interview produce specific drafts.</p></li>
+<li><p><strong>The bot keeps drafting for non-targets.</strong> Tighten icp-qualifications.md. Type “my ICP changed” and walk through the interview again.</p></li>
+<li><p><strong>A reply slipped through that you would have killed.</strong> Tell your Rockstarr lead. We re-tune the gate language and catch the misclassification.</p></li>
+<li><p><strong>You are traveling and cannot approve for a few days.</strong> Nothing sends. The drafts queue. The next morning’s digest will list everything still pending. No damage done.</p></li>
+<li><p><strong>Anything else.</strong> Call your Rockstarr lead.</p></li>
+</ul>
+<blockquote>
+<p><strong>Your safety net</strong></p>
+<p>Nothing sends on a reply thread without your explicit “send it.” Editing instructions are NEVER authorization. Silence is never consent.</p>
+<p>The bot has no hardcoded reply pattern — every word comes from your style guide, your warm-reply pattern, and your ICP rules. If the drafts feel off, the inputs are the place to fix it.</p>
+<p>Every draft passes a voice pass and an AI-slop scrub before it hits your queue. The scrub returns a 0 to 50 score; anything below 35 gets flagged so you see it.</p>
+<p>The booking link is never pasted into a reply. The bot proposes specific times instead, then your outreach plugin books on the lead’s behalf once they confirm.</p>
+<p>Every approved send is logged with the verbatim phrase you used to authorize it. There is a clear paper trail.</p>
+</blockquote>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

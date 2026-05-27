@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Content</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-content">Rockstarr Content</h1>
+<p><em>User guide for founder-led clients — v0.7.3</em></p>
+<blockquote>
+<p><strong>At a glance</strong></p>
+<ul>
+<li>A long-form content drafting system that writes in your approved voice from your first-party knowledge base.</li>
+<li>Strategic planning layer (seo-strategy, quarterly) produces a backlog of 25-32 prioritized blog topics organized into pillar + supporting clusters that build topical authority.</li>
+<li>Monthly cadence: ideate, pick, calendar, approve, draft. Blog and thought-leadership lanes are outline-first.</li>
+<li>Blog drafts are SEO + GEO disciplined — FAQ section required, inline source URLs, 13-item quality checklist before stop-slop.</li>
+<li>Thought-leadership drafts run the canonical rubric (argument quality) before stop-slop (prose hygiene).</li>
+<li>Plus interview-driven case studies on a quarterly cadence and on-demand repurposed derivatives.</li>
+<li>Long-form only as of v0.7 — LinkedIn polls and other short-form content live in the rockstarr-social plugin.</li>
+</ul>
+</blockquote>
+<p>This is the guide to rockstarr-content, the Rockstarr long-form drafting plugin your Rockstarr lead installed in your Cowork workspace. It does not post, schedule, or send — its job is to draft, and hand finished drafts to the approve / publish-log lifecycle.</p>
+<p>Two things this guide is not: a setup manual (your Rockstarr lead handles that) and a technical reference (maintained separately). This is the founder's guide to what the system does, what it asks of you, and how you know it is working.</p>
+<p><strong>1. What the system does (and doesn't do)</strong></p>
+<p><strong>What it does</strong></p>
+<ul>
+<li><p>Drafts long-form content in your approved voice, drawing only from first-party material you have vetted.</p></li>
+<li><p>Runs a strategic content-planning pass quarterly (seo-strategy) that decides which blog topics matter across 6-12 months and organizes them into pillar + supporting clusters.</p></li>
+<li><p>Runs a monthly planning pass: topic ideation (drawing from the SEO backlog for the blog lane), user picks, calendar, approval — then drafts on the scheduled dates.</p></li>
+<li><p>Gates every lane by a cadence field in stack.md. If you don't publish in a lane, the bot will not propose topics for it or draft in it.</p></li>
+<li><p>Enforces an outline-first flow on both long-form lanes (blog and thought leadership). Drafts refuse to run without an approved outline.</p></li>
+<li><p>Runs the canonical SEO + GEO checklist (13 items) before stop-slop on every blog draft — structural quality before prose hygiene.</p></li>
+<li><p>Runs the canonical thought-leadership rubric (7 tests) before stop-slop on every TL draft — argument quality before prose hygiene.</p></li>
+<li><p>Runs an interview-driven case-study flow quarterly, walking you through the Rockstarr custom-GPT interview one question at a time.</p></li>
+<li><p>Takes any one approved long-form piece and fans it out into LinkedIn post, newsletter highlight, X/Threads thread, and (when you record video) a short spoken script.</p></li>
+</ul>
+<p><strong>What it does not do</strong></p>
+<ul>
+<li><p>Does not post, schedule, or send. Publishing connectors are deferred until a signed client's stack lights up the matching field.</p></li>
+<li><p>Does not draft any short-form content. LinkedIn polls and open-ended social posts live in the rockstarr-social plugin as of v0.7.</p></li>
+<li><p>Does not generate outreach, reply, or nurture copy — those are separate plugins.</p></li>
+<li><p>Does not re-open or rewrite your style guide. If a draft reveals a voice issue, the fix runs upstream in rockstarr-infra.</p></li>
+<li><p>Does not approve its own drafts. Human review through rockstarr-infra:approve is the only path to 04_approved/.</p></li>
+<li><p>Does not accept a pre-written case-study document. The case-study lane is interview-first by design.</p></li>
+</ul>
+<p><strong>2. What you get</strong></p>
+<p><strong>Every quarter (strategic planning)</strong></p>
+<ul>
+<li><p>A dated SEO strategy document at 02_inputs/seo/strategy_&lt;date&gt;.md covering keyword research, competitor gaps, and topic clusters.</p></li>
+<li><p>A refreshed canonical backlog at 02_inputs/seo/backlog.md with 25-32 prioritized blog topics organized into 4-5 pillar+supporting clusters, ready for monthly ideation to draw from.</p></li>
+</ul>
+<p><strong>Every month</strong></p>
+<ul>
+<li><p>A ranked topic list in 02_inputs/content-topics_YYYY-MM.md, filtered to the lanes you publish. Blog angles preferred from the SEO backlog; TL angles include an enemy field with diversity check across the month's slate.</p></li>
+<li><p>A month-at-a-glance calendar in 02_inputs/content-calendar_YYYY-MM.md, slotting your picks across the month with pillar-before-supports ordering enforced for backlog-sourced blogs.</p></li>
+<li><p>A draft in 03_drafts/content/ on each scheduled date, awaiting your review.</p></li>
+</ul>
+<p><strong>Every quarter (case studies)</strong></p>
+<ul>
+<li><p>A reminder to book a 30-minute case-study interview on a recent customer win.</p></li>
+<li><p>After the interview, a polished case-study draft in 03_drafts/content/ with the live transcript kept alongside in 02_inputs/content/ for audit.</p></li>
+</ul>
+<p><strong>On demand</strong></p>
+<ul>
+<li>Derivative drafts from any approved long-form piece, one per channel, each landing as a separate approval.</li>
+</ul>
+<p><strong>3. What we need from you before we start</strong></p>
+<ul>
+<li><p>Your approved style guide. The plugin reads Brand Personality, Tone Definition pairs, Style Rules, and Channel Adaptation literally.</p></li>
+<li><p>Your client profile in 00_intake/client-profile.md, including a clear audience definition (the SEO strategy and the thought-leadership rubric both lean on it).</p></li>
+<li><p>Your stack.md, including the content-cadence fields (blogs_per_month, thought_leadership_per_month, email_newsletters_per_month, linkedin_newsletters_per_month, case_studies_per_quarter, records_videos) AND the website_base_url field that the blog lane uses to plan internal links.</p></li>
+<li><p>Enough first-party material in 01_knowledge_base/processed/ for the bot to have real voice signal. Third-party sources are allowed as cited references but never paraphrased as if you said them.</p></li>
+<li><p>About 20 to 40 minutes per draft for review, plus 30 minutes once a month for planning, 30 minutes per quarter for the SEO strategy refresh, and 30 minutes per quarter per case-study interview.</p></li>
+</ul>
+<p><strong>4. The publishing lanes</strong></p>
+<p>Six lanes total: four long-form publishing lanes gated by stack.md cadence, plus case studies on a quarterly cadence and on-demand repurposed derivatives. Cadence 0 on any lane suppresses it — no topics proposed, no slots scheduled, no drafts generated. Short-form content (LinkedIn polls, open-ended social posts) lives in rockstarr-social, not here.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Lane</strong></th>
+<th><strong>Cadence field</strong></th>
+<th><strong>Format</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Researched blog</td>
+<td>blogs_per_month</td>
+<td>Long-form, outline-first, FAQ section required</td>
+<td>The anchor. SEO + GEO disciplined — written to rank on Google AND get cited by AI search.</td>
+</tr>
+<tr>
+<td>Thought leadership</td>
+<td>thought_leadership_per_month</td>
+<td>Short, opinion-driven, outline-first</td>
+<td>Your stance. Argument quality first; weight from POV, not research. Source for LinkedIn newsletters.</td>
+</tr>
+<tr>
+<td>Email newsletter</td>
+<td>email_newsletters_per_month</td>
+<td>Short-form email</td>
+<td>Ties the month's approved pieces together. Anchored to your preferred weekday.</td>
+</tr>
+<tr>
+<td>LinkedIn newsletter</td>
+<td>linkedin_newsletters_per_month</td>
+<td>Republished TL piece</td>
+<td>Reuses an approved TL piece on LinkedIn. (Publish connector deferred.)</td>
+</tr>
+<tr>
+<td>Case study</td>
+<td>case_studies_per_quarter</td>
+<td>Interview-driven, 800-1200 words</td>
+<td>Proof. Quarterly cadence, interview-first.</td>
+</tr>
+<tr>
+<td>Derivatives</td>
+<td>(source-gated)</td>
+<td>LinkedIn post, newsletter highlight, thread, video script</td>
+<td>Fans out one approved long-form piece across short-form channels.</td>
+</tr>
+</tbody>
+</table>
+<p>Two distinctions worth understanding. The researched blog is the anchor — informational, research-backed, outline-first, FAQ-bearing, designed to rank in Google AND get cited by AI search systems. Thought leadership is the opposite kind of long-form: shorter, opinion-driven, outline-first too but with a different rubric — its weight comes from the argument, not the research pile.</p>
+<p><strong>5. The strategic content-planning layer (quarterly)</strong></p>
+<p>This is the layer above the monthly cadence. seo-strategy decides which blog topics matter for your business across 6-12 months and organizes them into pillar + supporting clusters that build topical authority over time. ideate-topics then draws from that backlog month by month.</p>
+<p>The strategy run takes about 30 minutes with your Rockstarr lead. Six phases:</p>
+<ul>
+<li><p>Phase 1: Research. The bot fetches your website + blog index, runs WebSearch on your keyword landscape, captures top-ranking competitor articles.</p></li>
+<li><p>Phase 2: Keywords. 30 seed keywords across informational / commercial / transactional intent, 50 long-tail variants on the top 10 seeds, and 8-12 quick wins flagged for first-publish priority.</p></li>
+<li><p>Phase 3: Strategy. 5 competitor gaps identified specifically (audience segment, angle, or format underserved), then 4-5 topic clusters built with one pillar page (2,500-4,000 words) and 4-6 supporting posts per cluster.</p></li>
+<li><p>Phase 4: Write deliverables. The strategy doc + the canonical backlog (regenerated per run) at 02_inputs/seo/backlog.md.</p></li>
+<li><p>Phase 5: Verify. Cluster integrity, quick-win distribution, items already covered in your publish log.</p></li>
+</ul>
+<p>Cadence: quarterly is the default, but on-demand works when you add a new service line, get a new content focus, or notice the backlog running thin. ideate-topics warns when fewer than 2× monthly cadence remains so you have visibility before the backlog empties.</p>
+<p>When the strategy runs, monthly ideation changes shape. ideate-topics reads the backlog first and prefers backlog items for the blog lane. Each picked blog item carries cluster, cluster-role (pillar or supporting), parent pillar slug, target keyword, search intent, and difficulty estimate — which the downstream outline and draft steps use to plan internal linking inside the cluster and to enforce pillar-before-supports ordering on the calendar.</p>
+<p><strong>6. The monthly flow</strong></p>
+<p>You do not run these steps by hand. Your Rockstarr lead runs them, or they run on a schedule. This is what the rhythm looks like behind the scenes.</p>
+<ol type="1">
+<li><p><strong>Day 1 — ideate.</strong> ideate-topics reads profile, style guide, first-party KB, publish log, and (when present) the SEO backlog. Proposes 8 to 12 ranked angles. Blog angles come from the backlog by default; TL angles each carry an enemy field that gets checked for rhyming across the month's TL slate.</p></li>
+<li><p><strong>Day 3 — calendar.</strong> content-calendar slots your picks across the month. Pillar blogs calendar before their supporting posts within the same cluster. TL pieces and newsletters anchor to their respective weekdays.</p></li>
+<li><p><strong>Day 3 — approve the calendar.</strong> This is the monthly gate. Once approved, per-piece drafting runs on the scheduled dates.</p></li>
+<li><p><strong>Days 4 through end-of-month — outline and draft.</strong> Each scheduled date triggers the right skill. Blog outlines and TL outlines need your approval before their drafts can run. Newsletter drafts ship single-shot.</p></li>
+<li><p><strong>Review and approve.</strong> You read each draft. Approve, edit, or send back. Approved pieces land in 04_approved/content/ with a date stamp and are logged on publish.</p></li>
+</ol>
+<p><strong>7. The two quality gates</strong></p>
+<p>Both long-form lanes run a structural quality pass BEFORE stop-slop runs. The order is fixed — structural failures don't get rescued by smoother prose. Each lane has its own pass:</p>
+<p><strong>The 13-item SEO + GEO checklist (blog lane)</strong></p>
+<p>Every blog draft runs the canonical SEO + GEO checklist as Pass 1. Modern blogs need to rank on Google AND get cited by AI search systems (ChatGPT, Perplexity, Google AI Overviews). The checklist enforces the structural pieces that make both happen:</p>
+<ul>
+<li><p>Word count ≥ 1,200, with keyword in title, first 100 words, 1-2 H2s, and final paragraph.</p></li>
+<li><p>Keyword density tracked (0.5-1% band; surfaced as warning if outside, never hard-enforced).</p></li>
+<li><p>FAQ section required — 3-5 H3 questions, each answered direct-answer-first. This is where AI extraction is densest.</p></li>
+<li><p>At least 5 cited statistics or facts from named sources, each carrying an inline [Source: URL] next to the claim.</p></li>
+<li><p>References section at the bottom listing every external source cited inline.</p></li>
+<li><p>Meta title (≤60 chars) and meta description (≤155 chars) carried in front-matter.</p></li>
+<li><p>3-5 internal links inline with descriptive anchor text, including at least one to the client's primary service page.</p></li>
+<li><p>Active voice with named subject in every sentence; tone matches the style guide.</p></li>
+</ul>
+<p>A failed checklist returns the draft for a targeted fix — the skill regenerates once with the failures as the correction prompt. Two consecutive failures means the issue is upstream (usually a thin outline or missing research). At that point the bot surfaces to you rather than burning more compute.</p>
+<p><strong>The thought-leadership rubric (TL lane)</strong></p>
+<p>Every TL draft runs a seven-test rubric as Pass 1. The rubric tests argument quality, not prose quality. The first three tests are the gold standard for whether a TL piece has anything to say:</p>
+<ul>
+<li><p>One argument a smart competitor could publicly disagree with (not a slogan in dress-up).</p></li>
+<li><p>One specific story told in detail end-to-end (not a list of stats or testimonials).</p></li>
+<li><p>One line a reader would repeat at dinner (the crystallized take), placed in the first third of the article.</p></li>
+</ul>
+<p>Plus four structural tests: thesis matches the outline's stated thesis, draft engages with the counter-argument named at outline time, proprietary terms are buried until the second half, closing paragraph crystallizes the take above the CTA.</p>
+<p>The rubric and the SEO/GEO checklist both run BEFORE stop-slop. The principle is the same: argument first, structure second, prose hygiene last. Polishing a slogan into smoother prose just produces a smoother slogan.</p>
+<p><strong>8. The case-study lane</strong></p>
+<p>Case studies sit outside the monthly calendar. They fire on a quarterly reminder, or when you name a customer win you want to document.</p>
+<p>The whole lane is interview-first. The bot walks you through the Rockstarr custom-GPT case-study prompt one question at a time using AskUserQuestion — consultant's company, ideal client audience, client company, anonymity preference, client snapshot, trigger, challenges, your approach, concrete results with numbers, before vs. after, ongoing impact, optional quote, and a video-testimonial headline.</p>
+<p>Two rules make the lane work:</p>
+<ul>
+<li><p>The bot pushes back on vague answers. "It was better" is not an answer for the results question — it will ask for before/after numbers, time-to-value, or revenue impact.</p></li>
+<li><p>The polished draft does not generate until every required question has an answer. If you need to defer a number you don't have yet, mark it [CLIENT TO CONFIRM] explicitly.</p></li>
+</ul>
+<p>The transcript is kept at 02_inputs/content/case-study-interview-&lt;slug&gt;.md so you can audit which answer drove which paragraph. Because the transcript is an audit record, not prose for publication, it is exempt from the stop-slop pass. The polished case-study prose runs stop-slop as normal; customer quotes are reproduced as given.</p>
+<p><strong>9. Repurpose (on-demand derivatives)</strong></p>
+<p>Any approved long-form piece — blog, thought leadership, or case study — can be fanned out into channel-native derivatives. Repurpose compresses and reshapes the approved argument; it does not re-research or reframe. Voice stays the same.</p>
+<ul>
+<li><p>LinkedIn post. 1,200-1,500 characters, native format, ends with a PS linking the source.</p></li>
+<li><p>Newsletter highlight. 150-250 words, ends with a one-line CTA pointing at the full piece.</p></li>
+<li><p>X / Threads thread. 5 to 9 posts, each ≤ 280 chars, hook → argument → CTA.</p></li>
+<li><p>Short video script (only when stack.md.records_videos=true). 60-120 seconds of spoken copy, hook → argument → CTA.</p></li>
+</ul>
+<p>Each derivative lands in its own file under 03_drafts/ and gets its own separate approval. Newsletters cannot be repurposed; they are the ingestion point, not a source.</p>
+<p><strong>10. The stop-slop pass (mandatory, every prose output)</strong></p>
+<p>Every drafting skill in this plugin — blog, thought leadership, newsletter, case study, and each repurpose derivative — runs the shared stop-slop skill as its final pass before the file is written. The order is fixed: style guide first (voice), then the structural rubric specific to the lane (SEO/GEO checklist for blogs, TL rubric for thought leadership), then stop-slop (prose hygiene).</p>
+<p>Stop-slop catches things like filler openers, binary contrasts ("not X, but Y"), em-dash splices, metronome rhythm, vague declaratives, and narrator-from-a-distance framing. Each draft carries a stop_slop_score (out of 50) in its front-matter. Scores below 35/50 flag the draft for reviewer attention.</p>
+<p>Structural artifacts (topic lists, calendars, outlines, interview transcripts, customer quotes) are exempt — they're not prose for publication.</p>
+<p><strong>11. What you approve, and when</strong></p>
+<p>The plugin does not promote anything to 04_approved/ on its own. Three things always go through you:</p>
+<ol start="6" type="1">
+<li><p><strong>The monthly calendar.</strong> You approve content-calendar before any per-piece drafting runs.</p></li>
+<li><p><strong>Each outline (blog and TL).</strong> Drafting refuses to run without an approved outline on both long-form lanes — outline-blog → draft-blog and outline-thought-leadership → draft-thought-leadership.</p></li>
+<li><p><strong>Every draft (and every derivative).</strong> Each blog, TL piece, newsletter, case study, and repurposed derivative is its own approval. Derivatives do not batch-approve.</p></li>
+</ol>
+<p>Lane cadence (set in stack.md) is also a form of approval. Suppressing a lane by setting its cadence to 0 prevents the bot from proposing or drafting for it.</p>
+<p><strong>12. What to type when you want the system to do something</strong></p>
+<p>Every action is a short English instruction typed into a Cowork task. If you can say it to your Rockstarr lead in plain English, you can type it as a prompt.</p>
+<p><strong>Strategic planning (quarterly)</strong></p>
+<ul>
+<li><p><strong>"Run the SEO strategy."</strong> Six-phase research + clustering workflow. Produces the strategy doc and refreshes the canonical blog backlog.</p></li>
+<li><p><strong>"How many items are left in the SEO backlog?"</strong> Status check — the bot reads the backlog and the workflow files to tell you what's still available.</p></li>
+</ul>
+<p><strong>Monthly planning</strong></p>
+<ul>
+<li><p><strong>"Ideate this month's content topics."</strong> Reads the SEO backlog (when present), filters items already in flight, proposes 8 to 12 ranked angles.</p></li>
+<li><p><strong>"Build the content calendar for [month]."</strong> After you mark Pick: yes on the topics you want to draft, slots them across the month with pillar-before-supports ordering.</p></li>
+<li><p><strong>"Approve the calendar."</strong> The monthly gate. Drafting runs only after this.</p></li>
+</ul>
+<p><strong>Per-piece drafting</strong></p>
+<ul>
+<li><p><strong>"Outline the blog on [topic]."</strong> Runs WebSearch research, drafts the FAQ section, plans keyword placement and internal links. Approval required before drafting.</p></li>
+<li><p><strong>"Draft the blog on [topic]."</strong> Refuses without an approved outline. Body REQUIRES the FAQ section. Every external fact carries an inline [Source: URL]. Runs the 13-item checklist before stop-slop.</p></li>
+<li><p><strong>"Outline the thought-leadership piece on [topic]."</strong> Forces five required fields — thesis, smart-competitor counter-argument, opening scene, quotable line, buried proprietary term.</p></li>
+<li><p><strong>"Draft the thought-leadership piece."</strong> Refuses without an approved outline. Runs the canonical TL rubric (7 tests) before stop-slop.</p></li>
+<li><p><strong>"Draft this week's email newsletter."</strong> Single-shot. Links the month's approved blog and TL pieces as the CTA.</p></li>
+<li><p><strong>"Draft a case study on [customer name]."</strong> Runs the interview one question at a time. Polished draft only after every required question is answered.</p></li>
+<li><p><strong>"Repurpose the approved [slug] piece."</strong> Emits a LinkedIn post, a newsletter highlight, an X/Threads thread, and (when records_videos=true) a short video script.</p></li>
+</ul>
+<p><strong>Approvals and publishing</strong></p>
+<ul>
+<li><p><strong>"Approve this draft."</strong> Moves the file from 03_drafts/ to 04_approved/ with a date stamp and records the approval in the approvals log.</p></li>
+<li><p><strong>"Log that I published [slug] to [channel]."</strong> Records the send in 05_published/_publish.log so next month's ideate-topics avoids repeats.</p></li>
+</ul>
+<p><strong>When you are not sure what to ask for</strong></p>
+<p>Describe what you want in your own words. Examples that work:</p>
+<ul>
+<li><p>"Which clusters are unrepresented in this month's slate?"</p></li>
+<li><p>"Show me the stop_slop_score and tl_rubric_score on the last three TL drafts."</p></li>
+<li><p>"Why did the bot refuse to draft this morning?" (Usually: outline not approved, or lane cadence is 0.)</p></li>
+<li><p>"Has anything we've drafted in the last two months touched on [topic]?"</p></li>
+</ul>
+<p><strong>13. Your review rhythm</strong></p>
+<ul>
+<li><p>Per-draft review. 20 to 40 minutes per piece. Read each draft as it lands. Edit in place if needed. Approve when ready.</p></li>
+<li><p>Outline reviews. 10 to 15 minutes per outline. Both blog and TL outlines need your approval before drafting can start — the gate is where directional issues get caught cheaply.</p></li>
+<li><p>Monthly planning session, Day 1. 30 minutes with your Rockstarr lead. Ideate, pick, calendar, approve.</p></li>
+<li><p>Quarterly strategy session. 30 minutes with your Rockstarr lead. Refresh the SEO backlog.</p></li>
+<li><p>Quarterly case-study interview. 30 minutes with your Rockstarr lead. The bot walks you through the interview questions one at a time.</p></li>
+<li><p>Friday review (optional). 30 minutes with your Rockstarr lead. Walk this week's drafts, confirm what ships next week.</p></li>
+</ul>
+<p><strong>14. Caps and guardrails</strong></p>
+<ul>
+<li><p>Cadence 0 in stack.md suppresses a lane entirely. The bot will not propose topics, slot a calendar entry, or accept a draft prompt for a lane with cadence 0.</p></li>
+<li><p>First-party voice only. Voice signal is drawn only from KB files tagged kb_scope: owned AND style_guide_eligible: true. Third-party sources appear as cited references inline AND in the References section, never paraphrased into the client's voice.</p></li>
+<li><p>Both long-form lanes are outline-first. Drafting refuses to run without an approved outline.</p></li>
+<li><p>Case-study lane is interview-first. Pre-written case-study documents are not accepted.</p></li>
+<li><p>Two-pass discipline on every long-form draft. Structural quality (SEO/GEO checklist or TL rubric) runs before prose hygiene (stop-slop). Order is fixed.</p></li>
+<li><p>Pillar blogs ship before their supporting posts. content-calendar enforces this when cluster-tagged picks land in the same month — supports link back to the pillar, so the pillar can't ship after its supports.</p></li>
+<li><p>Human approval is the only path to 04_approved/. The plugin does not approve its own drafts.</p></li>
+</ul>
+<p><strong>15. Common questions</strong></p>
+<p><strong>What happens if a draft scores below 35 on stop-slop?</strong></p>
+<p>The draft still lands in 03_drafts/ — the score does not block writing — but it flags for reviewer attention. Your Rockstarr lead will take a closer look before it goes to you, or surface the specific AI tells that triggered the low score.</p>
+<p><strong>What happens if the SEO/GEO checklist or TL rubric fails Pass 1?</strong></p>
+<p>The skill regenerates once with the failed items as targeted correction prompts. Two consecutive failures means the issue is upstream — usually the outline is thin or the research didn't capture enough. The bot stops at that point and asks you to re-open the outline rather than burning more compute on regenerations against the same wall.</p>
+<p><strong>Can I skip the outline for a blog or thought-leadership piece?</strong></p>
+<p>No. Both long-form lanes are outline-first. If you want a single-shot piece, you probably want a newsletter or a social post (the latter lives in rockstarr-social, not here).</p>
+<p><strong>How often do I need to re-run seo-strategy?</strong></p>
+<p>Quarterly is the default. The bot warns you when the backlog runs thin (fewer than 2× monthly cadence remaining); a re-run regenerates the backlog and adds an audit-preserved copy of the new strategy doc.</p>
+<p><strong>Can I change lane cadence mid-month?</strong></p>
+<p>You can, but it affects next month's planning. The current month's calendar already ran against the old cadence. Your Rockstarr lead updates stack.md in capture-stack, not by editing the file directly.</p>
+<p><strong>What if a case study stalls mid-interview?</strong></p>
+<p>The transcript captures progress. Re-running draft-case-study picks up at the first unanswered required question. You will not be re-asked questions you already answered.</p>
+<p><strong>Can I repurpose a newsletter?</strong></p>
+<p>No. Newsletters are the ingestion point, not a repurpose source. Repurpose from the underlying blog or thought-leadership piece the newsletter referenced.</p>
+<p><strong>Where do LinkedIn polls live now?</strong></p>
+<p>In the rockstarr-social plugin, as of v0.7. Polls were briefly in rockstarr-content (v0.6) but moved out once rockstarr-social was built. The workspace contract for polls — polls_cadence in stack.md, the LinkedIn polls subsection in style-guide.md — is unchanged. Only the implementing plugin changed.</p>
+<p><strong>Does this plugin post or send?</strong></p>
+<p>No. Publishing connectors are deferred until a signed client's stack lights up the matching field. Until then, you publish in your usual tool and log the send.</p>
+<p><strong>What happens if I pause or end my engagement?</strong></p>
+<p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. Nothing disappears.</p>
+<p><strong>16. When to contact Rockstarr</strong></p>
+<ul>
+<li><p>A draft reads off-voice. Call your Rockstarr lead before re-running — voice issues almost always point back at the style guide, not the drafting skill.</p></li>
+<li><p>You want to change the cadence on a lane.</p></li>
+<li><p>You have a customer win you want to document as a case study.</p></li>
+<li><p>The stop_slop_score on a piece is persistently low and edits are not moving it.</p></li>
+<li><p>The SEO backlog is running thin and you want to do an early refresh rather than wait for the quarterly cadence.</p></li>
+<li><p>You saw a topic repeat the ideate-topics pass didn't catch.</p></li>
+<li><p>Anything else you are not sure about.</p></li>
+</ul>
+<p>Your Rockstarr lead is the primary contact. The plugin is the tool. We are the humans behind it.</p>
+<blockquote>
+<p><strong>One closing note</strong></p>
+<p>This system works best when you treat the long-form content as a strategic asset, not a kinetic output. The 30 minutes you spend on the quarterly SEO strategy session decides what your audience will associate you with for the next year. The 10 to 15 minutes per outline gate is where directional issues get caught before they cost you a 1,500-word rewrite. The 20 to 40 minutes per draft review is what turns a model's output into content worth your name. The rest runs on its own.</p>
+</blockquote>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

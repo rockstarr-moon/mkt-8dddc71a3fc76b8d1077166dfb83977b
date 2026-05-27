@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Outreach, Sales Navigator Edition</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-outreach-sales-navigator-edition">Rockstarr Outreach, Sales Navigator Edition</h1>
+<p><em>User guide for founder-led clients</em></p>
+<blockquote>
+<p><strong>At a glance</strong></p>
+<ul>
+<li>A LinkedIn outreach system that runs directly through Sales Navigator.</li>
+<li>Two campaign types: full-sequence (connect + three short messages aimed at conversations and meetings) and connect-only (connection requests only, no post-accept messages — for network-building).</li>
+<li>Nothing sends without your approval for new campaigns, replies, and bookings.</li>
+<li>Capped at 20 connection requests per day and 100 per week, enforced in code.</li>
+<li>Your time commitment: about 10 minutes per weekday, 30 minutes on Fridays.</li>
+</ul>
+</blockquote>
+<p>This is the guide to rockstarr-outreach-salesnav, the Rockstarr LinkedIn outreach system your Rockstarr lead installed in your Cowork workspace. It runs multi-touch campaigns through your Sales Navigator, keeps all state in a single workbook inside your /rockstarr-ai/ folder, and routes everything that touches a lead through your approval.</p>
+<p>Two things this guide is <em>not</em>: a setup manual (your Rockstarr lead handles setup) and a technical reference (that is maintained separately). This is a founder's guide to what the system does, what it asks of you, and how you know it is working.</p>
+<h2 id="1-what-the-system-does-and-doesnt-do">1. What the system does (and doesn't do)</h2>
+<p>What it does</p>
+<ul>
+<li><p>Runs LinkedIn outreach campaigns on your behalf, directly through Sales Navigator, using a saved search you define.</p></li>
+<li><p>Two campaign types you pick at draft time. Full-sequence: a blank connect request followed by three short messages across roughly one week, aimed at opening conversations and booking meetings. Connect-only: connection requests only, no post-accept messages — for growing your network presence in an audience without starting a sales conversation.</p></li>
+<li><p>Pulls replies into an approval queue. You review every reply draft before anything goes back to the lead. Connect-only campaigns route replies the same way; the difference is that they don't generate outbound conversations themselves.</p></li>
+<li><p>Books meetings automatically (via your booking link) or queues them for you to book manually, depending on your setup.</p></li>
+<li><p>Gives you a one-page report every Friday.</p></li>
+<li><p>Scrubs every draft for AI writing patterns before you see it, so what lands in your approval queue reads like a human wrote it.</p></li>
+<li><p>Personalizes every sequence message with the lead's first name, resolved at send time. If a lead's name is missing or garbage in the workbook, the personalization drops cleanly — you never see a placeholder ship to a lead.</p></li>
+<li><p>Pings you by email the moment a lead replies, with each draft response rendered inline and a one-click link straight into the approval queue.</p></li>
+</ul>
+<p>What it does not do</p>
+<ul>
+<li><p>It does not pitch. No sequence message asks for a meeting, and no message talks about what you sell.</p></li>
+<li><p>It does not run outside Sales Navigator. Sales Navigator only.</p></li>
+<li><p>It does not send anything you have not approved for replies and new campaigns.</p></li>
+<li><p>It does not exceed 20 connection requests per day or 100 per week.</p></li>
+<li><p>It does not hand your booking link to a lead in message copy. Times are always proposed inside an approved reply.</p></li>
+</ul>
+<h2 id="2-what-you-get">2. What you get</h2>
+<p>Every day</p>
+<ul>
+<li><p>Connection requests out to your ICP, up to the daily cap, spread across your active campaigns.</p></li>
+<li><p>Accepts from prior days pulled into the sequence.</p></li>
+<li><p>Scheduled sequence messages sent to leads who have reached the next step.</p></li>
+<li><p>Replies detected, classified, drafted, and queued for your approval — with a same-run urgent email summarizing each new draft so you don't miss anything that needs you.</p></li>
+</ul>
+<p>Every Friday</p>
+<ul>
+<li><p>A weekly report showing connects sent, accepts received, replies, meetings booked, reply rate, and book rate.</p></li>
+<li><p>A roll-up across all your active campaigns.</p></li>
+<li><p>A short “what to watch” section flagging any campaign that is off-pace, with a one-line diagnosis.</p></li>
+</ul>
+<h2 id="3-what-we-need-from-you-before-we-start">3. What we need from you before we start</h2>
+<p>Five items. No more.</p>
+<ol type="1">
+<li><p><strong>A Sales Navigator seat.</strong> Not regular LinkedIn. Sales Navigator. The system drives Sales Navigator through your browser, and Sales Navigator's saved searches are the lead source.</p></li>
+<li><p><strong>One approved ICP per campaign.</strong> We pull the baseline from the workbook you completed during onboarding. Before each new campaign, your Rockstarr lead walks you through a short per-campaign clarification pass, narrowing role, company size, geography, and disqualifiers for that specific campaign. Those per-campaign adjustments never overwrite your baseline ICP.</p></li>
+<li><p><strong>A saved search in Sales Nav.</strong> One saved search per campaign that matches the ICP. We do not scrape. We use LinkedIn's own filters.</p></li>
+<li><p><strong>Three decisions per campaign.</strong> What is the single pain your ICP feels that nobody else names precisely (we call this the anchor phrase), how should meetings be booked (automated via your booking link, or manually from your calendar), and who on your side approves replies.</p></li>
+<li><p><strong>About 15 minutes per day</strong> during active campaigns, plus roughly 30 minutes on Fridays for the weekly report.</p></li>
+</ol>
+<h2 id="4-how-the-daily-loop-works">4. How the daily loop works</h2>
+<p>You do not run any of these steps by hand. Your Rockstarr lead runs them, or they run on a schedule. This is what happens behind the scenes so you know what the system is actually doing every day.</p>
+<ol type="1">
+<li><p><strong>Confirm session.</strong> The system verifies your browser is signed in to the correct LinkedIn account. If it is not, the run stops and nothing sends.</p></li>
+<li><p><strong>Preview the queue.</strong> A short preview shows exactly who is about to get a connection request today and which sequence step each active lead is on.</p></li>
+<li><p><strong>Send connection requests.</strong> Up to the daily cap. Connection requests are sent blank, with no note. This is on purpose: blank connects have a measurably higher accept rate than notes.</p></li>
+<li><p><strong>Detect accepts.</strong> Anyone who accepted since the last run is pulled into the sequence and scheduled for Message 2 that same day.</p></li>
+<li><p><strong>Generate message tasks.</strong> The system schedules Messages 2, 3, and 4 for each lead according to the campaign cadence.</p></li>
+<li><p><strong>Send scheduled messages.</strong> Any messages due today go out. Each lead's first name is dropped into the opening of Messages 2 and 3 at send time. If the workbook has no clean first name for a given lead, the personalization is dropped cleanly so the message still reads naturally and never ships a placeholder.</p></li>
+<li><p><strong>Detect replies.</strong> Replies are pulled from LinkedIn, classified (engaged, not interested, out-of-office, etc.), and drafts are staged for your approval. At the end of the run, you get one urgent email summarizing every newly-staged draft response — lead, what they said, the draft you would send — with a click-through that opens directly into your reply queue.</p></li>
+<li><p><strong>Log daily metrics.</strong> Connects, accepts, sends, replies, and meetings booked are logged to the workbook for the weekly roll-up.</p></li>
+</ol>
+<p>What you see in your workspace: a single workbook named <code>outreach-tasks.xlsx</code> (under <code>/rockstarr-ai/02_inputs/outreach/</code>), holding the current state of every lead, every message, and every reply. The workbook is the source of truth.</p>
+<h2 id="5-your-daily-touchpoints">5. Your daily touchpoints</h2>
+<p>Every weekday, about 10 minutes total:</p>
+<ul>
+<li><p><strong>Morning, 2 minutes.</strong> Open Cowork. Confirm the session is green. Your Rockstarr lead or the scheduled run handles the rest.</p></li>
+<li><p><strong>Midday, 5 to 7 minutes.</strong> When the urgent reply email lands (or whenever you check), review the drafts the system staged. Approve, edit, or reject each one.</p></li>
+<li><p><strong>Your browser.</strong> Stays signed in to LinkedIn in the background. That is the only steady-state requirement.</p></li>
+</ul>
+<p>No reply the system drafts is sent without your explicit approval. You see the exact text. You edit it or approve it. Then it sends.</p>
+<h2 id="6-how-to-interact-with-the-system">6. How to interact with the system</h2>
+<p>How it works at a high level</p>
+<p>Every action is a short English instruction you type into a Cowork task. No commands, no syntax, no menus. You describe what you want in plain words; the system figures out which step to run, asks follow-up questions when it needs to, and shows you drafts before anything leaves your workspace. The rest of this section walks you through the exact flows you will use most often.</p>
+<p>A few ground rules that make this easier:</p>
+<ul>
+<li><p>If you know what you want to do, say it directly: “Run today's outreach loop.”</p></li>
+<li><p>If you are not sure what to call it, describe it: “I want to see which leads have gone quiet this week.” Both work.</p></li>
+<li><p>The system will ask before doing anything irreversible. You can always say “Wait, let me check something first.”</p></li>
+<li><p>You do not need to get the prompt word-perfect. These are starting points, not magic phrases.</p></li>
+</ul>
+<p>Walkthrough: creating a new campaign</p>
+<p>This is the flow you will run with your Rockstarr lead the first time, and again whenever you want to launch a new ICP.</p>
+<ol type="1">
+<li><p><strong>Open a new task and type: “Draft a new outreach campaign.”</strong> The first thing the system asks is which type of campaign this is — full-sequence (the default, with the three-message post-accept conversation) or connect-only (no post-accept sequence, for network-building). Answer in plain English. The rest of the draft flow adapts to your pick.</p></li>
+<li><p><strong>Answer its questions one at a time.</strong> Typical sequence: role, company size, geography, disqualifiers. Full-sequence campaigns add two more questions — the single pain this ICP feels and the anchor phrase (a short line naming that pain in your voice). Connect-only campaigns skip those, since there's no opener message to anchor. Answer in plain English. If you are not sure, say “not sure — propose something” and the system will suggest an option for you to confirm.</p></li>
+<li><p><strong>Review the drafted four-message sequence.</strong> Message 1 is blank by design. Messages 2, 3, and 4 are short. If anything is off, push back: “Rewrite Message 2 to open on [specific observation].” “Message 3 is too long — cut it in half.” “The anchor phrase feels off. Try something closer to: [your wording].” Repeat until it reads like you.</p></li>
+<li><p><strong>Approve: “Approve this campaign.”</strong> The draft moves into your approved folder and becomes the reference copy.</p></li>
+<li><p><strong>Launch: “Register the campaign and crawl the saved search.”</strong> Have the saved-search URL from Sales Nav ready when you run this. The system paginates the search, pulls leads into your tracker, and seeds connect tasks. The campaign goes live in the next daily run.</p></li>
+</ol>
+<p>Walkthrough: the daily loop</p>
+<p>Most weekdays, this is all you do:</p>
+<ol type="1">
+<li><p><strong>Type: “Run today's outreach loop.”</strong> The system confirms your LinkedIn session, then reports back a short summary: N connects sent, N accepts detected, N messages sent, N new replies queued. If anything fails (session mismatch, a LinkedIn UI change), it stops and tells you — nothing sends in a broken state.</p></li>
+<li><p><strong>If there are replies in the queue, type: “Show me the replies waiting for my approval.”</strong> The system walks you through one draft at a time.</p></li>
+<li><p><strong>For each draft, pick one response:</strong></p></li>
+</ol>
+<ul>
+<li><p><strong>“Approve.”</strong> Sends as written.</p></li>
+<li><p><strong>“Edit: [your changes].”</strong> The system applies the edit and shows you the updated draft for a final approve.</p></li>
+<li><p><strong>“Reject. Reason: [one short line].”</strong> Kills this draft. You can ask for another: “Draft another response to this reply.”</p></li>
+<li><p><strong>“Not interested. Opt them out.”</strong> Flags the lead. No more sequence messages reach them.</p></li>
+</ul>
+<p>If you want to eyeball the queue before anything ships, type <em>“Just preview today's queue before we send.”</em> The system shows who is about to receive a connect request and where each active lead sits in the sequence. When you are satisfied, type <em>“Go ahead.”</em></p>
+<p>Walkthrough: pausing, stopping, marking a manual booking</p>
+<ul>
+<li><p><strong>Pause a campaign:</strong> “Pause the [campaign name] campaign.” No new enrollments, no new sends. In-flight leads stay in place so you can resume without losing them.</p></li>
+<li><p><strong>Stop a campaign:</strong> “Stop the [campaign name] campaign.” Ends it. In-flight leads fall off the sequence.</p></li>
+<li><p><strong>Mark a manual booking:</strong> “Mark the meeting with [lead's name] as booked for [date and time].” The system flips the lead's state, cancels remaining sequence messages, and records the booking so the weekly report picks it up.</p></li>
+</ul>
+<p>Walkthrough: the Friday report</p>
+<ol start="4" type="1">
+<li><p><strong>Type: “Generate this week's outreach report.”</strong> The system rolls up connects, accepts, replies, bookings, reply rate, and book rate per campaign, writes the report into 06_reports/weekly/, and shows it in your task.</p></li>
+<li><p><strong>Review it with your Rockstarr lead.</strong> Campaigns flagged “watch” come with a one-line diagnosis. If you want to act on a recommendation on the spot: “Tighten the ICP on [campaign].” “Pause [campaign] — the reply rate isn't there.”</p></li>
+<li><p><strong>Before you close out the week, type: “Back up the outreach workbook.”</strong> A timestamped copy lands in 99_archive/. Do this any time before a big change, and every Friday as a habit.</p></li>
+</ol>
+<p>Quick reference: the prompts you will use most often</p>
+<ul>
+<li><p><strong>Run the daily loop:</strong> “Run today's outreach loop.”</p></li>
+<li><p><strong>Preview before sending:</strong> “Just preview today's queue before we send.”</p></li>
+<li><p><strong>Reply queue:</strong> “Show me the replies waiting for my approval.”</p></li>
+<li><p><strong>New campaign:</strong> “Draft a new outreach campaign.” → “Approve this campaign.” → “Register the campaign and crawl the saved search.”</p></li>
+<li><p><strong>Pause or stop:</strong> “Pause the [campaign] campaign.” / “Stop the [campaign] campaign.”</p></li>
+<li><p><strong>Manual booking:</strong> “Mark the meeting with [name] as booked for [time].”</p></li>
+<li><p><strong>Friday report:</strong> “Generate this week's outreach report.”</p></li>
+<li><p><strong>Backup:</strong> “Back up the outreach workbook.”</p></li>
+</ul>
+<p>When you are not sure what to ask for</p>
+<p>Describe what you want in plain English. You do not need to know the skill names. All of these work:</p>
+<ul>
+<li><p>“I'm seeing replies but none are from the kind of company I'm trying to reach. What's going on?”</p></li>
+<li><p>“Show me every lead in the Series B founders campaign that has been in the sequence for more than a week with no reply.”</p></li>
+<li><p>“Why did my connection rate drop this week?”</p></li>
+<li><p>“Can I see the last three messages sent to [lead's name]?”</p></li>
+<li><p>“What's the next thing you'd suggest we tune?”</p></li>
+</ul>
+<p>The system reads the relevant files in your workspace and answers. If your question is ambiguous, it asks a clarifier before acting.</p>
+<blockquote>
+<p><strong>Rule of thumb</strong></p>
+<p>If you can say it to your Rockstarr lead in plain English, you can type it as a prompt. When in doubt, type what you want. You will not break anything — nothing sends to a lead without your explicit approval.</p>
+</blockquote>
+<h2 id="7-your-weekly-touchpoint">7. Your weekly touchpoint</h2>
+<p>Every Friday, about 30 minutes with your Rockstarr lead:</p>
+<ul>
+<li><p>Open the weekly report (generated every Friday end-of-day).</p></li>
+<li><p>Review the per-campaign numbers: connects, accepts, replies, books, reply rate, book rate.</p></li>
+<li><p>Review any campaigns flagged as off-pace, with the short diagnosis attached.</p></li>
+<li><p>Approve next week's adjustments. Tighten an ICP, swap a saved search, pause a campaign, add one.</p></li>
+</ul>
+<p>If a campaign is underperforming, we tell you, we tell you why, and we propose a fix. That is the point of the Friday meeting.</p>
+<h2 id="8-what-you-approve-and-when">8. What you approve, and when</h2>
+<p>The system will not send these three things without your explicit approval:</p>
+<ol type="1">
+<li><p><strong>Campaign launches.</strong> A new ICP, saved search, and sequence is drafted and held in draft state until you approve it.</p></li>
+<li><p><strong>Replies to leads.</strong> Every reply the system drafts is held in the queue until you approve it. You can edit the text before approving.</p></li>
+<li><p><strong>Manual bookings.</strong> If you chose manual booking, you pick the time and run a short confirmation so the system knows the meeting is set.</p></li>
+</ol>
+<p>Connection requests, routine sequence messages, and the weekly report do not require per-item approval. They are governed by the campaign spec you approved at launch, and they follow the hard caps.</p>
+<blockquote>
+<p><strong>When a lead replies, you get pinged the same run</strong></p>
+<p>Every reply pass that stages new draft responses fires one urgent email summarizing the batch — lead, what they said, the draft you would send, and a click-through that opens directly into your reply queue. The email only fires when something new is waiting; no replies, no email. Anything still sitting in the queue the next morning shows up in your daily approvals digest, so nothing rots.</p>
+</blockquote>
+<blockquote>
+<p><strong>Voice and scrub passes, before you see anything</strong></p>
+<p>Every draft runs through two passes before it hits your approval queue: a voice pass against your approved style guide, and a final scrub that strips the usual AI tells (em dashes, “not X but Y” constructions, passive voice, filler openers, metronomic rhythm). You still review the result, but what you are reviewing has already had the robotic edges taken off.</p>
+</blockquote>
+<h2 id="9-booking-flow">9. Booking flow</h2>
+<p>Two modes. Pick one per campaign. You can use different modes for different campaigns.</p>
+<p>Automated booking (booking link)</p>
+<ul>
+<li><p>You give us a booking link, whether Calendly, SavvyCal, GrowthAmp calendars, or similar.</p></li>
+<li><p>When a lead shows meeting intent, the system proposes two or three specific times and includes the link in the approved reply.</p></li>
+<li><p>The lead books. The meeting lands on your calendar.</p></li>
+</ul>
+<p>Manual booking (Google Calendar read)</p>
+<ul>
+<li><p>The system reads your Google Calendar to find open slots.</p></li>
+<li><p>The system drafts a reply proposing two or three specific times.</p></li>
+<li><p>You approve the reply. The lead replies with a time.</p></li>
+<li><p>You book the meeting manually on your calendar and confirm it in the tracker so the system can record the booking.</p></li>
+</ul>
+<blockquote>
+<p><strong>One rule, zero exceptions</strong></p>
+<p>The booking link is never included in a sequence message. It only appears inside a reply you have approved, after a lead has expressed meeting intent. This keeps your outreach conversational rather than transactional and protects your reply rate.</p>
+</blockquote>
+<h2 id="10-caps-and-guardrails">10. Caps and guardrails</h2>
+<p>These are hardcoded in the system, not preferences:</p>
+<ul>
+<li><p>20 connection requests per day, across all your active campaigns.</p></li>
+<li><p>100 connection requests per week, ISO week, rolling over on Monday.</p></li>
+<li><p>One campaign per lead. A lead already in one campaign cannot be enrolled in a second.</p></li>
+<li><p>No connection notes. The initial connect request is intentionally blank.</p></li>
+<li><p>Confirm-session gate. Every run verifies your browser is signed in to the correct LinkedIn before anything sends.</p></li>
+</ul>
+<p>The daily and weekly caps are about your LinkedIn account health. LinkedIn rate-limits aggressive outreach. We stay well under the known safe ceiling so that Sales Navigator keeps working reliably over months, not just weeks.</p>
+<h2 id="11-the-weekly-report">11. The weekly report</h2>
+<p>The Friday report is a short document. It contains:</p>
+<ul>
+<li><p><strong>Summary.</strong> Three headline numbers: connects sent this week, accepts received this week, meetings booked this week.</p></li>
+<li><p><strong>Per-campaign breakdown.</strong> One row per active campaign with the same numbers, plus reply rate and book rate.</p></li>
+<li><p><strong>Wins.</strong> Named leads who replied or booked, so you can prep for specific conversations.</p></li>
+<li><p><strong>Watch.</strong> Campaigns that are off-pace, each with a one-line diagnosis and a proposed adjustment.</p></li>
+<li><p><strong>Next week.</strong> Specific changes we are making, if any.</p></li>
+</ul>
+<p>Every weekly report is kept. They live in 06_reports/weekly/ in your workspace, dated, so you can look back across months.</p>
+<h2 id="12-common-questions">12. Common questions</h2>
+<p>What if a lead replies “not interested”?</p>
+<p>The system classifies it as an opt-out, cancels the rest of the sequence for that lead, and flags it in the weekly report. No chase message. No follow-up attempt.</p>
+<p>Can I run multiple campaigns at once?</p>
+<p>Yes. The 20 per day cap is global. The system splits it round-robin across your active campaigns so no single campaign monopolizes the queue.</p>
+<p>What if I am traveling and cannot approve replies for a day or two?</p>
+<p>Replies queue. Nothing sends without your approval. You will have a slightly longer review list when you return, but no damage is done. Leads who replied still see a human pause, not a reflexive bot response.</p>
+<p>What if LinkedIn flags my account?</p>
+<p>Very rare at this send rate, but call your Rockstarr lead immediately. We pause everything and assess before restarting. The conservative caps exist precisely to make this almost never happen.</p>
+<p>Can I change the sequence copy mid-campaign?</p>
+<p>Yes. We update the campaign spec, stop the old sequence for new leads, and keep in-flight leads on their current track. Changing copy mid-stream for leads already in the sequence reads as inconsistent and hurts reply rates.</p>
+<p>Does this plugin also do email outreach?</p>
+<p>No. LinkedIn only. Email outreach is a separate part of the Rockstarr AI Growth Operating System.</p>
+<p>What happens if I pause or end my engagement?</p>
+<p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. The outreach stops when we stop running the daily loop with you. Nothing disappears.</p>
+<h2 id="13-when-to-contact-rockstarr">13. When to contact Rockstarr</h2>
+<ul>
+<li><p>Your LinkedIn account got a warning. Call immediately, not email.</p></li>
+<li><p>You want to launch a new campaign.</p></li>
+<li><p>You want to pause or stop a campaign.</p></li>
+<li><p>The reply queue is growing faster than you can approve it.</p></li>
+<li><p>A lead booked and the meeting is not on your calendar.</p></li>
+<li><p>You saw something in the weekly report that does not match what you expected.</p></li>
+</ul>
+<p>Your Rockstarr lead is the primary contact. The plugin is the tool. We are the humans behind it.</p>
+<blockquote>
+<p><strong>Looking for the monthly page-follow invite?</strong></p>
+<p>Page-follow invites moved out of this plugin in 0.2.0. If you want to grow your company page's follower count automatically each month, ask your Rockstarr lead about installing the rockstarr-social plugin alongside this one.</p>
+</blockquote>
+<p><strong>One closing note.</strong> This system works best when you treat it like a pipeline habit, not a software product. The 10 minutes per day you spend on the reply queue is what turns connects into conversations, and conversations into booked meetings. The rest runs on its own.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

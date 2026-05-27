@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr AI User Guide</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-ai-user-guide">Rockstarr AI User Guide</h1>
+<p>How your Growth Operating System works, and how to run it</p>
+<p>Your Rockstarr AI Growth Operating System is a set of Claude plugins installed into your Cowork workspace, plus a dedicated folder on your computer where every piece of work the system produces is stored. This guide covers what each piece is for, how the system fits together, and what your day-to-day looks like once the bots are running.</p>
+<p>If you have not yet completed the initial install, start with the Quickstart. This guide assumes your intake is done.</p>
+<p>What Rockstarr AI is</p>
+<p>Rockstarr AI extends your team with always-on capacity for content, social, outreach, reply handling, and CRM nurture. It is not a single product. It is a set of purpose-built bots, each matched to a specific tool in your stack, coordinated by a shared foundation.</p>
+<p>Three characteristics define how the system behaves:</p>
+<ul>
+<li><p><strong>Your voice, enforced.</strong> Every draft is measured against a style guide generated from your profile and voice samples. Third-party material is used as reference only, never borrowed as voice.</p></li>
+<li><p><strong>Your approval, always.</strong> No draft ships without your sign-off. Bots write to a drafts folder. You promote files to approved. Only approved files are published.</p></li>
+<li><p><strong>Your workspace, your files.</strong> Everything the system produces lives in a folder on your computer, in markdown, so you own it outright. Cancel the service and the work stays with you.</p></li>
+</ul>
+<p>How the pieces fit together</p>
+<p>Four components work together.</p>
+<p>The Cowork app</p>
+<p>Cowork is where Claude runs and where plugins are managed. You installed it during the Quickstart. You interact with the system by typing requests into Cowork (“draft this week’s newsletter,” “approve this draft,” “ingest the knowledge base”). Cowork reads and writes files in the folder you selected.</p>
+<p>Your private marketplace</p>
+<p>Every client has a dedicated marketplace URL. The marketplace is how updates reach you. When Rockstarr ships improvements, they arrive in your marketplace, and Cowork pulls them if your Sync updates toggle is on. If Rockstarr pauses or ends your service, the marketplace returns an empty update list and you keep whatever versions you last installed.</p>
+<p>The rockstarr-infra plugin</p>
+<p>The foundation plugin, installed on every Rockstarr client. It runs the intake interview (six guided exercises that produce your client-profile.md), scaffolds your folder, ingests your knowledge base, generates your style guide, and handles the approve and publish-log steps every bot ends with. Every bot plugin depends on rockstarr-infra.</p>
+<p>One entry point covers nearly everything you do during setup:</p>
+<p>run onboarding</p>
+<p>This single command chains your folder scaffolding, your intake interview, and the post-intake prompts for knowledge base processing and style guide generation. Safe to re-run at any point; it picks up where you left off.</p>
+<p>The bot plugins</p>
+<p>Seven bot plugins, each matched to a specific lane of work: content (long-form), social (short-form + LinkedIn admin), outreach (Interceptly or Sales Navigator variant), reply (channel-agnostic reply drafter), ops (sales-ops orchestration), and crm (Rockstarr AI Platform integration, when your CRM is The Growth Amplifier). Each is variant-matched to the tool you use. You only have bots installed that match your stack and your subscription. See "Your bots, one by one" below for what each does.</p>
+<p>Your intake</p>
+<p>Intake is the conversation that produces your client-profile.md — the single document every bot reads before drafting a word. Get it right and every output reads like you. Get it wrong and every output drifts.</p>
+<p>Two paths produce the same canonical client-profile.md. The interview path is the recommended default for new clients; the workbook path is supported for backwards compatibility.</p>
+<p>Path 1 — Interview (recommended)</p>
+<p>Six guided exercises in chat. One question at a time. Pause anywhere; resume any time. Drop files and links into the conversation as they come up — voice samples, case studies, competitor URLs, your About page — and Claude routes each one to the right place without breaking the flow.</p>
+<p>The six exercises in order:</p>
+<ul>
+<li><p><strong>1. Background.</strong> Your tools, content cadence, a tight company description, and the first batch of voice samples and content URLs you want the bots to learn from. Plan for 15 to 20 minutes.</p></li>
+<li><p><strong>2. ICP.</strong> A guided profile of your ideal client, then a Perception Gap exercise that pressure-tests how clients actually describe what you do. Multi-ICP supported — capture as many as you serve. Plan for 30 to 40 minutes per ICP.</p></li>
+<li><p><strong>3. Transformations.</strong> Your top three to five client outcomes, pressure-tested for repeatability, why-they-worked, and right-fit-dependency. Plan for 20 to 30 minutes.</p></li>
+<li><p><strong>4. Competitors.</strong> Up to three competitors mapped on a grid, plus your Brand Edge, Differentiation Summary, Messaging Opportunities, Risks to Watch, and Quick Wins. When web fetch is available, Claude visits competitor sites and pre-drafts; you confirm or correct. Plan for 20 to 30 minutes.</p></li>
+<li><p><strong>5. Platinum Message.</strong> Three elevator-pitch options per ICP, validated against four message-quality principles (Appeal, Exclusivity, Clarity, Credibility). You pick the one that lands; Claude captures three supporting outcome statements. Plan for 15 to 25 minutes per ICP.</p></li>
+<li><p><strong>6. Offer.</strong> Each offer you sell captured in a fixed eight-field shape — Who it's for, Problem, Outcome, Process, Experience, Edge, Why it works, Category-of-one positioning. Category-of-One check runs after each offer to confirm a competitor couldn't describe themselves the same way. Plan for 10 to 15 minutes per offer.</p></li>
+</ul>
+<p>Total time depends on how many ICPs and offers you capture. A single-ICP, single-offer firm runs about 1.5 to 2 hours. A five-ICP, three-offer firm closer to 4 hours. Either way, you can split it across as many sessions as you want.</p>
+<p>Path 2 — Workbook (legacy)</p>
+<p>If your strategist gave you the Rockstarr AI Playbook (.docx) and you have completed it, the workbook path is one upload. Drop the .docx into the path Claude asks for, and Claude parses it directly into your profile. Only available if you have a completed workbook in hand — the interview path is what new clients use.</p>
+<p>Pause and resume</p>
+<p>Say</p>
+<p>stop</p>
+<p>at any question and Claude saves what you have answered, marks the step in progress, and exits cleanly. Next time, ask:</p>
+<p>run onboarding</p>
+<p>(or directly:</p>
+<p>continue intake</p>
+<p>) and Claude reads your progress file, shows you a status grid of the six exercises, and offers to continue the next incomplete step, redo a completed one, or stop again.</p>
+<p>Redo a single step</p>
+<p>If you decide later that an exercise needs a rewrite — your ICP shifted, you spotted a sharper competitor, the messaging is off — you do not need to redo intake from scratch. Ask Claude:</p>
+<p>redo step 3</p>
+<p>Substitute the step number you want (1 Background, 2 ICP, 3 Transformations, 4 Competitors, 5 Platinum Message, 6 Offer). Claude reopens that exercise, archives the prior answers, and walks you through it again. Re-running compile-profile after a redo refreshes your client-profile.md with the new answers.</p>
+<p>Switching paths</p>
+<p>You can switch from the interview path to the workbook path (or the reverse) at any point. Claude archives everything captured on the prior path to /99_archive/intake/ for the audit trail, then starts the new path fresh. Switching is irreversible without another switch, but archives are the safety net.</p>
+<p>Your folder, explained</p>
+<p>Every file in the system lives under your selected folder, inside a directory called rockstarr-ai. The layout is fixed. Bots know where to look and where to write, so do not rename or reshape these folders.</p>
+<blockquote>
+<p>/rockstarr-ai/</p>
+<p>00_intake/ profile, style guide, stack, voice samples</p>
+<p>01_knowledge_base/ source material the bots read</p>
+<p>raw/ drop new files here</p>
+<p>raw/third-party/ reference material (not voice)</p>
+<p>processed/ cleaned, tagged markdown</p>
+<p>02_inputs/ briefs, case-study transcripts, prompts</p>
+<p>03_drafts/ bots write drafts here</p>
+<p>04_approved/ signed-off drafts ready to publish</p>
+<p>05_published/ shipped outputs + publish log</p>
+<p>06_reports/ weekly + monthly performance reports</p>
+<p>99_archive/ old material you want out of the way</p>
+</blockquote>
+<p>Three rules apply across every folder:</p>
+<ul>
+<li><p><strong>Subfolders are split by channel.</strong> Inside 03_drafts, 04_approved, and 05_published, each channel (content, social, outreach, replies, nurture) gets its own subdirectory. You always know which lane a file belongs to.</p></li>
+<li><p><strong>Every approved file is logged.</strong> Approvals are recorded in 04_approved/_approvals.log. Publishes are recorded in 05_published/_publish.log. You can always trace a shipped piece back to its draft and approval.</p></li>
+<li><p><strong>Never edit the processed knowledge base by hand.</strong> The processed/ directory is generated from raw/ by the kb-ingest skill. Edit your raw files, re-ingest, and the processed output updates.</p></li>
+</ul>
+<p>First-party and third-party content</p>
+<p>Your knowledge base holds two kinds of material, in separate directories, and the distinction is load-bearing for everything the bots produce.</p>
+<p>First-party: your own content</p>
+<p>Anything you created or have explicit rights to speak for. Blog posts you wrote, podcast episodes you recorded, keynote talks you delivered, website copy, case studies, LinkedIn essays, client-facing decks.</p>
+<p>First-party content lives in:</p>
+<blockquote>
+<p>/rockstarr-ai/01_knowledge_base/raw/</p>
+</blockquote>
+<p>Every drafting bot uses first-party content. It is what your style guide is calibrated against and what your drafts cite as evidence.</p>
+<p>Third-party: reference material</p>
+<p>Useful material you did not create: competitor posts, industry research, articles you want the bots aware of, books that shaped your thinking.</p>
+<p>Third-party material lives in:</p>
+<blockquote>
+<p>/rockstarr-ai/01_knowledge_base/raw/third-party/</p>
+</blockquote>
+<p>Bots may cite third-party material or link to it in a References section, but never paraphrase it as if you said it. The kb-ingest skill tags every processed file with its scope, and the generate-style-guide skill is built to ignore third-party material when shaping your voice.</p>
+<p>When in doubt, drop it in third-party. A file that ends up categorized correctly on the second pass is better than a voice contaminated by someone else’s phrasing.</p>
+<p>Adding new material</p>
+<p>Two ways to add content. Drop a file (.pdf, .docx, .md, .txt) into the right raw directory, or hand Claude a URL:</p>
+<p>ingest this post: <a href="https://example.com/some-article">https://example.com/some-article</a></p>
+<p>Then ask Claude to refresh the knowledge base. Every bot picks up the new material on its next draft.</p>
+<p>Your day-to-day: draft, approve, publish</p>
+<p>Once your bots are turned on, your weekly rhythm settles into a four-step cycle.</p>
+<p>Draft</p>
+<p>Ask a bot to do its work. A content bot might ideate topics, outline a blog, draft a newsletter, or run a case-study interview. A social bot might draft a week of LinkedIn posts. An outreach bot might build a campaign spec for a new Sales Nav search.</p>
+<p>Drafts land in /03_drafts/&lt;channel&gt;/ with a filename that includes the date and a slug. Every draft carries front-matter so the approvals digest (in development) can surface items awaiting your review.</p>
+<p>Every prose draft passes through an automatic voice-polish step before it lands in /03_drafts/. The pass strips hedges, filler adverbs, throat-clearing openers, and business jargon so the writing stays tight and direct. Your draft still needs your eyes; the polish gives you less to edit.</p>
+<p>Review</p>
+<p>Open the draft in your editor of choice. Edit freely. Every draft is a starting point, not a final answer.</p>
+<p>Heavy edits are a signal. If a bot is giving you drafts that need substantial rework on most passes, the style guide or the knowledge base needs an update. Tell your strategist.</p>
+<p>Approve</p>
+<p>When a draft is ready to ship, ask Claude:</p>
+<p>approve this draft</p>
+<p>The file moves to /04_approved/&lt;channel&gt;/ with a date-stamped filename, and the approval is recorded in /04_approved/_approvals.log.</p>
+<p>Publish</p>
+<p>After the post goes live, the email sends, or the LinkedIn message fires, ask Claude:</p>
+<p>log that I published this</p>
+<p>Claude writes a publish record into /05_published/ so your weekly and monthly reports reflect what actually shipped. Some bots (Sales Nav outreach, for example) drive the send themselves and log automatically. For human-sent work (a newsletter you send from your email platform, a blog you publish on your website), the manual log keeps your numbers honest.</p>
+<p>Your bots, one by one</p>
+<p>The Rockstarr AI Growth Operating System ships as eight plugins. <code>rockstarr-infra</code> is the foundation every install includes. The other seven are bot plugins, each matched to a specific lane of work. You only have the bots matched to your stack and your subscription.</p>
+<p>rockstarr-infra (foundation — always installed)</p>
+<p>The foundation plugin every Rockstarr client gets. Runs onboarding, scaffolds your <code>/rockstarr-ai/</code> folder, generates your brand style guide, ingests your knowledge base, and captures your tool stack. It also owns three things every other bot reaches into: the <code>approve</code> lifecycle (every draft is promoted through it), the <code>publish-log</code> lifecycle (every shipped piece logs through it), and the email notification layer (covered below). Every other Rockstarr plugin depends on this one.</p>
+<p>rockstarr-content</p>
+<p>Long-form drafting for blog posts, email newsletters, thought-leadership articles, and case studies. The bot runs on a monthly rhythm driven by the content cadence you set during intake.</p>
+<p>Your typical content month:</p>
+<ul>
+<li><p><strong>Ideate topics.</strong> Early in the month, ask Claude to ideate content topics. The bot proposes 8 to 12 ranked angles filtered to the lanes you publish in. You pick the ones you want to run.</p></li>
+<li><p><strong>Build the calendar.</strong> Ask Claude to build the content calendar. The bot schedules the picked angles across the month, respecting the outline-first gate for blogs, anchoring newsletters to a weekday you choose, and aligning LinkedIn newsletters to approved thought-leadership pieces.</p></li>
+<li><p><strong>Draft by lane.</strong> Researched blogs run a two-step flow (outline first, then draft). Thought-leadership and newsletters draft in a single pass. Each lane uses its own skill and lands in /03_drafts/content/.</p></li>
+<li><p><strong>Case studies.</strong> A quarterly cadence by default. The case-study interview walks you through the Rockstarr editorial prompt one question at a time and produces a polished narrative only after every required answer is in.</p></li>
+<li><p><strong>Repurpose.</strong> When a long-form piece is approved, ask Claude to repurpose it. The bot fans it out into a LinkedIn post, a newsletter highlight, and a social thread. If you record video, you also get a short script. Each derivative lands in its own channel drafts folder for separate review.</p></li>
+</ul>
+<p>rockstarr-social</p>
+<p>Short-form social plus LinkedIn admin actions. The bot drafts LinkedIn posts (and optionally X and Instagram) in your approved voice, builds balanced weekly batches, and exports them to your scheduler (Publer by default; The Growth Amplifier planner if you've enabled it). It also owns LinkedIn polls, monthly LinkedIn page-follow invites, and a daily LinkedIn comment-check workflow with per-comment approval. Cadence (per-week post count and mix ratios) is set in <code>stack.md</code> at install. Every batch flows through <code>rockstarr-infra:approve</code> — the bot never posts directly.</p>
+<p>rockstarr-outreach (variant: Interceptly OR Sales Navigator)</p>
+<p>LinkedIn outreach, variant-matched to the tool you use. The two shipping variants today are:</p>
+<ul>
+<li><p><strong>rockstarr-outreach-interceptly</strong> (default). Multi-account daily inbox + tasks loop through Interceptly. Account discovery, persona capture, full campaign lifecycle, per-reply send / label / follow-up / booking, daily and weekly metrics. Supports background scheduled runs that stage drafts and fire one urgent reply-ready email per run.</p></li>
+<li><p><strong>rockstarr-outreach-salesnav</strong>. Drives Sales Navigator directly via Chrome MCP. Two campaign types: <strong>full-sequence</strong> (blank connect + three post-accept messages aimed at conversations and meetings) and <strong>connect-only</strong> (connection requests only, no post-accept messages — for network-building). All state lives in a single workbook under <code>/rockstarr-ai/02_inputs/outreach/outreach-tasks.xlsx</code>. Enforces a hard 20 connections per day and 100 per ISO week cap across all active campaigns.</p></li>
+</ul>
+<p>Both variants route every inbound reply through <code>rockstarr-reply</code> for drafting and your operator approval before sending. Reserved-for-future variants (MeetAlfred, Dripify, Waalaxy) are placeholders only — none ship today.</p>
+<p>rockstarr-reply</p>
+<p>Channel-agnostic reply drafting. Receives a structured handoff from whichever outreach plugin you're running, classifies the inbound (Hot / Warm-ICP / Warm-non-ICP / Skeptical / Cold), drafts the response in your voice, runs an AI-slop scrub, and holds the draft in your approval queue until you say "send it." Drives no inbox of its own; it's the brain that draws the reply, the outreach plugin is the hand that sends it.</p>
+<p>The pipeline is the same for every channel:</p>
+<ul>
+<li><p><strong>Classify.</strong> The thread gets a temperature bucket and a proposed label. Hostile or ambiguous threads get flagged for you to look at, not drafted.</p></li>
+<li><p><strong>Draft.</strong> A reply in your voice, channel-aware (LinkedIn DMs stay short and sign-block-free; email — when those variants ship — will get a subject line and signature). Hot threads automatically include 2 to 3 proposed meeting times pulled from your availability source, unless local-area face-to-face handoff is enabled and the message mentions a trigger term (e.g. "grab a coffee"), in which case the thread flags for you to handle in person.</p></li>
+<li><p><strong>Present for approval.</strong> Claude shows you the draft with full context and blocks until you say "send it." Editing instructions trigger a redraft, never an authorization. The literal phrase "send it" is your seal.</p></li>
+</ul>
+<p>On Warm-non-ICP threads you get three option bodies with no default pre-selected, so you can pick the one that fits your relationship with the lead.</p>
+<p>Email variants (<code>reply-gmail</code>, <code>reply-outlook</code>) are designed-for, not shipping. When they land, the core pipeline stays the same; the variants add an inbox reader and a draft writer for your mail client.</p>
+<p>rockstarr-ops</p>
+<p>Sales-ops orchestration. Tool-agnostic — every CRM, task system, meeting recorder, calendar, email platform, deliverability tool, and LinkedIn outreach tool is named in <code>stack.md</code> at install. Covers daily call prep, Call 1 (discovery) and Call 2 (close) prep docs, client catch-up agendas, old-lead audits, lead reengagement, post-call transcript processing, and recurring email-deliverability tests.</p>
+<p><code>rockstarr-ops</code> is a pure orchestrator: it never drafts customer-facing prose (hands off to <code>rockstarr-reply</code>), never writes to your CRM (hands off to the active <code>rockstarr-ops-bot-&lt;crm&gt;</code> variant), and never sends LinkedIn DMs (hands off to the active outreach variant). What it owns is the sequence — which sources to consult in which order, which play to recommend, which fields to pull from a transcript.</p>
+<p>rockstarr-crm</p>
+<p>Direct integration with the Rockstarr AI Platform (the GrowthAmp CRM product). Adds contacts, finds deals, manages pipelines, and exposes the platform's API to other plugins. Source lives in the Rockstarr platform repo and ships through the same publish flow as every other plugin. Only present when your stack uses The Growth Amplifier as your CRM.</p>
+<p>Your style guide and voice</p>
+<p>The style guide is the single most important file in your Rockstarr AI folder. Every drafting bot reads it before writing a word. Positioning, tone, audience, channel adaptation, do-and-do-not rules: the style guide is the contract.</p>
+<p>Regenerate your style guide when any of these happen:</p>
+<ul>
+<li><p>You rebrand or rename your company.</p></li>
+<li><p>Your positioning shifts (new primary audience, new core offer, new category).</p></li>
+<li><p>Your voice drifts and drafts start to sound off across the board.</p></li>
+<li><p>A year has passed since the last regeneration.</p></li>
+</ul>
+<p>To regenerate, ask Claude to generate the style guide. The skill reads your existing guide and your current knowledge base, and walks you through the interview again. Budget another 30 to 45 minutes for the refresh.</p>
+<p>Email notifications from the bots</p>
+<p><code>rockstarr-infra</code> owns the notification layer. Three channels reach you:</p>
+<ul>
+<li><p><strong>Daily approvals digest</strong> (6 am local). One email lists every draft staged for your approval in the last 24 hours, grouped by bot and lane. Silent on days with nothing pending.</p></li>
+<li><p><strong>Weekly strategist backlog alert</strong> (Mondays at 8 am local). Fires if the count of unapproved drafts older than the threshold breaks the configured limit. Tells your Rockstarr lead the queue is backing up.</p></li>
+<li><p><strong>Urgent reply-ready email</strong> (event-driven). Fires the moment a <code>detect-replies</code> run stages new drafts for your approval. One email per run, regardless of how many drafts staged. Each draft is rendered inline, with a one-click link straight into the Cowork approval queue.</p></li>
+</ul>
+<p>Plus the per-bot reports you may receive (weekly outreach summary, monthly content rollup, etc.) — those vary by bot.</p>
+<p>All notifications come from <code>hello@mail.rockstarr.ai</code> and route replies back to your Rockstarr strategist unless a specific email sets a different reply-to. Tune cadence or opt-out individual channels by telling your strategist; the configuration lives in your <code>client.toml</code> under <code>[notifications]</code>.</p>
+<p>Updates and versioning</p>
+<p>New features reach you through your marketplace. When Sync updates is on, Cowork pulls the latest plugin versions as they ship.</p>
+<p>Your client.toml file records the rockstarr-infra version your folder is aligned to. If your strategist mentions a layout change (new folders, new intake fields), the ritual is:</p>
+<ul>
+<li><p>Update rockstarr-infra in Plugin Settings.</p></li>
+<li><p>Re-run “run onboarding.” Every step inside the chain is idempotent: scaffold-client fills in missing folders, run-intake reads your progress file and only asks about new fields, kb-ingest reprocesses raw material when it has changed.</p></li>
+</ul>
+<p>Version numbers follow semantic-version rules. A patch bump (0.9.5 to 0.9.6) is safe to adopt without action. A minor bump (0.9.x to 0.10.0) may add a new skill or a new folder. A major bump (0.x to 1.0) implies breaking changes; your strategist coordinates those.</p>
+<p>Troubleshooting</p>
+<p>“Claude cannot find my folder.”</p>
+<p>Reselect the workspace folder in Cowork. If you moved the RockstarrAI folder on your computer, Cowork loses the link. Pick the folder again and Claude sees your files.</p>
+<p>“A bot says it cannot find stack.md or style-guide.md.”</p>
+<p>An intake step is missing. Ask Claude to run onboarding, or pick up where you left off:</p>
+<p>continue intake</p>
+<p>Once intake is complete, ask Claude to generate the style guide if the missing file is style-guide.md, or to ingest the knowledge base if processed KB material is missing. Bots refuse to run on incomplete intake; this is deliberate, so drafts are never written without the voice document.</p>
+<p>“My drafts do not sound like me.”</p>
+<p>The style guide is the lever. Look at it and see what is off. Small fixes can be edited directly in style-guide.md. Larger drift means the style guide needs regenerating. Your strategist can run the regeneration with you on a short call.</p>
+<p>“A plugin is not appearing in Plugin Settings.”</p>
+<p>Two likely causes. Either Sync updates is off (turn it on), or your strategist has not enabled the plugin in your marketplace yet. Ping your strategist to confirm.</p>
+<p>“A bot did something surprising.”</p>
+<p>Tell your strategist. Screenshots or the path to the draft in question help. Every bot is designed to fail loudly rather than silently, so if something unexpected happened the failure mode should be visible in the file or an _errors.md note. We jump on these fast.</p>
+<p>Filing a ticket directly from Cowork</p>
+<p>You do not have to leave Cowork to reach us. Ask Claude:</p>
+<p>email Rockstarr support</p>
+<p>Claude collects your workspace context (client ID, plugin versions, recent errors) and drafts a ticket for your review. On approval it sends to our support inbox. Replies route back to you directly. Use this path when something is broken or you want a written record of the issue.</p>
+<p>When to involve your strategist</p>
+<p>Short list of reasons to reach out:</p>
+<ul>
+<li><p><strong>Quarterly style-guide review.</strong> We book a 30-minute call to walk through current drafts and refresh the guide if needed.</p></li>
+<li><p><strong>Positioning shift.</strong> A new offer, new audience, or new category warrants a style-guide regeneration and a stack review.</p></li>
+<li><p><strong>Tool switch.</strong> Moving from HubSpot to The Growth Amplifier, Interceptly to Dripify, etc. Your strategist swaps the bot variants in your marketplace.</p></li>
+<li><p><strong>Anything broken or weird.</strong> Do not fight it; tell us. We watch every client’s rollout and want to hear about friction.</p></li>
+</ul>
+<p>Appendix: glossary</p>
+<p>Terms you’ll see across skills, drafts, and conversations with your strategist:</p>
+<table>
+<tbody>
+<tr>
+<td><strong>Term</strong></td>
+<td>Meaning</td>
+</tr>
+<tr>
+<td><strong>Scaffold</strong></td>
+<td>The one-time creation of your /rockstarr-ai/ folder layout. Handled by scaffold-client; run-onboarding calls it automatically.</td>
+</tr>
+<tr>
+<td><strong>Onboarding</strong></td>
+<td>The full setup chain: scaffold-client, then run-intake (workbook or interview), then optional kb-ingest and generate-style-guide.</td>
+</tr>
+<tr>
+<td><strong>Intake</strong></td>
+<td>The setup conversation that produces your client-profile.md. Two paths — workbook upload (legacy) or six-exercise interview (recommended).</td>
+</tr>
+<tr>
+<td><strong>Workbook path</strong></td>
+<td>The legacy intake path. You upload your completed Rockstarr AI Playbook (.docx) and Claude parses it directly into your profile.</td>
+</tr>
+<tr>
+<td><strong>Interview path</strong></td>
+<td>The current intake path. Six guided exercises in chat: Background, ICP, Transformations, Competitors, Platinum Message, Offer.</td>
+</tr>
+<tr>
+<td><strong>Stack</strong></td>
+<td>Your tools inventory: CRM, LI outreach tool, website, social scheduler, email, task system, analytics.</td>
+</tr>
+<tr>
+<td><strong>Client profile</strong></td>
+<td>A structured summary of your business produced by intake — the single document every drafting bot reads before writing a word.</td>
+</tr>
+<tr>
+<td><strong>Style guide</strong></td>
+<td>The authoritative voice document every bot reads before drafting.</td>
+</tr>
+<tr>
+<td><strong>Knowledge base</strong></td>
+<td>Your raw and processed source material, split into first-party and third-party scopes.</td>
+</tr>
+<tr>
+<td><strong>First-party content</strong></td>
+<td>Content you created or have rights to speak for. Used as voice signal.</td>
+</tr>
+<tr>
+<td><strong>Third-party content</strong></td>
+<td>Reference material from others. Used as source, never voice.</td>
+</tr>
+<tr>
+<td><strong>Draft</strong></td>
+<td>A bot-written file in /03_drafts/, waiting for your review.</td>
+</tr>
+<tr>
+<td><strong>Approve</strong></td>
+<td>The act of moving a reviewed draft to /04_approved/ and logging the approval.</td>
+</tr>
+<tr>
+<td><strong>Publish log</strong></td>
+<td>A record in /05_published/ that a shipped piece went live on a given date.</td>
+</tr>
+<tr>
+<td><strong>Variant</strong></td>
+<td>A bot version matched to a specific tool, e.g. rockstarr-reply-gmail or rockstarr-outreach-interceptly.</td>
+</tr>
+<tr>
+<td><strong>Marketplace</strong></td>
+<td>Your private plugin feed hosted by Rockstarr. How updates and new bots reach you.</td>
+</tr>
+<tr>
+<td><strong>Sync updates</strong></td>
+<td>The Cowork toggle that pulls new plugin versions from your marketplace as they ship.</td>
+</tr>
+<tr>
+<td><strong>Content cadence</strong></td>
+<td>The monthly count of each content lane you publish (blogs, thought-leadership, newsletters, LinkedIn newsletters, case studies). Set during capture-stack.</td>
+</tr>
+<tr>
+<td><strong>Daily loop</strong></td>
+<td>The Sales Nav outreach bot’s scheduled run: session check, queue preview, accept detection, reply detection, sends, and metrics rollup.</td>
+</tr>
+<tr>
+<td><strong>Send it</strong></td>
+<td>The literal phrase you use to authorize a reply draft. No draft goes out without it.</td>
+</tr>
+<tr>
+<td><strong>Voice polish</strong></td>
+<td>An automatic final pass that strips filler, hedges, and jargon from every prose draft before it lands in /03_drafts/.</td>
+</tr>
+<tr>
+<td><strong>Support ticket</strong></td>
+<td>A workspace-context email sent to Rockstarr support via “email Rockstarr support.”</td>
+</tr>
+</tbody>
+</table>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

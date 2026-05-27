@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Ops Bot Quickstart</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-ops-bot-quickstart">Rockstarr Ops Bot Quickstart</h1>
+<p><em>v0.1.4</em></p>
+<h2 id="how-you-talk-to-the-system">How you talk to the system</h2>
+<p>You type short, plain-English instructions into a Cowork task. No commands, no menus. The system asks follow-up questions when it needs to and shows you drafts before anything customer-facing leaves your workspace. You do not need to know skill names — “Prep my day” and “Run the daily call prep” both work. Anything customer-facing routes through your Rockstarr Reply bot; anything that touches your CRM routes through your CRM ops bot. This system owns the prep work in between.</p>
+<p>The daily prep also runs on a schedule (default 6am local) without you in the chat. When it runs in the background, it lays a prep doc, an agenda doc, or an audit synthesis into your drafts folder and emails you ONCE with a summary of today’s calls. Click any link in the email to open the doc on your desk. If you have no calls, the summary still goes out but is empty by design — confirmation that the loop ran clean.</p>
+<p>You can drive the same loop manually anytime by typing “Prep my day” — same skill, just with you watching it work.</p>
+<h2 id="your-intake-end-to-end">Your intake, end to end</h2>
+<p>In a new task, type: “Capture the pitch.” The system asks eight short questions about your current offer, your current pricing, your positioning, who-it’s-for, who-it’s-not, banned landing-page phrases, common objections, and the last time you actually quoted this price to a real prospect. Plain English. If you are not sure on a question, say “not sure — propose something.”</p>
+<p>After the pitch interview, the system asks if your stack includes a deliverability tool (MailReach, GMass, similar). If yes, type: “Capture the deliverability config.” Nine short questions on sender, tracker, test segment, template-clone source, comment format, low-score threshold, and — importantly — the report URL pattern so the bot can construct your spam-test report URL without ever reloading the tool’s home page.</p>
+<p>Type: “Capture the call framework.” Eight short questions on call phases (count + names), pricing card, opening pain hooks, disqualify language, deal-breaker filters, objection handlers, and booking language. This is what the call-prep skills render against — there is no baked-in framework in this bot.</p>
+<p>Review the three intake files in /00_intake/ (pitch.md, deliverability-config.md, ops-call-framework.md). If anything reads wrong, re-run the relevant capture skill — it overwrites the file, no merge step.</p>
+<p>Type: “Prep my day” to confirm the bot is ready. If any precondition is missing, the bot tells you exactly which intake file is missing and which skill produces it.</p>
+<h2 id="your-daily-rhythm-10-to-15-min-depending-on-calls">Your daily rhythm (10 to 15 min, depending on calls)</h2>
+<p>Morning (2 min). Check email. You have ONE message from Rockstarr AI titled “[ops] Daily prep — [date] — N events.” Open it on your phone. Each call shows a one-line summary: ICP verdict for Call 1s, commitment-recap count for Call 2s, overdue + stale counts for client catch-ups. Tap the link on any doc you want to read in full at your desk.</p>
+<p>Before each call (5 min). Open the prep doc or agenda. Skim it. The bot wrote it for the operator — it doesn’t need to read like a customer artifact, so don’t expect polish; expect leverage. Quotes from prior calls are verbatim. Pricing is from pitch.md, not from the transcript.</p>
+<p>After the call (3 to 5 min). If the call was sales-driven, your task system already has a post-call task waiting for the bot to process — you don’t need to do anything. The bot will read the transcript when it lands and present you a CRM-update bundle + recap email for approval.</p>
+<p>That’s it. Close the task.</p>
+<p>If you want to drive the loop manually — say you want to eyeball things before anything ships — type “Prep my day” in the morning. The bot threads the prep through inline as it runs, and skips the email.</p>
+<h2 id="the-morning-email-in-one-paragraph">The morning email, in one paragraph</h2>
+<p>One email per scheduled run. Subject reads “[ops] Daily prep — [date] — N events.” The body is a mobile-readable bullet list: time, lead or client name, ICP verdict chip for Call 1s, commitment chip for Call 2s, overdue/stale chips for catch-ups, plus a link to each prep doc or agenda. The bottom of the email has a FLAGS section that only shows up when something needs your attention before the call — recorder unavailable, DISQUALIFY verdict, pricing conflict between framework and pitch. If FLAGS is empty, you have nothing to worry about. The email is the trigger; the docs are where you act.</p>
+<h2 id="on-demand-work-audits-reengagements-post-call">On-demand work (audits, reengagements, post-call)</h2>
+<p>Audit a stalled lead: “Audit [name]” or “What’s going on with [name]?” The bot walks four sources in fixed order (recorder, then CRM, then email, then outreach), writes a synthesis to /02_inputs/ops/, and recommends ONE of six plays. Override with one word (“play 4 instead”) or “go” to proceed. Only after the play is locked in does the bot draft a message via Rockstarr Reply or create a calendar reminder.</p>
+<p>Reengage a dark lead: “Reengage [name]” or “[name] went dark — try again.” The bot runs a strict scope check: prior recorded call (non-overridable), LinkedIn ghosting (non-overridable), recent newsletter or sequence engagement (overridable with explicit “reengage anyway”). If scope passes, the bot picks a verbatim pain quote from the recorder and hands the draft to Rockstarr Reply with a five-business-day follow-up timer.</p>
+<p>Process a call recap: “Process the call recap for [task-id]” or just let the queue walker fire automatically when a new post-call task lands. The bot reads the transcript, extracts your per-client field set, and presents you a CRM update bundle (you approve before it writes) plus a recap email draft (Rockstarr Reply’s send-it gate).</p>
+<p>Run the spam test: “Run the deliverability test” — or let the weekly schedule fire it. Score below your threshold gets a LOW SCORE prefix on the queue comment and a flag on the weekly report.</p>
+<h2 id="your-friday-rhythm-30-min">Your Friday rhythm (30 min)</h2>
+<p>Open this week’s report in 06_reports/weekly/ — it appears Friday end-of-day automatically.</p>
+<p>Review the headline + per-section numbers with your Rockstarr lead. Watch for: audit override rate (which play do you keep overriding TO?), reengagement reply rate, deliverability trend, and the cross-client stale-review list.</p>
+<p>Approve any adjustments for next week: re-run capture-pitch if pricing changed, re-run capture-call-framework if a phase shifted, tune the warm-reply pattern if reengagement reads thin.</p>
+<h2 id="other-things-you-will-need-to-type">Other things you will need to type</h2>
+<p>Audit a lead: “Audit [name]” or paste a queue-task URL.</p>
+<p>Reengage: “Reengage [name].”</p>
+<p>Process a transcript: “Process the call recap for [task-id].”</p>
+<p>Run the spam test: “Run the deliverability test.”</p>
+<p>Weekly report: “Generate this week’s ops report.”</p>
+<p>Weekly backup: “Back up the ops workbook.”</p>
+<p>Re-run intake: “Capture the pitch” / “Capture the call framework” / “Capture the deliverability config.”</p>
+<p>Any question: Describe what you want. “Which leads stalled this week?” and “Show me the audit synthesis for [name]” both work.</p>
+<h2 id="if-something-goes-sideways">If something goes sideways</h2>
+<p>Daily summary email did not arrive. Check spam for sender <a href="mailto:hello@ai.rockstarrandmoon.com">hello@ai.rockstarrandmoon.com</a>. If still missing, the docs are still in /03_drafts/ops/ — your Rockstarr lead can resend.</p>
+<p>Prep doc references stale pricing. Re-run “Capture the pitch” immediately. The bot trusts pitch.md over every transcript on conflict; if pitch.md is current, the next prep doc will be correct.</p>
+<p>Audit synthesis names a play you would never pick. Override with “play [N] instead” — the bot logs the override into the weekly report so we can see the pattern.</p>
+<p>Recorder transcript missing on a Call 2 prep. The doc still renders — with a clear RECORDER UNAVAILABLE callout. The bot does not invent quotes.</p>
+<p>Reengagement scope check refused. Two of the three gates are non-overridable for a reason (prior recorded call + LinkedIn ghosting). The third (engagement signal) is overridable — say “reengage anyway” if you accept the risk.</p>
+<p>CRM write failed on a post-call. The bot surfaces the rejection reason in chat — tune the bundle and re-approve, or skip. Nothing silently drops.</p>
+<p>Deliverability score below threshold. The bot flags it — the bot does NOT auto-pause sending. You decide remediation.</p>
+<p>Anything else. Call your Rockstarr lead.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

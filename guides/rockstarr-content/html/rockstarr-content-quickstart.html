@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Content Quickstart</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-content-quickstart">Rockstarr Content Quickstart</h1>
+<p><em>v0.7.3</em></p>
+<blockquote>
+<p><strong>Before your first session</strong></p>
+<ul>
+<li>Your approved style guide in /rockstarr-ai/00_intake/style-guide.md.</li>
+<li>Your stack captured in /rockstarr-ai/00_intake/stack.md, including the content-cadence fields (<code>blogs_per_month</code>, <code>thought_leadership_per_month</code>, <code>email_newsletters_per_month</code>, <code>linkedin_newsletters_per_month</code>, <code>case_studies_per_quarter</code>, <code>records_videos</code>) and the <code>website_base_url</code> field that the blog lane needs for internal linking.</li>
+<li>At least a handful of first-party KB files processed in /rockstarr-ai/01_knowledge_base/processed/ so the bot has voice signal to draw from.</li>
+<li>60 minutes on the calendar with your Rockstarr lead for the first session — 30 minutes for the SEO strategy run, 30 minutes for the first monthly planning pass.</li>
+<li>Decide which month is month one. The calendar runs month-at-a-time.</li>
+</ul>
+</blockquote>
+<p><strong>First session with your Rockstarr lead (60 min)</strong></p>
+<ol type="1">
+<li><p>We run seo-strategy first. The bot researches your website + the keyword landscape, generates 30 seed keywords and 50 long-tail variants, identifies 5 competitor gaps, and builds 4-5 topic clusters with one pillar page + 4-6 supporting blog posts each. Output: a strategy document plus a canonical backlog of 25-32 prioritized blog topics in /02_inputs/seo/backlog.md.</p></li>
+<li><p>We confirm cadence in stack.md. How many blogs, thought-leadership pieces, and newsletters per month. How many case studies per quarter. Whether you record video.</p></li>
+<li><p>We run ideate-topics. The bot proposes 8 to 12 ranked angles. Blog angles draw from the SEO backlog first; thought-leadership angles get an enemy field plus a diversity check; other lanes ideate from first-party material. You pick which to draft.</p></li>
+<li><p>We run content-calendar. Your picks get slotted across the month. Blog and thought-leadership outlines lead their drafts. Pillar blogs calendar before their supporting posts. Newsletters anchor to your preferred weekday.</p></li>
+<li><p>You approve the calendar. That is the monthly gate — once approved, per-piece drafting runs on the scheduled dates.</p></li>
+<li><p>Case studies sit outside the monthly calendar and fire on a quarterly reminder when you name a customer win to document.</p></li>
+</ol>
+<p><strong>Your monthly rhythm (about 2 hours total)</strong></p>
+<ul>
+<li><p>Day 1 of the month, 30 min. Monthly planning session — ideate, pick, calendar, approve.</p></li>
+<li><p>Days 4 through end-of-month, 20 to 40 min per draft. Review each draft that lands in 03_drafts/content/. Approve, edit, or send back.</p></li>
+<li><p>One Friday review, 30 min. Walk this week's drafts, confirm what ships next week, talk next month's pillars.</p></li>
+<li><p>Quarterly, 45 min. Re-run seo-strategy to refresh the backlog and run one 30-minute case-study interview per customer win.</p></li>
+</ul>
+<p><strong>What to type</strong></p>
+<p>Plain English. Type these into a Cowork task, one at a time. Your own wording works too; these are starting points.</p>
+<ul>
+<li><p><strong>Strategic planning (quarterly):</strong> "Run the SEO strategy." The bot produces the strategy doc and refreshes the blog backlog.</p></li>
+<li><p><strong>Monthly kickoff:</strong> "Ideate this month's content topics." Then "Build the content calendar for May." Then "Approve the calendar."</p></li>
+<li><p><strong>Blog lane:</strong> "Outline the blog on [topic]." The bot runs WebSearch research, drafts the FAQ section, plans keyword placement and internal links. After you approve the outline, "Draft the blog on [topic]." Every external fact gets an inline [Source: URL].</p></li>
+<li><p><strong>Thought leadership:</strong> "Outline the thought-leadership piece on [topic]." The bot forces five required fields — thesis, smart-competitor counter-argument, opening scene, quotable line, buried proprietary term. After you approve, "Draft the thought-leadership piece."</p></li>
+<li><p><strong>Newsletter:</strong> "Draft this week's email newsletter." Pulls the month's approved pieces as the CTA.</p></li>
+<li><p><strong>Case study:</strong> "Draft a case study on [customer name]." The bot walks the interview one question at a time.</p></li>
+<li><p><strong>Repurpose:</strong> "Repurpose the approved [slug] piece." Emits LinkedIn post, newsletter highlight, X/Threads thread, and (if you record video) a short script.</p></li>
+<li><p><strong>Approval:</strong> "Approve this draft." Moves the file from 03_drafts/ to 04_approved/ with a date stamp.</p></li>
+<li><p><strong>Publishing:</strong> "Log that I published [slug] to [channel]." Records the send in 05_published/_publish.log.</p></li>
+<li><p><strong>Any question:</strong> Just describe what you want. "How many backlog items are left?" works. So does "Which TL angles for May have rhyming enemies?"</p></li>
+</ul>
+<p><strong>Your Friday rhythm (30 min)</strong></p>
+<ul>
+<li><p>Open any drafts currently sitting in 03_drafts/content/ and walk them with your Rockstarr lead.</p></li>
+<li><p>Confirm what ships next week and what gets bumped.</p></li>
+<li><p>Review the month's publish log so repeat topics do not creep in.</p></li>
+</ul>
+<p><strong>If something goes sideways</strong></p>
+<ul>
+<li><p>A blog draft is missing the FAQ section. The 13-item SEO/GEO checklist would have failed it on Pass 1 — re-running the draft from the same approved outline picks the missing piece up.</p></li>
+<li><p>A thought-leadership piece reads like positioning instead of perspective. The TL rubric should have caught it. Check the tl_rubric_score in front-matter; if low, re-open the outline rather than re-drafting from the same fuzzy thesis.</p></li>
+<li><p>A draft reads like a model wrote it. Check the stop_slop_score in front-matter. Scores below 35/50 flag for review — tell your Rockstarr lead.</p></li>
+<li><p>The bot refuses to draft on a lane. You probably have that lane's cadence set to 0 in stack.md (or for blogs, website_base_url is missing). Update the stack, don't work around it.</p></li>
+<li><p>Two TL angles for the same month have rhyming enemies. ideate-topics flags this at proposal time and asks you to resolve before approving the calendar.</p></li>
+<li><p>The case-study interview stalled mid-way. Re-run the skill — it resumes at the first unanswered required question from the transcript.</p></li>
+<li><p>The SEO backlog is running thin. ideate-topics warns when fewer than 2× monthly blog cadence remains. Re-run seo-strategy to refresh.</p></li>
+<li><p>Anything else. Call your Rockstarr lead.</p></li>
+</ul>
+<blockquote>
+<p><strong>Your safety net</strong></p>
+<ul>
+<li>Every draft runs the shared stop-slop skill as its mandatory final pass. AI tells get stripped before the file lands.</li>
+<li>Blog drafts run the 13-item SEO/GEO quality checklist as Pass 1 before stop-slop runs as Pass 2 — structural quality first, prose hygiene second.</li>
+<li>Thought-leadership drafts run the canonical TL rubric as Pass 1 before stop-slop runs as Pass 2 — argument quality first, prose hygiene second.</li>
+<li>Both long-form lanes are outline-first. Drafting refuses to run without an approved outline. Catches fuzziness before drafting wastes compute.</li>
+<li>Nothing promotes to 04_approved/ without your explicit approval.</li>
+<li>Case studies are interview-first. The bot will not accept a pre-written case-study document.</li>
+<li>Short-form content (LinkedIn polls, social posts) lives in the rockstarr-social plugin, not here. This plugin is long-form only as of v0.7.</li>
+</ul>
+</blockquote>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

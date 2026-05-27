@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr AI Quickstart</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-ai-quickstart">Rockstarr AI Quickstart</h1>
+<p>Get installed and running in about an hour</p>
+<p>Welcome aboard. This guide walks you through the first install of your Rockstarr AI Growth Operating System. By the end, your intake is complete and your bots are ready for your strategist to turn on.</p>
+<p>Block off two to three hours of focused time. The intake interview is the longest piece and benefits from a quiet window. You can pause anywhere and resume later.</p>
+<p>Before you start</p>
+<ul>
+<li><p><strong>Cowork installed</strong> on your computer. Your strategist sent you the download link.</p></li>
+<li><p><strong>Your Rockstarr marketplace URL.</strong> It looks like <a href="https://github.com/rockstarr-moon/mkt-\">https://github.com/rockstarr-moon/mkt-\</a>&lt;your-token&gt;. Your strategist sent this with your welcome email.</p></li>
+<li><p><strong>Two to three hours of focused time,</strong> split over one or two sittings. Intake covers six exercises; each takes 15 to 40 minutes. You can stop anywhere and pick up later.</p></li>
+<li><p><strong>Optional: a completed Rockstarr AI Playbook (.docx).</strong> If your strategist asked you to fill out the workbook in advance, have it ready. If not, the interview path covers the same ground in chat. Either path produces the same outputs.</p></li>
+</ul>
+<h2 id="step-1-install-rockstarr-infra">Step 1. Install rockstarr-infra</h2>
+<p>Open Cowork and go to Plugin Settings. Add your marketplace URL, authorize GitHub when prompted, and turn on the Sync updates toggle so improvements reach you over time.</p>
+<p>Once the marketplace is connected, install rockstarr-infra. This is the foundation plugin. Your bots will appear in the marketplace after your strategist turns them on, so do not be surprised if nothing else is visible yet.</p>
+<h2 id="step-2-select-your-working-folder">Step 2. Select your working folder</h2>
+<p>In Cowork, select the folder on your computer that will hold everything Rockstarr AI produces for you. A folder named RockstarrAI on your Desktop works well. Every file the system creates lives inside this folder.</p>
+<h2 id="step-3-run-onboarding">Step 3. Run onboarding</h2>
+<p>This is the main step. One command runs the whole setup: scaffolds your folder layout, walks you through intake, and assembles your client profile.</p>
+<p>Ask Claude:</p>
+<p>run onboarding</p>
+<p>Claude does three things in order:</p>
+<ul>
+<li><p><strong>Scaffolds your folder.</strong> Asks for a short client ID (lowercase, hyphens only, for example acme-corp) and your company display name. Then builds the full folder structure under <code>/rockstarr-ai/</code>. The layout is fixed: <code>00_intake/</code> (your profile and voice), <code>01_knowledge_base/</code> (your source material), <code>02_inputs/</code> (campaign briefs), <code>03_drafts/</code> (bot-written work awaiting your review), <code>04_approved/</code> (signed-off drafts), <code>05_published/</code> (shipped work), <code>06_reports/</code> (weekly and monthly analytics), and <code>99_archive/</code> (old material). Every bot reads and writes within this contract.</p></li>
+<li><p><strong>Asks how to capture your business context.</strong> Interview path (recommended) — Claude walks you through six guided exercises in chat. Legacy workbook path is still supported if you've completed the Rockstarr AI Playbook (.docx) in advance, but the interview is the standard for new clients.</p></li>
+<li><p><strong>Produces your client-profile.md.</strong> The single document every bot reads. Covers your company, offers, ICPs, messaging, positioning, proof, competitors, voice samples, and goals.</p></li>
+</ul>
+<p>The interview path is the recommended one for most new clients. Six exercises:</p>
+<ul>
+<li><p><strong>Background.</strong> Your tools, content cadence, the company description, content URLs and voice samples you want the bots to learn from. 15 to 20 minutes.</p></li>
+<li><p><strong>ICP.</strong> A guided profile of your ideal client, plus a Perception Gap exercise that pressure-tests how clients actually describe what you do. 30 to 40 minutes per ICP.</p></li>
+<li><p><strong>Transformations.</strong> Your top three to five results, pressure-tested for repeatability. 20 to 30 minutes.</p></li>
+<li><p><strong>Competitors.</strong> Up to three competitors mapped on a grid, plus your Brand Edge and Differentiation Summary. 20 to 30 minutes.</p></li>
+<li><p><strong>Platinum Message.</strong> Three elevator-pitch options for each ICP, validated against four message-quality principles. You pick the one that lands. 15 to 25 minutes.</p></li>
+<li><p><strong>Offer.</strong> Each offer captured in a fixed eight-field shape (problem, outcome, process, experience, why it works, etc.) with a Category-of-One check. 10 to 15 minutes per offer.</p></li>
+</ul>
+<p>You can pause at any question. Claude saves what you've answered and picks up where you left off the next time you ask:</p>
+<p>run onboarding</p>
+<p>Or, mid-flow:</p>
+<p>stop</p>
+<p>Drop files and links into chat as they come up. Voice samples, case studies, competitor URLs, your website's About page, a brand guide PDF. Claude routes each one to the right place and returns to the question you were on.</p>
+<p>When all six exercises are done, Claude assembles your client-profile.md and asks whether to continue with the knowledge base and style guide right away (Step 4) or take a break first.</p>
+<h2 id="step-4-knowledge-base--style-guide">Step 4. Knowledge base + style guide</h2>
+<p>After intake completes, Claude offers two more skills:</p>
+<ul>
+<li><p><strong>kb-ingest.</strong> Reads any content URLs you captured during intake and any files you dropped into /rockstarr-ai/01_knowledge_base/raw/. Cleans them into the processed library every bot can search. Quick — usually a few minutes.</p></li>
+<li><p><strong>generate-style-guide.</strong> Reads your profile, samples, and processed knowledge base. Walks you through a focused interview that produces /rockstarr-ai/00_intake/style-guide.md, the single voice document every bot reads when drafting. Budget 30 to 45 minutes.</p></li>
+</ul>
+<p>Both are required before your drafting bots produce usable output, but neither is on a timer. You can take a break between intake and these two — your strategist usually does. When you are ready, run them either as part of the onboarding chain or directly:</p>
+<p>ingest the knowledge base</p>
+<p>generate the style guide</p>
+<p>What happens next</p>
+<p>Open these three files and read them end to end:</p>
+<ul>
+<li><p>00_intake/client-profile.md</p></li>
+<li><p>00_intake/style-guide.md</p></li>
+<li><p>00_intake/stack.md</p></li>
+</ul>
+<p>Edits now are cheap. Edits after bots start drafting cost you content that does not sound like you. To redo any single intake exercise without re-running everything, ask:</p>
+<p>redo step 3</p>
+<p>(or whichever step number from 1 to 6 you want to redo).</p>
+<p>When the three files look right, tell your strategist. They turn on your bots in the marketplace. Your bots appear in your Cowork Plugin Settings as they become available, and you install each one the same way you installed rockstarr-infra.</p>
+<p>From that point forward, your day-to-day is a four-step cycle: draft, review, approve, publish. The User Guide covers it in detail.</p>
+<p>Getting help</p>
+<p>Two ways to reach us.</p>
+<ul>
+<li><p><strong>Message your Rockstarr strategist.</strong> Best for scheduled check-ins, strategy questions, and anything you want to talk through.</p></li>
+<li><p><strong>File a support ticket from inside Cowork.</strong> If something is broken or a bot is behaving unexpectedly, ask Claude to</p></li>
+</ul>
+<p>email Rockstarr support</p>
+<p>Claude writes a ticket with your workspace context (client ID, plugin versions, recent errors) attached and sends it to our support inbox. Replies route back to you directly. We watch rollouts closely and jump in fast.</p>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>
