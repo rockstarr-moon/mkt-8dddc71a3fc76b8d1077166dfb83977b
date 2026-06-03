@@ -299,12 +299,14 @@
 <body>
   <main class="content">
 <h1 id="rockstarr-content">Rockstarr Content</h1>
-<p><em>User guide for founder-led clients — v0.7.3</em></p>
+<p><em>User guide for founder-led clients — v0.9.0</em></p>
 <blockquote>
 <p><strong>At a glance</strong></p>
 <ul>
 <li>A long-form content drafting system that writes in your approved voice from your first-party knowledge base.</li>
 <li>Strategic planning layer (seo-strategy, quarterly) produces a backlog of 25-32 prioritized blog topics organized into pillar + supporting clusters that build topical authority.</li>
+<li><strong>New in v0.8 — SEO site audit.</strong> seo-site-audit diagnoses your existing website (indexability, schema, on-page, topical authority, AI-search visibility, Core Web Vitals) and feeds its content findings into the strategy, so the backlog also fixes what's already published, not just net-new topics.</li>
+<li><strong>New in v0.9 — LinkedIn newsletter go-live.</strong> publish-linkedin-newsletter republishes an approved thought-leadership piece as a LinkedIn newsletter edition on your personal account, and verify-linkedin-newsletter confirms it posted on schedule.</li>
 <li>Monthly cadence: ideate, pick, calendar, approve, draft. Blog and thought-leadership lanes are outline-first.</li>
 <li>Blog drafts are SEO + GEO disciplined — FAQ section required, inline source URLs, 13-item quality checklist before stop-slop.</li>
 <li>Thought-leadership drafts run the canonical rubric (argument quality) before stop-slop (prose hygiene).</li>
@@ -312,13 +314,15 @@
 <li>Long-form only as of v0.7 — LinkedIn polls and other short-form content live in the rockstarr-social plugin.</li>
 </ul>
 </blockquote>
-<p>This is the guide to rockstarr-content, the Rockstarr long-form drafting plugin your Rockstarr lead installed in your Cowork workspace. It does not post, schedule, or send — its job is to draft, and hand finished drafts to the approve / publish-log lifecycle.</p>
+<p>This is the guide to rockstarr-content, the Rockstarr long-form drafting plugin your Rockstarr lead installed in your Cowork workspace. Its main job is to draft, and hand finished drafts to the approve / publish-log lifecycle. It does not post your blogs, send your emails, or schedule your social — with one exception added in v0.9: it can schedule an approved thought-leadership piece as a LinkedIn newsletter edition on your personal account (with you in the loop for the cover image, the intro post, and the final Schedule click). More on that in section 9b.</p>
 <p>Two things this guide is not: a setup manual (your Rockstarr lead handles that) and a technical reference (maintained separately). This is the founder's guide to what the system does, what it asks of you, and how you know it is working.</p>
 <p><strong>1. What the system does (and doesn't do)</strong></p>
 <p><strong>What it does</strong></p>
 <ul>
 <li><p>Drafts long-form content in your approved voice, drawing only from first-party material you have vetted.</p></li>
 <li><p>Runs a strategic content-planning pass quarterly (seo-strategy) that decides which blog topics matter across 6-12 months and organizes them into pillar + supporting clusters.</p></li>
+<li><p>Audits your existing website on demand (seo-site-audit) and feeds the content-relevant findings — stale posts to refresh, cannibalizing posts to consolidate, thin posts to expand, missing topic clusters — into the strategy backlog.</p></li>
+<li><p>Republishes an approved thought-leadership piece as a LinkedIn newsletter edition on your personal account (publish-linkedin-newsletter), then confirms it went live (verify-linkedin-newsletter).</p></li>
 <li><p>Runs a monthly planning pass: topic ideation (drawing from the SEO backlog for the blog lane), user picks, calendar, approval — then drafts on the scheduled dates.</p></li>
 <li><p>Gates every lane by a cadence field in stack.md. If you don't publish in a lane, the bot will not propose topics for it or draft in it.</p></li>
 <li><p>Enforces an outline-first flow on both long-form lanes (blog and thought leadership). Drafts refuse to run without an approved outline.</p></li>
@@ -329,7 +333,7 @@
 </ul>
 <p><strong>What it does not do</strong></p>
 <ul>
-<li><p>Does not post, schedule, or send. Publishing connectors are deferred until a signed client's stack lights up the matching field.</p></li>
+<li><p>Does not post your blogs, send your emails, or schedule your short-form social. The only publishing connector that lives here is the LinkedIn newsletter (v0.9) — and even that keeps you in the loop and never clicks the final Schedule itself. Other publishing connectors (WordPress, GrowthAmp) remain deferred until a signed client's stack lights up the matching field.</p></li>
 <li><p>Does not draft any short-form content. LinkedIn polls and open-ended social posts live in the rockstarr-social plugin as of v0.7.</p></li>
 <li><p>Does not generate outreach, reply, or nurture copy — those are separate plugins.</p></li>
 <li><p>Does not re-open or rewrite your style guide. If a draft reveals a voice issue, the fix runs upstream in rockstarr-infra.</p></li>
@@ -339,8 +343,9 @@
 <p><strong>2. What you get</strong></p>
 <p><strong>Every quarter (strategic planning)</strong></p>
 <ul>
+<li><p>A dated SEO site-audit at 02_inputs/seo/audit_&lt;date&gt;.md (when you run seo-site-audit) — a prioritized findings doc, max 3 Critical items, with a "Content findings for seo-strategy" table tagging existing-site work as refresh / consolidate / expand. A canonical 02_inputs/seo/audit_state.md tracks the open punch-list between rounds.</p></li>
 <li><p>A dated SEO strategy document at 02_inputs/seo/strategy_&lt;date&gt;.md covering keyword research, competitor gaps, and topic clusters.</p></li>
-<li><p>A refreshed canonical backlog at 02_inputs/seo/backlog.md with 25-32 prioritized blog topics organized into 4-5 pillar+supporting clusters, ready for monthly ideation to draw from.</p></li>
+<li><p>A refreshed canonical backlog at 02_inputs/seo/backlog.md with 25-32 prioritized blog topics organized into 4-5 pillar+supporting clusters — net-new topics plus the refresh / consolidate / expand items the audit surfaced — ready for monthly ideation to draw from.</p></li>
 </ul>
 <p><strong>Every month</strong></p>
 <ul>
@@ -399,7 +404,7 @@
 <td>LinkedIn newsletter</td>
 <td>linkedin_newsletters_per_month</td>
 <td>Republished TL piece</td>
-<td>Reuses an approved TL piece on LinkedIn. (Publish connector deferred.)</td>
+<td>Reuses an approved TL piece. As of v0.9, scheduled live on your personal LinkedIn account via publish-linkedin-newsletter, with verify-linkedin-newsletter confirming go-live.</td>
 </tr>
 <tr>
 <td>Case study</td>
@@ -418,6 +423,7 @@
 <p>Two distinctions worth understanding. The researched blog is the anchor — informational, research-backed, outline-first, FAQ-bearing, designed to rank in Google AND get cited by AI search systems. Thought leadership is the opposite kind of long-form: shorter, opinion-driven, outline-first too but with a different rubric — its weight comes from the argument, not the research pile.</p>
 <p><strong>5. The strategic content-planning layer (quarterly)</strong></p>
 <p>This is the layer above the monthly cadence. seo-strategy decides which blog topics matter for your business across 6-12 months and organizes them into pillar + supporting clusters that build topical authority over time. ideate-topics then draws from that backlog month by month.</p>
+<p><strong>Start with the site audit (new in v0.8).</strong> Before the first strategy run — and again each quarter — seo-site-audit looks at your <em>existing</em> website so the plan is grounded in reality, not a guess. It runs an impact-first, schema- and AI-search-aware audit (indexability, on-page, structured data, content / topical authority, AI-search visibility, Core Web Vitals), capped at 3 Critical items so it stays a fix-list you can actually act on, not a 200-item dump. It splits findings two ways: a developer hand-off list (canonicals, page speed, schema markup — work your dev does) and content findings (stale posts to refresh, cannibalizing posts to consolidate, thin posts to expand, topic gaps). When seo-strategy next runs, it reads the audit and folds those content findings into the backlog as refresh / consolidate / expand items right alongside the net-new topics — so the plan improves what you already have, not just what you'll write next. The audit is optional: if you skip it, the strategy still runs, just from a lighter look at your site. Ask for it with <strong>"Audit the site."</strong></p>
 <p>The strategy run takes about 30 minutes with your Rockstarr lead. Six phases:</p>
 <ul>
 <li><p>Phase 1: Research. The bot fetches your website + blog index, runs WebSearch on your keyword landscape, captures top-ranking competitor articles.</p></li>
@@ -479,6 +485,17 @@
 <li><p>Short video script (only when stack.md.records_videos=true). 60-120 seconds of spoken copy, hook → argument → CTA.</p></li>
 </ul>
 <p>Each derivative lands in its own file under 03_drafts/ and gets its own separate approval. Newsletters cannot be repurposed; they are the ingestion point, not a source.</p>
+<p><strong>9b. Going live on LinkedIn (newsletter republish, v0.9)</strong></p>
+<p>The LinkedIn newsletter lane reuses an approved thought-leadership piece — it is not a new draft. As of v0.9, the plugin can take that approved piece all the way onto LinkedIn for you, with you in control at the moments that matter.</p>
+<p>How it gets flagged: when ideate-topics proposes a thought-leadership angle that is especially well-suited for LinkedIn, it marks it for republish; content-calendar then adds a LinkedIn-newsletter slot tied to that approved piece and a publish date (always after the original piece's own publish date). You don't have to set any of this up by hand.</p>
+<p>When you run <strong>"Publish the LinkedIn newsletter,"</strong> publish-linkedin-newsletter:</p>
+<ul>
+<li><p><strong>Confirms the right account is signed in.</strong> LinkedIn newsletters live on a <em>person's</em> profile, so the bot checks the signed-in account matches before doing anything. If it's the wrong account, it stops and asks you to sign in. (It also asks you to confirm which newsletter and what publish day/time — these are per-person details it does not store.)</p></li>
+<li><p><strong>Builds the edition in LinkedIn's editor</strong> — sets the newsletter as the publishing target, types the title and the approved body (already in your voice, already through stop-slop), and applies the formatting.</p></li>
+<li><p><strong>Stops three times for you.</strong> (1) You upload the cover image from your computer. (2) You approve a 3-sentence, question-led intro post the bot drafts (it runs stop-slop on that intro before showing it to you). (3) You click the final Schedule. The bot prepares everything up to that last click but never schedules on its own.</p></li>
+</ul>
+<p>Then <strong>"Verify the newsletter went live"</strong> (verify-linkedin-newsletter) checks, on or after the scheduled date, that the edition actually posted within a few days of plan, and reports back. If it didn't post, your Rockstarr lead gets flagged.</p>
+<p>Why the human stop-points: posting to the wrong account, or with the wrong cover or an empty intro, is the kind of mistake that's public and hard to walk back. The stop-points are deliberate. This is the one place the content plugin touches a live channel, and it's built to be careful about it.</p>
 <p><strong>10. The stop-slop pass (mandatory, every prose output)</strong></p>
 <p>Every drafting skill in this plugin — blog, thought leadership, newsletter, case study, and each repurpose derivative — runs the shared stop-slop skill as its final pass before the file is written. The order is fixed: style guide first (voice), then the structural rubric specific to the lane (SEO/GEO checklist for blogs, TL rubric for thought leadership), then stop-slop (prose hygiene).</p>
 <p>Stop-slop catches things like filler openers, binary contrasts ("not X, but Y"), em-dash splices, metronome rhythm, vague declaratives, and narrator-from-a-distance framing. Each draft carries a stop_slop_score (out of 50) in its front-matter. Scores below 35/50 flag the draft for reviewer attention.</p>
@@ -495,7 +512,8 @@
 <p>Every action is a short English instruction typed into a Cowork task. If you can say it to your Rockstarr lead in plain English, you can type it as a prompt.</p>
 <p><strong>Strategic planning (quarterly)</strong></p>
 <ul>
-<li><p><strong>"Run the SEO strategy."</strong> Six-phase research + clustering workflow. Produces the strategy doc and refreshes the canonical blog backlog.</p></li>
+<li><p><strong>"Audit the site."</strong> Runs the impact-first SEO site audit on your existing website. Produces a prioritized findings doc (max 3 Critical) and the content findings that feed the next strategy run. Run this before "Run the SEO strategy" so the backlog reflects your real site.</p></li>
+<li><p><strong>"Run the SEO strategy."</strong> Six-phase research + clustering workflow. Reads the latest site audit when present and folds its refresh / consolidate / expand findings into the backlog. Produces the strategy doc and refreshes the canonical blog backlog.</p></li>
 <li><p><strong>"How many items are left in the SEO backlog?"</strong> Status check — the bot reads the backlog and the workflow files to tell you what's still available.</p></li>
 </ul>
 <p><strong>Monthly planning</strong></p>
@@ -513,6 +531,11 @@
 <li><p><strong>"Draft this week's email newsletter."</strong> Single-shot. Links the month's approved blog and TL pieces as the CTA.</p></li>
 <li><p><strong>"Draft a case study on [customer name]."</strong> Runs the interview one question at a time. Polished draft only after every required question is answered.</p></li>
 <li><p><strong>"Repurpose the approved [slug] piece."</strong> Emits a LinkedIn post, a newsletter highlight, an X/Threads thread, and (when records_videos=true) a short video script.</p></li>
+</ul>
+<p><strong>LinkedIn newsletter (go-live)</strong></p>
+<ul>
+<li><p><strong>"Publish the LinkedIn newsletter."</strong> Schedules an approved TL piece as a LinkedIn newsletter edition on your personal account. Confirms the account, builds the edition, then stops for you to upload the cover image, approve the intro post, and click the final Schedule.</p></li>
+<li><p><strong>"Verify the newsletter went live."</strong> Checks that the scheduled edition actually posted on/near its date and reports back.</p></li>
 </ul>
 <p><strong>Approvals and publishing</strong></p>
 <ul>
@@ -564,7 +587,7 @@
 <p><strong>Where do LinkedIn polls live now?</strong></p>
 <p>In the rockstarr-social plugin, as of v0.7. Polls were briefly in rockstarr-content (v0.6) but moved out once rockstarr-social was built. The workspace contract for polls — polls_cadence in stack.md, the LinkedIn polls subsection in style-guide.md — is unchanged. Only the implementing plugin changed.</p>
 <p><strong>Does this plugin post or send?</strong></p>
-<p>No. Publishing connectors are deferred until a signed client's stack lights up the matching field. Until then, you publish in your usual tool and log the send.</p>
+<p>Almost never — with one exception. It does not post your blogs, send your emails, or schedule your short-form social; for those you publish in your usual tool and log the send. The exception (v0.9) is the LinkedIn newsletter: the plugin schedules an approved TL piece as a newsletter edition on your personal LinkedIn account, but it keeps you in the loop for the cover image, the intro post, and the final Schedule click. The WordPress and GrowthAmp publishing connectors remain deferred.</p>
 <p><strong>What happens if I pause or end my engagement?</strong></p>
 <p>Your workspace stays intact. The plugin stops receiving updates through the Rockstarr marketplace. Nothing disappears.</p>
 <p><strong>16. When to contact Rockstarr</strong></p>

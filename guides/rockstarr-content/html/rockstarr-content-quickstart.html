@@ -299,7 +299,7 @@
 <body>
   <main class="content">
 <h1 id="rockstarr-content-quickstart">Rockstarr Content Quickstart</h1>
-<p><em>v0.7.3</em></p>
+<p><em>v0.9.0</em></p>
 <blockquote>
 <p><strong>Before your first session</strong></p>
 <ul>
@@ -312,7 +312,7 @@
 </blockquote>
 <p><strong>First session with your Rockstarr lead (60 min)</strong></p>
 <ol type="1">
-<li><p>We run seo-strategy first. The bot researches your website + the keyword landscape, generates 30 seed keywords and 50 long-tail variants, identifies 5 competitor gaps, and builds 4-5 topic clusters with one pillar page + 4-6 supporting blog posts each. Output: a strategy document plus a canonical backlog of 25-32 prioritized blog topics in /02_inputs/seo/backlog.md.</p></li>
+<li><p>We audit your existing site first (seo-site-audit), then run seo-strategy. The audit produces a prioritized findings doc (max 3 Critical) and content findings — stale posts to refresh, cannibalizing posts to consolidate, thin posts to expand. seo-strategy then researches your website + the keyword landscape, generates 30 seed keywords and 50 long-tail variants, identifies 5 competitor gaps, and builds 4-5 topic clusters with one pillar page + 4-6 supporting blog posts each — and folds the audit's findings into the backlog. Output: a strategy document plus a canonical backlog of 25-32 prioritized blog topics (net-new plus refresh/consolidate/expand) in /02_inputs/seo/backlog.md.</p></li>
 <li><p>We confirm cadence in stack.md. How many blogs, thought-leadership pieces, and newsletters per month. How many case studies per quarter. Whether you record video.</p></li>
 <li><p>We run ideate-topics. The bot proposes 8 to 12 ranked angles. Blog angles draw from the SEO backlog first; thought-leadership angles get an enemy field plus a diversity check; other lanes ideate from first-party material. You pick which to draft.</p></li>
 <li><p>We run content-calendar. Your picks get slotted across the month. Blog and thought-leadership outlines lead their drafts. Pillar blogs calendar before their supporting posts. Newsletters anchor to your preferred weekday.</p></li>
@@ -329,13 +329,14 @@
 <p><strong>What to type</strong></p>
 <p>Plain English. Type these into a Cowork task, one at a time. Your own wording works too; these are starting points.</p>
 <ul>
-<li><p><strong>Strategic planning (quarterly):</strong> "Run the SEO strategy." The bot produces the strategy doc and refreshes the blog backlog.</p></li>
+<li><p><strong>Strategic planning (quarterly):</strong> "Audit the site." (diagnoses your existing site, max 3 Critical fixes, feeds the backlog) then "Run the SEO strategy." (produces the strategy doc and refreshes the blog backlog, folding in the audit's findings).</p></li>
 <li><p><strong>Monthly kickoff:</strong> "Ideate this month's content topics." Then "Build the content calendar for May." Then "Approve the calendar."</p></li>
 <li><p><strong>Blog lane:</strong> "Outline the blog on [topic]." The bot runs WebSearch research, drafts the FAQ section, plans keyword placement and internal links. After you approve the outline, "Draft the blog on [topic]." Every external fact gets an inline [Source: URL].</p></li>
 <li><p><strong>Thought leadership:</strong> "Outline the thought-leadership piece on [topic]." The bot forces five required fields — thesis, smart-competitor counter-argument, opening scene, quotable line, buried proprietary term. After you approve, "Draft the thought-leadership piece."</p></li>
 <li><p><strong>Newsletter:</strong> "Draft this week's email newsletter." Pulls the month's approved pieces as the CTA.</p></li>
 <li><p><strong>Case study:</strong> "Draft a case study on [customer name]." The bot walks the interview one question at a time.</p></li>
 <li><p><strong>Repurpose:</strong> "Repurpose the approved [slug] piece." Emits LinkedIn post, newsletter highlight, X/Threads thread, and (if you record video) a short script.</p></li>
+<li><p><strong>LinkedIn newsletter (go-live):</strong> "Publish the LinkedIn newsletter." Schedules an approved TL piece as a newsletter edition on your personal LinkedIn — you upload the cover, approve the intro post, and click the final Schedule. Then "Verify the newsletter went live."</p></li>
 <li><p><strong>Approval:</strong> "Approve this draft." Moves the file from 03_drafts/ to 04_approved/ with a date stamp.</p></li>
 <li><p><strong>Publishing:</strong> "Log that I published [slug] to [channel]." Records the send in 05_published/_publish.log.</p></li>
 <li><p><strong>Any question:</strong> Just describe what you want. "How many backlog items are left?" works. So does "Which TL angles for May have rhyming enemies?"</p></li>
