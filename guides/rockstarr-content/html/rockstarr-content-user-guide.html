@@ -299,7 +299,7 @@
 <body>
   <main class="content">
 <h1 id="rockstarr-content">Rockstarr Content</h1>
-<p><em>User guide for founder-led clients — v0.10.0</em></p>
+<p><em>User guide for founder-led clients — v0.12.0</em></p>
 <blockquote>
 <p><strong>At a glance</strong></p>
 <ul>
@@ -308,6 +308,7 @@
 <li><strong>New in v0.8 — SEO site audit.</strong> seo-site-audit diagnoses your existing website (indexability, schema, on-page, topical authority, AI-search visibility, Core Web Vitals) and feeds its content findings into the strategy, so the backlog also fixes what's already published, not just net-new topics.</li>
 <li><strong>New in v0.9 — LinkedIn newsletter go-live.</strong> publish-linkedin-newsletter republishes an approved thought-leadership piece as a LinkedIn newsletter edition on your personal account, and verify-linkedin-newsletter confirms it posted on schedule.</li>
 <li><strong>New in v0.10 — content master list.</strong> master-list-create builds a local Excel tracker of your long-form content (and where each piece was reposted) from your publish log; master-list-blog-audit checks it against your live site so nothing slips through untracked.</li>
+<li><strong>New in v0.11–0.12 — content autopilot.</strong> Your content can run on a schedule: each month it proposes a plan for you to approve, then drafts each piece on its date — and it always stops for your approval before anything is finalized, and never publishes on its own. On by default; toggle it off anytime. See section 6b.</li>
 <li>Monthly cadence: ideate, pick, calendar, approve, draft. Blog and thought-leadership lanes are outline-first.</li>
 <li>Blog drafts are SEO + GEO disciplined — FAQ section required, inline source URLs, 13-item quality checklist before stop-slop.</li>
 <li>Thought-leadership drafts run the canonical rubric (argument quality) before stop-slop (prose hygiene).</li>
@@ -448,6 +449,15 @@
 <li><p><strong>Days 4 through end-of-month — outline and draft.</strong> Each scheduled date triggers the right skill. Blog outlines and TL outlines need your approval before their drafts can run. Newsletter drafts ship single-shot.</p></li>
 <li><p><strong>Review and approve.</strong> You read each draft. Approve, edit, or send back. Approved pieces land in 04_approved/content/ with a date stamp and are logged on publish.</p></li>
 </ol>
+<p><strong>6b. Autopilot — the monthly flow on a schedule</strong></p>
+<p>You can run the whole monthly rhythm above by hand (or with your Rockstarr lead), but by default it runs on a schedule. Two background jobs do the <em>production</em>; you still make every <em>decision</em>.</p>
+<ul>
+<li><p><strong>Once a month, it proposes your plan.</strong> Early on the 1st, the system ideates the month's topics, makes a <em>provisional</em> selection to hit your cadence, and lays out a proposed calendar — then <strong>stops and waits for you</strong>. You get a heads-up that "[Month]'s plan is ready to review." You edit the picks however you like and approve the calendar. The picks it made are a starting point, not a decision — change them freely.</p></li>
+<li><p><strong>Each day, it drafts what's due.</strong> Once you've approved the calendar, a daily job produces the next piece on its date (an outline on its outline-date; a draft once you've approved that outline) and <strong>stages it for your review</strong>. Drafts show up in your approvals queue and your daily approvals email, exactly as if someone had run the skill for you.</p></li>
+</ul>
+<p>Two things never change under autopilot: <strong>it never approves anything for you, and it never publishes.</strong> It produces drafts and parks them at your approval gate — the same gates described above. If a draft is due but you haven't approved its outline yet, it simply waits (and the backlog reminder nudges you); it will not push something through to keep a schedule.</p>
+<p>What it does <strong>not</strong> auto-run: case studies (those are interview-driven — you do them with your lead), and publishing (you still publish in your own tool and log it).</p>
+<p><strong>Turning it on or off.</strong> Autopilot is <strong>on by default</strong> when you have a content cadence set. To turn it off (or back on, or check it), just say so in Cowork — "turn off content autopilot," "turn it back on," "is autopilot on?" No settings to edit. Turning it off takes effect immediately; nothing is produced on a schedule until you turn it back on. You can always run the steps on demand regardless ("plan the month," "draft the blog on [topic]").</p>
 <p><strong>7. The two quality gates</strong></p>
 <p>Both long-form lanes run a structural quality pass BEFORE stop-slop runs. The order is fixed — structural failures don't get rescued by smoother prose. Each lane has its own pass:</p>
 <p><strong>The 13-item SEO + GEO checklist (blog lane)</strong></p>
@@ -535,6 +545,13 @@
 <li><p><strong>"Build the content calendar for [month]."</strong> After you mark Pick: yes on the topics you want to draft, slots them across the month with pillar-before-supports ordering.</p></li>
 <li><p><strong>"Approve the calendar."</strong> The monthly gate. Drafting runs only after this.</p></li>
 </ul>
+<p><strong>Autopilot (scheduling)</strong></p>
+<ul>
+<li><p><strong>"Turn on content autopilot."</strong> / <strong>"Turn off content autopilot."</strong> Switches scheduled production on or off (on by default). Off takes effect immediately; no settings to edit.</p></li>
+<li><p><strong>"Is content autopilot on?"</strong> Status check — tells you whether it's on and whether the scheduled jobs are set to fire.</p></li>
+<li><p><strong>"Plan the month."</strong> Runs the monthly planning now instead of waiting for the 1st — proposes topics + a provisional calendar for you to edit and approve.</p></li>
+<li><p><strong>"Run the content loop."</strong> Advances today's due piece now instead of waiting for the daily run (stages a draft for your approval; never approves or publishes).</p></li>
+</ul>
 <p><strong>Per-piece drafting</strong></p>
 <ul>
 <li><p><strong>"Outline the blog on [topic]."</strong> Runs WebSearch research, drafts the FAQ section, plans keyword placement and internal links. Approval required before drafting.</p></li>
@@ -588,6 +605,10 @@
 <li><p>Human approval is the only path to 04_approved/. The plugin does not approve its own drafts.</p></li>
 </ul>
 <p><strong>15. Common questions</strong></p>
+<p><strong>Does my content get produced automatically, or do I have to start each piece?</strong></p>
+<p>By default it's automatic (autopilot, section 6b): each month the system proposes a plan you approve, then drafts each piece on its date and stages it for your review. You never lose control — it stops at your approval gate every time and never publishes. Prefer to drive it yourself? Say "turn off content autopilot" and run the steps on demand instead.</p>
+<p><strong>Will autopilot ever publish or approve something without me?</strong></p>
+<p>No. It only ever produces drafts (and a proposed calendar) and parks them for your approval. Approving and publishing are always your call.</p>
 <p><strong>What happens if a draft scores below 35 on stop-slop?</strong></p>
 <p>The draft still lands in 03_drafts/ — the score does not block writing — but it flags for reviewer attention. Your Rockstarr lead will take a closer look before it goes to you, or surface the specific AI tells that triggered the low score.</p>
 <p><strong>What happens if the SEO/GEO checklist or TL rubric fails Pass 1?</strong></p>

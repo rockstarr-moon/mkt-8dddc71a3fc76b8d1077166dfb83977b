@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rockstarr Orchestrator Quickstart</title>
+  <style>
+  /* Rockstarr & Moon brand-aligned guide stylesheet.
+     Fonts and colors per the brand guide (Sep 2025).
+     Used by both HTML and PDF outputs of every founder guide. */
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --rs-blue:    #0069AA;
+    --rs-teal:    #04E6F7;
+    --rs-black:   #000000;
+    --rs-ink:     #1a1a1a;       /* body text — easier on the eye than pure black */
+    --rs-muted:   #5a6470;
+    --rs-rule:    #e3e8ee;
+    --rs-bg:      #ffffff;
+    --rs-callout: #eef9fc;       /* very light teal tint */
+    --rs-code-bg: #f2f5f8;
+
+    --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Top hero band: thin Blue → Teal gradient so every guide reads as
+     "from Rockstarr." */
+  body::before {
+    content: "";
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--rs-blue) 0%, var(--rs-teal) 100%);
+  }
+
+  main, .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* === Typography === */
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;          /* Bebas Neue is display-weight by default */
+    letter-spacing: 0.02em;
+    color: var(--rs-blue);
+    margin: 0 0 0.4em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    text-transform: uppercase;
+    color: var(--rs-black);
+    margin-top: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 4px solid var(--rs-teal);
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    margin-top: 2.4em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--rs-rule);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    color: var(--rs-ink);
+    margin-top: 2em;
+    letter-spacing: 0.04em;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--rs-muted);
+    margin-top: 1.6em;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  strong, b {
+    font-weight: 700;
+    color: var(--rs-ink);
+  }
+
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--rs-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 105, 170, 0.3);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  a:hover {
+    color: var(--rs-teal);
+    border-bottom-color: var(--rs-teal);
+  }
+
+  /* Subtitle: pandoc renders the line just under H1 as a paragraph; for the
+     founder guides this is the "User guide for founder-led clients — v0.7.3"
+     line. Italicize and mute it. */
+  h1 + p em:first-child,
+  h1 + p {
+    /* If the para after H1 is fully italicized, treat as subtitle. */
+  }
+
+  /* === Lists === */
+
+  ul, ol {
+    margin: 0 0 1.2em;
+    padding-left: 1.6em;
+  }
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.55;
+  }
+  li > p { margin: 0 0 0.5em; }
+  li > p:last-child { margin-bottom: 0; }
+
+  ol {
+    list-style: decimal;
+  }
+  ol > li::marker {
+    font-weight: 700;
+    color: var(--rs-blue);
+  }
+
+  ul > li::marker {
+    color: var(--rs-teal);
+  }
+
+  /* === Callout: blockquote === */
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em 1em;
+    background: var(--rs-callout);
+    border-left: 4px solid var(--rs-teal);
+    border-radius: 2px;
+    font-size: 0.97rem;
+  }
+  blockquote p { margin: 0 0 0.6em; }
+  blockquote p:last-child { margin-bottom: 0; }
+  blockquote strong:first-child {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    color: var(--rs-blue);
+    display: block;
+    margin-bottom: 0.4em;
+  }
+  blockquote ul, blockquote ol {
+    margin: 0.6em 0 0;
+    padding-left: 1.4em;
+  }
+
+  /* === Code === */
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--rs-code-bg);
+    padding: 0.12em 0.4em;
+    border-radius: 3px;
+    color: var(--rs-blue);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    background: var(--rs-code-bg);
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    border-left: 3px solid var(--rs-blue);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.4em 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--rs-ink);
+  }
+
+  /* === Horizontal rule === */
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--rs-rule);
+    margin: 2.4em 0;
+  }
+
+  /* === Tables (for if any guide adds one) === */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 0.6em 0.8em;
+    text-align: left;
+    border-bottom: 1px solid var(--rs-rule);
+  }
+  th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--rs-blue);
+    border-bottom: 2px solid var(--rs-blue);
+  }
+
+  /* === Footer (for the version + footer link if we add one) === */
+
+  .guide-footer {
+    margin-top: 5em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--rs-rule);
+    font-size: 0.85rem;
+    color: var(--rs-muted);
+    text-align: center;
+  }
+  .guide-footer a {
+    color: var(--rs-muted);
+    border-bottom-color: transparent;
+  }
+
+  /* === Print / PDF specifics === */
+
+  @page {
+    size: letter;
+    margin: 0.8in 0.75in 0.9in;
+
+    @bottom-center {
+      content: counter(page) " of " counter(pages);
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      color: #5a6470;
+    }
+  }
+
+  @media print {
+    /* Avoid the top gradient eating a page slice in PDFs — keep the
+       band but rely on @page margins for the white frame. */
+    body::before { height: 6px; }
+    main, .content { padding: 24px 0 40px; max-width: none; }
+    h1 { font-size: 28pt; }
+    h2 { font-size: 18pt; page-break-after: avoid; }
+    h3 { font-size: 13pt; page-break-after: avoid; }
+    h4 { font-size: 11pt; page-break-after: avoid; }
+    p, li { font-size: 10.5pt; line-height: 1.5; }
+    blockquote { page-break-inside: avoid; }
+    pre { page-break-inside: avoid; }
+    a { color: var(--rs-blue); border-bottom: none; }
+    /* Show links inline in print, so the URL isn't lost on paper. */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: var(--rs-muted);
+      word-break: break-all;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main class="content">
+<h1 id="rockstarr-orchestrator-quickstart">Rockstarr Orchestrator Quickstart</h1>
+<p><em>v0.6.0</em></p>
+<blockquote>
+<p><strong>Before your first session</strong></p>
+<ul>
+<li>A scaffolded workspace at /rockstarr-ai/ with your approved style guide and stack in place (your Rockstarr lead handles this).</li>
+<li>The specialist plugins you use already installed — the lead coordinates them; it doesn't replace them. The SEO/GEO Engine play, for example, drives rockstarr-content.</li>
+<li>30 minutes with your Rockstarr lead to set your marketing goals and run your first play.</li>
+<li>One decision in mind: what you most want to move first (more pipeline, more rankings, more authority). The lead works toward goals, so it helps to name them.</li>
+</ul>
+</blockquote>
+<p><strong>The one idea</strong></p>
+<p>Think of the orchestrator as your <strong>team lead</strong>. Instead of running each plugin yourself, you tell the lead what you want in plain language. It figures out which specialists to involve, <strong>does the safe internal work for you</strong>, and <strong>stops at anything that reaches your audience</strong> so you can approve it. It never publishes, sends, posts, or approves on its own.</p>
+<p><strong>First session with your Rockstarr lead (30 min)</strong></p>
+<ol type="1">
+<li><p>Set your goals: "Set our marketing goals." The lead interviews you for a one-page plan — what you're optimizing for across SEO/GEO, demand gen, and brand/authority, plus your priorities and constraints. Saved to /00_intake/marketing-plan.md.</p></li>
+<li><p>Get a baseline: "How's the team doing?" The lead reads across every function and gives you one status — what's been produced, what's waiting on your approval, and how it ladders up to the goals you just set.</p></li>
+<li><p>Run your first play: "Get us ranking" (or "Run the SEO/GEO engine"). The lead audits your site, builds an SEO/GEO strategy and backlog, and drafts the first cluster pieces into your drafts folder — then <strong>stops</strong> and shows you what's waiting for approval. Nothing is published.</p></li>
+</ol>
+<p><strong>The autonomy line (how it stays safe)</strong></p>
+<ul>
+<li><strong>It does automatically</strong> — the internal, reversible work that your audience never sees: audits, strategy and backlog, ideation, and <strong>drafting</strong> into /03_drafts/.</li>
+<li><strong>It always stops for you</strong> — anything audience-facing or irreversible: publishing, outreach sends, social posts, emails, CRM changes, <strong>and approval itself.</strong></li>
+</ul>
+<p>The lead stops at the first gate every time — even if you say "just do it." Approving and publishing stay your call.</p>
+<p><strong>What to type</strong></p>
+<p>Plain English, into a Cowork task, one at a time. Your own wording works too.</p>
+<ul>
+<li><p><strong>Set direction:</strong> "Set our marketing goals." / "Update the marketing plan." (writes /00_intake/marketing-plan.md)</p></li>
+<li><p><strong>Single pane (status):</strong> "How's the team doing?" / "What's waiting on me?" / "Where are we against our goals?" (runs team-report → /06_reports/team/)</p></li>
+<li><p><strong>Talk to the lead (do something):</strong> "Get us ranking." / "Grow my pipeline." / "What should the team focus on this week?" The lead interprets it, runs the matching play's safe steps, and stops at your first approval.</p></li>
+<li><p><strong>Run a play by name:</strong> "Run the SEO/GEO engine." Audit → strategy + backlog → first cluster drafts → stop at the publish gate. Or "spin the content flywheel" / "amplify our latest piece" — takes an approved long-form piece and stages social posts + a newsletter mention from it, then stops at your approval. Or "grow my pipeline" / "book more calls" — sharpens your target list, drafts the campaign, stages the outreach batch, drafts any waiting replies, and preps any booked calls, then stops before anything sends. Or "build our authority" / "establish our POV" — drafts a thought-leadership piece on your theme and stages the social post + poll to carry it, then stops at your approval.</p></li>
+<li><p><strong>Hands-off weekly planning (optional, off by default):</strong> "Turn on team autopilot." Once a week the lead works your highest-priority goal gap on its own — runs the safe steps and leaves the approvals waiting for you, then emails you a summary. "Turn off team autopilot" / "is team autopilot on?" to control it. It needs your marketing goals set first, and it always stops at the same gates.</p></li>
+<li><p><strong>Any question:</strong> Just describe what you want. The lead will tell you what it can do, what it would run, and where it would stop.</p></li>
+</ul>
+<p><strong>Your rhythm</strong></p>
+<ul>
+<li><p><strong>At onboarding / quarterly, 30 min.</strong> Set or refresh your marketing goals so the lead knows what to work toward.</p></li>
+<li><p><strong>Weekly, 10 min.</strong> "How's the team doing?" — clear the consolidated approval queue and see progress vs goals in one place.</p></li>
+<li><p><strong>On demand.</strong> Point the lead at a goal ("get us ranking") whenever you want to kick off coordinated work. The specialists' own autopilots keep the cadence going from there.</p></li>
+<li><p><strong>Or hands-off.</strong> Turn on team autopilot and the lead does the weekly kickoff itself (Monday mornings by default) — you just clear the approval queue it leaves you. Off by default; turn it on when you trust the rhythm.</p></li>
+</ul>
+<p><strong>If something seems off</strong></p>
+<ul>
+<li><p>The lead published or sent something without asking. It shouldn't — ever. That's a bug; tell your Rockstarr lead immediately.</p></li>
+<li><p>A play stopped early. That's by design — it hit an audience-facing gate (usually "approve these drafts" or "publish"). Check /03_drafts/ for what's waiting and approve from there.</p></li>
+<li><p>"It drafted a lot." A play is bounded to one cadence batch (your blogs-per-month). If you want more or less, change the cadence in stack.md.</p></li>
+<li><p>The lead asked a clarifying question instead of acting. Good — it won't guess on an ambiguous request, and it will never improvise an audience-facing action to resolve doubt.</p></li>
+<li><p>The lead says a play needs something first (e.g. an approved style guide, or content cadence is 0). Fix the prerequisite rather than working around it.</p></li>
+<li><p>Anything else. Call your Rockstarr lead.</p></li>
+</ul>
+<blockquote>
+<p><strong>Your safety net</strong></p>
+<ul>
+<li>The lead never crosses an audience-facing gate — no publishing, sending, posting, emailing, CRM changes, or approvals, regardless of how you phrase the request.</li>
+<li>It dispatches the real specialist skills; it doesn't reinvent their work, so every quality guard (stop-slop, the SEO/GEO checklist, the TL rubric) still runs exactly as it would if you ran the specialist yourself.</li>
+<li>"How's the team doing?" is strictly read-only — it reports, it never changes anything.</li>
+<li>Plays are bounded so they can't flood your approval queue.</li>
+<li>Weekly autopilot (when on) holds off when your queue is already deep — it keeps the team moving, it won't bury you — and it stops at the same gates as everything else.</li>
+<li>Nothing reaches your audience without your explicit approval.</li>
+</ul>
+</blockquote>
+    <footer class="guide-footer">
+      Rockstarr &amp; Moon · <a href="https://rockstarrandmoon.com">rockstarrandmoon.com</a>
+    </footer>
+  </main>
+</body>
+</html>

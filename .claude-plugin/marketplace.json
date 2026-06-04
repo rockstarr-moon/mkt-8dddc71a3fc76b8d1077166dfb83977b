@@ -3,5 +3,83 @@
   "owner": {
     "name": "Rockstarr & Moon"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "rockstarr-infra",
+      "description": "Foundation plugin every Rockstarr client install includes. Scaffolds /rockstarr-ai/, runs onboarding, generates the brand style guide, ingests the knowledge base, captures the tool stack. Owns the cross-bot approve and publish-log lifecycle and email notifications (daily approvals digest, weekly backlog alert, urgent reply-ready email). Every other Rockstarr plugin depends on this — run-onboarding is the entry point for new clients.",
+      "version": "0.15.0",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-infra",
+        "ref": "rockstarr-infra-v0.15.0"
+      }
+    },
+    {
+      "name": "rockstarr-content",
+      "description": "Rockstarr AI content plugin. Drafts researched blogs, thought-leadership, email and LinkedIn newsletters, case studies, and repurposed short-form in the client's approved voice, plus the SEO layer: keyword and cluster strategy and an impact-first site audit that feeds the content backlog. Every lane is cadence-gated in stack.md and routes through rockstarr-infra:approve. Drafting uses first-party knowledge only; third-party sources are cited inline, never paraphrased as the client's voice.",
+      "version": "0.12.0",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-content",
+        "ref": "rockstarr-content-v0.12.0"
+      }
+    },
+    {
+      "name": "rockstarr-outreach-salesnav",
+      "description": "Rockstarr AI LinkedIn outreach plugin for clients on Sales Navigator only — no third-party outreach tool. Supports full-sequence campaigns (connect request + three-message post-accept conversation) and connect-only campaigns. Drives Sales Nav via Chrome MCP and keeps all state in a single workbook under /rockstarr-ai/. Enforces a 20/day and 100/week connection cap. Every reply routes through rockstarr-reply for operator approval.",
+      "version": "0.4.0",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-outreach-salesnav",
+        "ref": "rockstarr-outreach-salesnav-v0.4.0"
+      }
+    },
+    {
+      "name": "rockstarr-reply",
+      "description": "Rockstarr AI channel-agnostic reply drafting for the Growth OS. Called by every rockstarr-outreach-* plugin to draft replies to inbound LinkedIn messages. Owns voice, classification, three-option non-ICP flow, stop-slop pass, and the 'send it' authorization gate. The caller owns the channel I/O. v0.2 wires the front-matter contract for rockstarr-infra v0.8 cross-bot notifications (notify-reply-ready + approvals-digest).",
+      "version": "0.2.1",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-reply",
+        "ref": "rockstarr-reply-v0.2.1"
+      }
+    },
+    {
+      "name": "rockstarr-social",
+      "description": "Rockstarr AI social plugin. Drafts daily/weekly LinkedIn (and X / IG) short-form posts in the client's approved voice, builds a balanced weekly batch, and exports to the client's scheduler (Publer default; GrowthAmp planner on demand). Bot does not post directly — every batch flows through the standard rockstarr-infra approve path, then a manually-triggered export skill writes a Publer-shaped CSV to /05_published-staging/social/. v0.1 also absorbs three formerly-adjacent surfaces: draft-polls (the LinkedIn polls lane, moved out of rockstarr-content where it shipped in v0.6 — short-form polls are a social lane, not a content lane), invite-page-followers (the monthly LinkedIn page-follow invite run, moved out of rockstarr-outreach-salesnav — page growth is a social-audience task, not an outreach campaign), and li-comment-check (a new daily skill for monitoring + responding to comments on managed LinkedIn accounts in the account holder's voice; multi-account rotation, ClickUp task closure optional). Per-week post count and mix ratios are config-driven in stack.md (social_posts_per_week + social_mix). Requires rockstarr-infra v0.8.2+ for the shared stop-slop pass and approvals lifecycle.",
+      "version": "0.1.4",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-social",
+        "ref": "rockstarr-social-v0.1.4"
+      }
+    },
+    {
+      "name": "rockstarr-ops",
+      "description": "Rockstarr AI sales-ops bot for the Growth OS. Tool-agnostic by design: every CRM, task system, meeting recorder, calendar, email platform, deliverability tool, and LinkedIn outreach tool is named in stack.md at install time. V0.1 covers daily call prep (orchestrator), Call 1 + Call 2 prep, client catch-up agendas, old-lead audits, lead reengagement, post-call transcript processing, and recurring email-deliverability tests. Drafting goes through rockstarr-reply; CRM writes go through the active rockstarr-ops-bot-<crm> variant; LinkedIn DM sends go through the active rockstarr-outreach-* variant. No baked-in framework, voice, pitch, or pricing — every behavior comes from intake-produced files (pitch.md, ops-call-framework.md, deliverability-config.md, icp-qualifications.md, style-guide.md) plus stack.md.",
+      "version": "0.1.4",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-ops",
+        "ref": "rockstarr-ops-v0.1.4"
+      }
+    },
+    {
+      "name": "rockstarr-orchestrator",
+      "description": "Rockstarr AI marketing-team orchestrator — the team lead. Talk to it; it coordinates the role functions (content, social, demand gen, RevOps) toward your marketing goals. It captures the goals spine, gives a single read-only team report, and routes requests into named cross-role plays (e.g. SEO/GEO Engine) — on demand or on an opt-in weekly schedule. It auto-runs the internal, reversible steps and stops at every audience-facing gate; humans approve publishing, outreach, and posts.",
+      "version": "0.6.0",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/rockstarr-moon/rockstarr-plugins.git",
+        "path": "rockstarr-orchestrator",
+        "ref": "rockstarr-orchestrator-v0.6.0"
+      }
+    }
+  ]
 }
