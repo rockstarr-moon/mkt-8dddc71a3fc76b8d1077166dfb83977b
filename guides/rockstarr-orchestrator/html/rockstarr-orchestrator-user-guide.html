@@ -299,7 +299,7 @@
 <body>
   <main class="content">
 <h1 id="rockstarr-orchestrator">Rockstarr Orchestrator</h1>
-<p><em>User guide for founder-led clients — v0.6.0</em></p>
+<p><em>User guide for founder-led clients — v0.7.0</em></p>
 <blockquote>
 <p><strong>At a glance</strong></p>
 <ul>
@@ -308,7 +308,8 @@
 <li><strong>It does the safe work for you.</strong> The internal, reversible steps your audience never sees — audits, strategy, backlog, ideation, drafting — run automatically.</li>
 <li><strong>It stops at every gate.</strong> Anything audience-facing or irreversible (publishing, outreach sends, social posts, emails, CRM changes, and approval itself) waits for you. Always. Even if you say "just do it."</li>
 <li><strong>Hands-off, if you want it.</strong> Turn on the weekly planner and the lead works your top goal gap every Monday on its own — and still leaves every approval to you. Off by default.</li>
-<li><strong>Five skills:</strong> set-marketing-goals (the goals spine), team-report (read-only single pane), route-request (talk to the lead), run-play (run a named play), team-tick (the optional weekly planner).</li>
+<li><strong>Starts from reality.</strong> <code>baseline-audit</code> inventories what already exists (blogs, LinkedIn newsletter editions, recent social) into a master list, so planning and ideation start from what's real and the team never duplicates content. Usually a new client's first move.</li>
+<li><strong>Six skills:</strong> baseline-audit (the starting snapshot + master list), set-marketing-goals (the goals spine), team-report (read-only single pane), route-request (talk to the lead), run-play (run a named play), team-tick (the optional weekly planner).</li>
 <li><strong>Named plays</strong> are reusable cross-role recipes. The first is the <strong>SEO/GEO Engine</strong>; more land over time.</li>
 <li>It coordinates and dispatches — it never reinvents specialist work, so every quality guard still runs.</li>
 </ul>
@@ -336,6 +337,7 @@
 </ul>
 <p>The lead runs the auto steps in order and <strong>stops at the first gated step.</strong> It never approves and never publishes — not even if you tell it to "just do it." If you want to approve, it points you at the right approval step; it won't do it for you. This is what makes it safe to hand the lead a goal and let it work.</p>
 <p><strong>4. The skills</strong></p>
+<p><strong>baseline-audit — where things stand today.</strong> Usually the first thing to run for a new client. The lead takes an honest snapshot of what already exists: it inventories the blogs on your site, the editions on your LinkedIn newsletter, and the social posts from the last three months, and assembles them into your <strong>master list</strong> (/06_reports/master-list.xlsx — long-form on one sheet, social on another). It also gives you a duplicate-awareness summary: the topics you've already covered, so the team doesn't re-create them. Crucially, this is read-only discovery — the lead reads your public channels and records what's already public; it publishes, posts, and sends nothing. The master list it builds is what the content calendar, topic ideation, and the schedules all build on, so the team starts from reality instead of a blank page.</p>
 <p><strong>set-marketing-goals — the goals spine.</strong> Run it at onboarding and refresh it quarterly. The lead interviews you for a one-page plan: objectives and targets across SEO/GEO, demand gen, and brand/authority, plus your priorities and constraints. It writes /00_intake/marketing-plan.md and nothing else. This is the strategic counterpart to your stack.md: stack.md says what you <em>publish</em>; the marketing plan says what you're <em>trying to achieve</em>. The team report measures against it.</p>
 <p><strong>team-report — the read-only single pane.</strong> Ask "how's the team doing?" and the lead reads across all four functions and writes one report to /06_reports/team/: what each function produced, the consolidated approval queue (everything waiting on you, in one list), progress vs your goals, and flags. It is strictly read-only — it reports, it changes nothing, it never approves. Honest caveat: today it measures <em>activity</em> against goals ("is the team doing the work that should move this?"), not analytics — it doesn't yet pull GA4, Ahrefs, or CRM metrics.</p>
 <p><strong>route-request — talk to the lead.</strong> The single-pane entry for <em>doing</em>. Say what you want — "get us ranking," "grow my pipeline," "what should we focus on this week?" The lead interprets it, matches it to a named play (or composes a short ad-hoc plan from the function map), runs the auto steps, and stops at your first approval. On an ambiguous request it asks rather than guessing, and it never improvises an audience-facing action.</p>
@@ -383,6 +385,7 @@
 <p>That's the full play library today — one per function. New plays can be added over time; each is just a recipe the lead can run, and you never have to learn anything new beyond its name.</p>
 <p><strong>6. How you work with it</strong></p>
 <ul>
+<li><p><strong>First, once:</strong> "Run the baseline audit." Inventory what already exists and build the master list, so everything that follows starts from reality.</p></li>
 <li><p><strong>At onboarding and quarterly:</strong> "Set our marketing goals." Give the lead something to work toward.</p></li>
 <li><p><strong>Weekly:</strong> "How's the team doing?" One report, one approval queue, progress vs goals. Clear what's waiting on you.</p></li>
 <li><p><strong>On demand:</strong> Point the lead at an outcome — "get us ranking" — and let it run the safe steps. Review and approve what lands.</p></li>
@@ -393,7 +396,7 @@
 <ul>
 <li><p>Every specialist's quality guards still run — stop-slop, the SEO/GEO checklist, the TL rubric — because the lead dispatches the real skills.</p></li>
 <li><p>Your approval gates are unchanged. Nothing reaches your audience without you.</p></li>
-<li><p>Your files live where they always have, in the /rockstarr-ai/ workspace. The lead reads across them and adds two things of its own: the marketing plan (/00_intake/) and team reports (/06_reports/team/).</p></li>
+<li><p>Your files live where they always have, in the /rockstarr-ai/ workspace. The lead reads across them and adds a few things of its own: the marketing plan (/00_intake/), team reports (/06_reports/team/), and the master list (/06_reports/master-list.xlsx). When it records pre-existing content it does so in your canonical publish log, the same place every published item lives.</p></li>
 </ul>
 <p><strong>8. If something seems off</strong></p>
 <ul>

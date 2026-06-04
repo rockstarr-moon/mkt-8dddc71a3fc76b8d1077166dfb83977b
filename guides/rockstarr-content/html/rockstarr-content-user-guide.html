@@ -299,7 +299,7 @@
 <body>
   <main class="content">
 <h1 id="rockstarr-content">Rockstarr Content</h1>
-<p><em>User guide for founder-led clients — v0.12.0</em></p>
+<p><em>User guide for founder-led clients — v0.13.0</em></p>
 <blockquote>
 <p><strong>At a glance</strong></p>
 <ul>
@@ -307,7 +307,7 @@
 <li>Strategic planning layer (seo-strategy, quarterly) produces a backlog of 25-32 prioritized blog topics organized into pillar + supporting clusters that build topical authority.</li>
 <li><strong>New in v0.8 — SEO site audit.</strong> seo-site-audit diagnoses your existing website (indexability, schema, on-page, topical authority, AI-search visibility, Core Web Vitals) and feeds its content findings into the strategy, so the backlog also fixes what's already published, not just net-new topics.</li>
 <li><strong>New in v0.9 — LinkedIn newsletter go-live.</strong> publish-linkedin-newsletter republishes an approved thought-leadership piece as a LinkedIn newsletter edition on your personal account, and verify-linkedin-newsletter confirms it posted on schedule.</li>
-<li><strong>New in v0.10 — content master list.</strong> master-list-create builds a local Excel tracker of your long-form content (and where each piece was reposted) from your publish log; master-list-blog-audit checks it against your live site so nothing slips through untracked.</li>
+<li><strong>New in v0.13 — LinkedIn newsletter inventory + master list moved.</strong> inventory-linkedin-newsletter catalogs your already-published LinkedIn newsletter editions. The master list itself now lives in the Rockstarr Orchestrator (the team lead) as a comprehensive long-form + social tracker — its baseline audit builds it; master-list-create here is now just a redirect there. master-list-blog-audit still checks your live site so no blog slips through untracked.</li>
 <li><strong>New in v0.11–0.12 — content autopilot.</strong> Your content can run on a schedule: each month it proposes a plan for you to approve, then drafts each piece on its date — and it always stops for your approval before anything is finalized, and never publishes on its own. On by default; toggle it off anytime. See section 6b.</li>
 <li>Monthly cadence: ideate, pick, calendar, approve, draft. Blog and thought-leadership lanes are outline-first.</li>
 <li>Blog drafts are SEO + GEO disciplined — FAQ section required, inline source URLs, 13-item quality checklist before stop-slop.</li>
@@ -357,7 +357,7 @@
 </ul>
 <p><strong>On demand (content tracking)</strong></p>
 <ul>
-<li>A content master list at 06_reports/master-list-of-content.xlsx — a local Excel workbook listing every long-form piece (blog or case study), where it was reposted (LinkedIn newsletter, email newsletter), and the live URL. Generated from your publish log; re-run any time to refresh.</li>
+<li>A master list of your content — now built and owned by the Rockstarr Orchestrator (the team lead) as a comprehensive long-form + social tracker at 06_reports/master-list.xlsx. This plugin feeds it: it discovers your live blogs and LinkedIn newsletter editions into your publish log, and the orchestrator's baseline audit builds the list. (See the Orchestrator guide.)</li>
 </ul>
 <p><strong>Every quarter (case studies)</strong></p>
 <ul>
@@ -511,14 +511,32 @@
 </ul>
 <p>Then <strong>"Verify the newsletter went live"</strong> (verify-linkedin-newsletter) checks, on or after the scheduled date, that the edition actually posted within a few days of plan, and reports back. If it didn't post, your Rockstarr lead gets flagged.</p>
 <p>Why the human stop-points: posting to the wrong account, or with the wrong cover or an empty intro, is the kind of mistake that's public and hard to walk back. The stop-points are deliberate. This is the one place the content plugin touches a live channel, and it's built to be careful about it.</p>
-<p><strong>9c. Your content master list (v0.10)</strong></p>
-<p>The master list is a single Excel workbook that tracks all your long-form content in one place — every blog and case study, where each was reposted (LinkedIn newsletter, email newsletter), and the live URL. It lives at 06_reports/master-list-of-content.xlsx in your own workspace.</p>
-<p>Two things to know about how it works:</p>
+<p><strong>9c. Your master list (moved to the Orchestrator in v0.13)</strong></p>
+<p>Your master list — the single tracker of everything you've published —
+now lives in the <strong>Rockstarr Orchestrator</strong> (the team lead), because it
+spans more than long-form content. It's a comprehensive workbook
+covering both your long-form (blogs, case studies, LinkedIn newsletter,
+email newsletter) and your <strong>social</strong> posts, at
+06_reports/master-list.xlsx. The orchestrator's <strong>baseline audit</strong> builds
+it. See the Orchestrator guide for the full picture.</p>
+<p>This content plugin <strong>feeds</strong> that master list:</p>
 <ul>
-<li><p><strong>It's generated, not hand-kept.</strong> "Make the master list" (master-list-create) builds the workbook from your publish log — the running record of everything you've approved and shipped. You don't edit the sheet by hand; if something's off, the fix is to log the publish, then regenerate. Re-run any time and it reflects the current state. (This is deliberate: one source of truth — the publish log — and the spreadsheet is a clean view of it, so the two never drift.)</p></li>
-<li><p><strong>The audit keeps it honest.</strong> "Audit the master list" (master-list-blog-audit) crawls your live website and checks that every blog actually published on your site is tracked. It reports any that are missing (for example, a post published outside the Rockstarr workflow) and, once you confirm, logs them so the next regeneration picks them up. It only reports and asks — it never edits the sheet or your records on its own.</p></li>
+<li><p><strong>Blog discovery.</strong> "Audit the master list" (master-list-blog-audit)
+crawls your live website and checks that every blog actually published
+is tracked. It reports any that are missing and, once you confirm, logs
+them — so the next rebuild of the master list picks them up. It only
+reports and asks; it never edits anything on its own.</p></li>
+<li><p><strong>LinkedIn newsletter discovery.</strong> "Inventory our LinkedIn newsletter"
+(inventory-linkedin-newsletter) catalogs the editions you've already
+published and logs the untracked ones the same way. Read-only — it
+never posts or publishes.</p></li>
+<li><p><strong>"Make the master list"</strong> still works, but it now simply points you to
+the orchestrator's baseline audit (which builds the comprehensive
+list). One master list, owned by the team lead — no more parallel
+long-form-only sheet.</p></li>
 </ul>
-<p>The four core columns match the long-standing Rockstarr format (Content type, Posted on LinkedIn newsletter, Posted in email newsletter, URL of final blog), with title, published date, and slug added for convenience. It's a local file you own outright — not a shared Google Sheet.</p>
+<p>As always, the publish log stays the single source of truth; the master
+list is a clean, regenerable view of it.</p>
 <p><strong>10. The stop-slop pass (mandatory, every prose output)</strong></p>
 <p>Every drafting skill in this plugin — blog, thought leadership, newsletter, case study, and each repurpose derivative — runs the shared stop-slop skill as its final pass before the file is written. The order is fixed: style guide first (voice), then the structural rubric specific to the lane (SEO/GEO checklist for blogs, TL rubric for thought leadership), then stop-slop (prose hygiene).</p>
 <p>Stop-slop catches things like filler openers, binary contrasts ("not X, but Y"), em-dash splices, metronome rhythm, vague declaratives, and narrator-from-a-distance framing. Each draft carries a stop_slop_score (out of 50) in its front-matter. Scores below 35/50 flag the draft for reviewer attention.</p>
@@ -567,10 +585,11 @@
 <li><p><strong>"Publish the LinkedIn newsletter."</strong> Schedules an approved TL piece as a LinkedIn newsletter edition on your personal account. Confirms the account, builds the edition, then stops for you to upload the cover image, approve the intro post, and click the final Schedule.</p></li>
 <li><p><strong>"Verify the newsletter went live."</strong> Checks that the scheduled edition actually posted on/near its date and reports back.</p></li>
 </ul>
-<p><strong>Content master list</strong></p>
+<p><strong>Master list (now built by the Orchestrator)</strong></p>
 <ul>
-<li><p><strong>"Make the master list of content."</strong> Builds / refreshes 06_reports/master-list-of-content.xlsx from your publish log. Re-run any time.</p></li>
-<li><p><strong>"Audit the master list."</strong> Crawls your live site and reports any live blogs not yet tracked, then logs them (with your OK) so the next refresh includes them.</p></li>
+<li><p><strong>"Make the master list."</strong> Redirects to the Rockstarr Orchestrator's baseline audit, which builds the comprehensive long-form + social master list at 06_reports/master-list.xlsx.</p></li>
+<li><p><strong>"Audit the master list."</strong> Crawls your live site and reports any live blogs not yet tracked, then logs them (with your OK) so the next rebuild of the master list includes them.</p></li>
+<li><p><strong>"Inventory our LinkedIn newsletter."</strong> Catalogs your already-published LinkedIn newsletter editions and logs the untracked ones. Read-only.</p></li>
 </ul>
 <p><strong>Approvals and publishing</strong></p>
 <ul>
